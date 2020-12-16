@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="welcome_back">
+
+        <item name="android:textSize">
+            38.57sp
+        </item>
+        <item name="android:textColor">
+            @color/white
+        </item>
+
+    </style>
+
+    <style name="sign_in">sign_in
+        <item name="android:textSize">
+            31.53sp
+        </item>
+        <item name="android:textColor">
+            @color/primary_color
+        </item>
+    </style>
+</resources>
