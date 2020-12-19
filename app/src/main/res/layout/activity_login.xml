@@ -6,7 +6,6 @@
     android:id="@+id/mobile_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToOutline="true"
     android:background="@drawable/mobile_login">
 
     <View
@@ -36,7 +35,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:gravity="top"
-        android:text="Welcome \nBack"
+        android:text="@string/welcome_nback"
         android:textAppearance="@style/welcome_back"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +58,8 @@
         app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.916"
+        android:contentDescription="@string/leaf_view" />
 
     <ImageView
         android:id="@+id/leaf_stroke"
@@ -72,7 +72,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/leaf_view"
         app:layout_constraintStart_toStartOf="@+id/leaf_view"
         app:layout_constraintTop_toTopOf="@+id/leaf_view"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/leaf_stroke" />
 
     <EditText
         android:id="@+id/editEmail"
@@ -88,7 +89,8 @@
         app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_1"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.38"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editPassword"
@@ -102,7 +104,8 @@
         app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_1"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/sign_in"
@@ -127,8 +130,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_signin_arrow"
         app:fabSize="auto"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editPassword"
+        android:contentDescription="@string/fab" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,4 +4,22 @@
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="net_sales">NET SALES</string>
+    <string name="transactions">TRANSACTIONS</string>
+    <string name="product_sold">PRODUCT SOLD</string>
+    <string name="sales_today">SALES TODAY VS YESTERDAY</string>
+    <string name="top_categories">TOP CATEGORIES</string>
+    <string name="gross_profit_margin">GROSS PROFIT MARGIN</string>
+    <string name="_9089_43">$9089.43</string>
+    <string name="gross_profit">GROSS PROFIT</string>
+    <string name="_405_22">$405.22</string>
+    <string name="_60">60</string>
+    <string name="_48">48</string>
+    <string name="_79_9">79.9%</string>
+    <string name="_22">22</string>
+    <string name="low_inventory_prod">LOW INVENTORY PROD.</string>
+    <string name="leaf_stroke">Leaf Stroke</string>
+    <string name="fab">FAB</string>
+    <string name="leaf_view">Leaf View</string>
+    <string name="welcome_nback">Welcome Back</string>
 </resources>
