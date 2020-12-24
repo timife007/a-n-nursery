@@ -1,4 +1,4 @@
-package com.timife.a_n_nursery_app
+package com.timife.a_n_nursery_app.dashboard
 
 import androidx.lifecycle.ViewModel
 
