@@ -54,14 +54,14 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:contentDescription="@string/leaf_view"
             android:src="@drawable/leaf"
             app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.912"
+            app:layout_constraintHorizontal_bias="0.869"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.916"
-            android:contentDescription="@string/leaf_view" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/leaf_stroke"
