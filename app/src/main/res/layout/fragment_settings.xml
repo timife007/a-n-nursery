@@ -1,13 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".settings.SettingsFragment">
+    android:layout_height="wrap_content"
+    android:id="@+id/settings_linear"
+    android:divider="?android:dividerHorizontal"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:showDividers="middle"
+    tools:context=".settings.SettingsFragment"
+    android:orientation="vertical">
 
-    <TextView
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="85dp"
+       android:layout_marginTop="20dp"
+       android:id="@+id/profile">
+
+       <ImageView
+           android:id="@+id/profile_icon"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:layout_marginStart="28dp"
+           android:src="@drawable/profile"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           android:contentDescription="@string/profile" />
+
+       <TextView
+           android:id="@+id/profile_text"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="40dp"
+           android:text="@string/profile"
+           android:gravity="center"
+           android:textAppearance="@style/settingsText"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/profile_icon"
+           app:layout_constraintTop_toTopOf="parent" />
+
+       <ImageView
+           android:id="@+id/profile_arrow"
+           android:layout_width="25dp"
+           android:layout_height="25dp"
+           android:layout_marginEnd="28dp"
+           android:src="@drawable/ic_arrow"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           android:contentDescription="@string/profile" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="85dp"
+        android:id="@+id/company_info">
+        <ImageView
+            android:id="@+id/company_info_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/company_info"
+            android:layout_marginStart="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/company_info" />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/company_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_info"
+            android:layout_marginStart="40dp"
+            android:textAppearance="@style/settingsText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/company_info_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/info_arrow"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/company_info_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533"
+            android:contentDescription="@string/company_info" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:id="@+id/access_control">
+
+        <ImageView
+            android:id="@+id/access_control_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/access_control"
+            android:layout_marginStart="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/access_control" />
+
+        <TextView
+            android:id="@+id/access_control_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/access_control"
+            android:layout_marginStart="37dp"
+            android:textAppearance="@style/settingsText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_control_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/access_arrow"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/access_control" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:id="@+id/advanced">
+
+        <ImageView
+            android:id="@+id/advanced_icon"
+            android:layout_width="30dp"
+            android:layout_marginStart="28dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/advanced"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/advanced" />
+
+        <TextView
+            android:id="@+id/advanced_text"
+            android:textAppearance="@style/settingsText"
+            android:layout_marginStart="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/advanced"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/advanced_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/advanced_arrow"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/advanced" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:id="@+id/log_out">
+
+        <ImageView
+            android:id="@+id/log_out_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/log_out"
+            android:layout_marginStart="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/logout" />
+
+        <TextView
+            android:id="@+id/log_out_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/logout"
+            android:textAppearance="@style/settingsText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/log_out_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/log_out_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/logout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/version_chip"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="@string/v1_0_1"
+        android:textAlignment="center"
+        android:textAppearance="@style/settingsText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_linear"
+        app:layout_constraintVertical_bias="0.855" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

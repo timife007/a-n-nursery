@@ -3,7 +3,6 @@
     <string name="welcome_back">Welcome  /nBack</string>
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
-    <string name="email">Email</string>
     <string name="net_sales">NET SALES</string>
     <string name="transactions">TRANSACTIONS</string>
     <string name="product_sold">PRODUCT SOLD</string>
@@ -27,4 +26,22 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="forgot_password_text">Forgot Password</string>
     <string name="reset">RESET</string>
+    <string name="profile">Profile</string>
+    <string name="company_info">Company Info</string>
+    <string name="access_control">Access Control</string>
+    <string name="advanced">Advanced</string>
+    <string name="logout">Logout</string>
+    <string name="firstname">FirstName</string>
+    <string name="lastname">LastName</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="price_change_text">The New Price change of the Fuel Price 89%</string>
+    <string name="update">Update</string>
+    <string name="inventory">Inventory</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="vendor">Vendor</string>
+    <string name="info">Info</string>
+    <string name="settings">Settings</string>
+    <string name="add_inventory">add inventory</string>
+    <string name="v1_0_1">v1.0.1</string>
 </resources>

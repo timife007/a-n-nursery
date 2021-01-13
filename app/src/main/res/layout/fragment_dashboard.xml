@@ -20,7 +20,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_net_sales"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="135dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -80,7 +80,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_gross_profit"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="135dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -133,7 +133,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_transactions"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="135dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -194,7 +194,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_products_sold"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="135dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -224,6 +224,8 @@
                         android:text="@string/_48"
                         android:textAppearance="@style/transaction_num"
                         app:layout_constraintEnd_toStartOf="@+id/product_back"
+                        app:layout_constraintHorizontal_bias="0.872"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -282,7 +284,9 @@
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/sales_bar_chart"
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_height="300dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
@@ -323,9 +327,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <com.github.mikephil.charting.charts.BarChart
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/transactions_bar_chart"
@@ -362,7 +368,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <com.github.mikephil.charting.charts.PieChart
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_height="300dp"
                     android:id="@+id/pie_chart"
                     android:layout_marginTop="10dp"
@@ -376,7 +384,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_gross_margin"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="135dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginEnd="16dp"
@@ -390,40 +398,55 @@
                 android:elevation="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/gross_margin_percent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="120dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="57dp"
-                    android:height="71dp"
-                    android:text="@string/_79_9"
-                    android:textAppearance="@style/transaction_num" />
+                    <TextView
+                        android:id="@+id/gross_margin_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="80dp"
+                        android:height="71dp"
+                        android:text="@string/_79_9"
+                        app:layout_constraintTop_toTopOf="parent"
 
-                <TextView
-                    android:id="@+id/gross_margin_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="78dp"
-                    android:textAppearance="@style/transaction_text"
-                    android:text="@string/gross_profit_margin" />
+                        android:textAppearance="@style/transaction_num"
+                        app:layout_constraintEnd_toStartOf="@+id/gross_margin_back"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                <ImageView
-                    android:id="@+id/gross_margin_back"
-                    android:layout_width="80dp"
-                    android:layout_marginStart="270dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/grossvec"
-                    android:contentDescription="@string/gross_profit_margin" />
+                    <TextView
+                        android:id="@+id/gross_margin_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="@string/gross_profit_margin"
+                        android:textAppearance="@style/transaction_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/gross_margin_percent" />
+
+                    <ImageView
+                        android:id="@+id/gross_margin_back"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="right"
+                        android:contentDescription="@string/gross_profit_margin"
+                        android:src="@drawable/grossvec"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/inventory_prod"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="135dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
@@ -438,35 +461,46 @@
                 android:elevation="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/inventory_prod_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="150dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="57dp"
-                    android:height="71dp"
-                    android:text="@string/_22"
-                    android:textAppearance="@style/transaction_num" />
+                    <TextView
+                        android:id="@+id/inventory_prod_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:height="71dp"
+                        android:layout_marginStart="80dp"
+                        android:text="@string/_22"
+                        android:textAppearance="@style/transaction_num"
+                        app:layout_constraintBottom_toTopOf="@id/inventory_prod_text"
+                        app:layout_constraintEnd_toStartOf="@+id/inventory_prod_back"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/inventory_prod_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="78dp"
-                    android:textAppearance="@style/transaction_text"
-                    android:text="@string/low_inventory_prod" />
+                    <TextView
+                        android:id="@+id/inventory_prod_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="@string/low_inventory_prod"
+                        android:textAppearance="@style/transaction_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                <ImageView
-                    android:id="@+id/inventory_prod_back"
-                    android:layout_width="80dp"
-                    android:layout_marginStart="270dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/inventoryvec"
-                    android:contentDescription="@string/low_inventory_prod" />
+                    <ImageView
+                        android:id="@+id/inventory_prod_back"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="right"
+                        android:contentDescription="@string/low_inventory_prod"
+                        android:src="@drawable/inventoryvec"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </com.google.android.material.card.MaterialCardView>
 
             <Spinner

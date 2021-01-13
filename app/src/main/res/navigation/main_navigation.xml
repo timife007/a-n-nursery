@@ -8,26 +8,39 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.timife.a_n_nursery_app.dashboard.DashboardFragment"
-        android:label="Dashboard"
+        android:label="DashBoard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/inventoryFragment"
         android:name="com.timife.a_n_nursery_app.inventory.InventoryFragment"
-        android:label="Inventory"
+        android:label="INVENTORY"
         tools:layout="@layout/fragment_inventory" />
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.timife.a_n_nursery_app.info.InfoFragment"
-        android:label="Info"
+        android:label="INFO"
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/vendorFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorFragment"
-        android:label="Vendor"
+        android:label="VENDOR"
         tools:layout="@layout/fragment_vendor" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.timife.a_n_nursery_app.settings.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/fragment_settings" />
+        android:label="SETTINGS"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.timife.a_n_nursery_app.settings.profile.ui.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

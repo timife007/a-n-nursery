@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+//        val userPreferences = UserPreferences(this)
+//        userPreferences.authToken.asLiveData().observe(this,  {
+//            Toast.makeText(this,it ?: "Token is null",Toast.LENGTH_LONG).show()
+//        })
         val binding =
                 DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

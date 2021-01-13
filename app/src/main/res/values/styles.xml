@@ -20,6 +20,10 @@
             @color/primary_color
         </item>
     </style>
+    <style name="settingsText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
 
     <style name="net_sales">
 

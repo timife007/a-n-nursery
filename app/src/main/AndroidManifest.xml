@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Annurseryapp">
         <activity
             android:name=".BaseActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Annurseryapp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +22,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.ui.auth.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Annurseryapp">
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.DashBoard">
 
             <!-- <intent-filter> -->

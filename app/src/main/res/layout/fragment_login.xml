@@ -37,7 +37,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:gravity="top"
-            android:text="@string/welcome_nback"
+            android:text="Welcome \nBack"
             android:textAppearance="@style/welcome_back"
             app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
             app:layout_constraintEnd_toEndOf="parent"
