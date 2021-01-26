@@ -3,12 +3,18 @@
     <words>
       <w>accesscontrol</w>
       <w>annurseryapp</w>
+      <w>bttm</w>
+      <w>categ</w>
       <w>companyinfo</w>
       <w>firstname</w>
       <w>grossvec</w>
       <w>inventoryvec</w>
+      <w>invnt</w>
       <w>loginprogress</w>
       <w>nback</w>
+      <w>prefrences</w>
+      <w>snackbar</w>
+      <w>upsert</w>
     </words>
   </dictionary>
 </component>

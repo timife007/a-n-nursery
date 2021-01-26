@@ -7,18 +7,15 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.FragmentProfileBinding
-import com.timife.a_n_nursery_app.login.Resource
-import com.timife.a_n_nursery_app.login.ui.base.BaseFragment
+import com.timife.a_n_nursery_app.Resource
+import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.login.ui.visible
 import com.timife.a_n_nursery_app.settings.profile.network.ProfileApi
-import com.timife.a_n_nursery_app.settings.profile.response.User
-import kotlinx.android.synthetic.main.fragment_profile.*
+import com.timife.a_n_nursery_app.settings.profile.response.Profile
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
@@ -39,24 +36,24 @@ class ProfileFragment :
             when (it) {
                 is Resource.Success ->
                 {binding.profileProgress.visible(false)
-                    updateUI(it.value[0].user!!)}
-                is Resource.Failure ->
-                    Toast.makeText(requireContext(),"Error loading profile", Toast.LENGTH_LONG).show()
+                    updateUI(it.value)}
+                is Resource.Failure ->{
+//                    Toast.makeText(requireContext(),"Error loading profile", Toast.LENGTH_LONG).show()
+                    logout()
+                }
+
                 is Resource.Loading ->
                     binding.profileProgress.visible(true)
-
-
             }
-
         })
     }
 
     //TO DO , recall that you want to make a complaint on the edit profile page
-    private fun updateUI(user: User) {
+    private fun updateUI(profile: Profile) {
         with(binding){
-            firstName.setText(user.first_name, TextView.BufferType.EDITABLE)
-            lastName.setText(user.last_name,TextView.BufferType.EDITABLE)
-            profileEmail.setText(user.email,TextView.BufferType.EDITABLE)
+            firstName.setText(profile.first_name, TextView.BufferType.EDITABLE)
+            lastName.setText(profile.last_name,TextView.BufferType.EDITABLE)
+            profileEmail.setText(profile.email,TextView.BufferType.EDITABLE)
         }
     }
 
@@ -67,9 +64,11 @@ class ProfileFragment :
         container: ViewGroup?
     ) = FragmentProfileBinding.inflate(inflater, container, false)
 
-    override fun getLoginRepository(): ProfileRepository {
+    override fun getRepository(): ProfileRepository {
         val token = runBlocking { userPreferences.authToken.first() }
-        val api = loginRetrofitClient.buildApi(ProfileApi::class.java, token)
+        val api = retrofitClient.buildApi(ProfileApi::class.java, token)
         return ProfileRepository(api)
     }
 }
+
+//token

@@ -8,13 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.ravikoradiya.library.CenterTitle
 import com.timife.a_n_nursery_app.databinding.FragmentDashboardBinding
 import com.timife.a_n_nursery_app.login.ui.specs
 
 class DashboardFragment : Fragment() {
     private lateinit var binding : FragmentDashboardBinding
+//    private lateinit var navController: NavController
 
     companion object {
         fun newInstance() = DashboardFragment()
@@ -29,6 +35,11 @@ class DashboardFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         binding = FragmentDashboardBinding.inflate(inflater)
+//        navController = findNavController()
+//        val appBarConfiguration = AppBarConfiguration(navController.graph)
+//        binding.dashboardToolbar.setupWithNavController(navController, appBarConfiguration)
+//        CenterTitle.centerTitle(binding.dashboardToolbar,true)
+
 
         val spinnerItems = arrayOf("Today", "Yesterday", "Last Week")
         binding.spinner.adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,spinnerItems)

@@ -1,6 +1,7 @@
-package com.timife.a_n_nursery_app.login.ui.base
+package com.timife.a_n_nursery_app.base
 
-import com.timife.a_n_nursery_app.login.Resource
+import com.timife.a_n_nursery_app.Resource
+import com.timife.a_n_nursery_app.user.UserApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -23,5 +24,8 @@ abstract class BaseRepository {
                 }
             }
         }
+    }
+    suspend fun logout(api: UserApi) = safeApiCall {
+        api.logout()
     }
 }

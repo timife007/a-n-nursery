@@ -12,24 +12,24 @@
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/inventoryFragment"
-        android:name="com.timife.a_n_nursery_app.inventory.InventoryFragment"
-        android:label="INVENTORY"
+        android:name="com.timife.a_n_nursery_app.inventory.ui.InventoryFragment"
+        android:label="@string/inventory"
         tools:layout="@layout/fragment_inventory" />
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.timife.a_n_nursery_app.info.InfoFragment"
-        android:label="INFO"
+        android:label="Info"
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/vendorFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorFragment"
-        android:label="VENDOR"
+        android:label="Vendor"
         tools:layout="@layout/fragment_vendor" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.timife.a_n_nursery_app.settings.SettingsFragment"
-        android:label="SETTINGS"
-        tools:layout="@layout/fragment_settings" >
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_profileFragment"
             app:destination="@id/profileFragment"
@@ -37,10 +37,23 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_settingsFragment_to_companyInfoFragment"
+            app:destination="@id/companyInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.timife.a_n_nursery_app.settings.profile.ui.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/addInvItemDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.ui.AddInvItemDialog"
+        tools:layout="@layout/dialog_add_inventory_item"
+        android:label="AddInvItemDialog" />
+    <fragment
+        android:id="@+id/companyInfoFragment"
+        tools:layout="@layout/fragment_company_info"
+        android:name="com.timife.a_n_nursery_app.settings.companyInfo.ui.CompanyInfoFragment"
+        android:label="Company Info" />
 </navigation>

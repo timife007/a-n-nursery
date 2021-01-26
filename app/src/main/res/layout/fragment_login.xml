@@ -55,27 +55,13 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/leaf_view"
-            android:src="@drawable/leaf"
+            android:src="@drawable/app_logo"
             app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.869"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-
-        <ImageView
-            android:id="@+id/leaf_stroke"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/leaf_view"
-            android:layout_alignBottom="@+id/leaf_view"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/leafstroke"
-            app:layout_constraintBottom_toBottomOf="@+id/leaf_view"
-            app:layout_constraintStart_toStartOf="@+id/leaf_view"
-            app:layout_constraintTop_toTopOf="@+id/leaf_view"
-            app:layout_constraintVertical_bias="0.0"
-            android:contentDescription="@string/leaf_stroke" />
 
         <EditText
             android:id="@+id/editEmail"

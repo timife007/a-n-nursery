@@ -1,13 +1,9 @@
 package com.timife.a_n_nursery_app
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
-import com.timife.a_n_nursery_app.login.UserPreferences
 import com.timife.a_n_nursery_app.login.ui.auth.LoginActivity
 import com.timife.a_n_nursery_app.login.ui.startNewActivity
 
