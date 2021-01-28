@@ -13,6 +13,8 @@ import com.timife.a_n_nursery_app.settings.companyInfo.ui.CompanyInfoRepository
 import com.timife.a_n_nursery_app.settings.companyInfo.ui.CompanyInfoViewModel
 import com.timife.a_n_nursery_app.settings.profile.ui.ProfileRepository
 import com.timife.a_n_nursery_app.settings.profile.ui.ProfileViewModel
+import com.timife.a_n_nursery_app.vendor.VendorRepository
+import com.timife.a_n_nursery_app.vendor.VendorViewModel
 import java.lang.IllegalArgumentException
 
 @Suppress("UNCHECKED_CAST")
@@ -32,6 +34,8 @@ class ViewModelFactory(
                 SettingsViewModel(repository as SettingsRepository) as T
             modelClass.isAssignableFrom(CompanyInfoViewModel::class.java) ->
                 CompanyInfoViewModel(repository as CompanyInfoRepository) as T
+            modelClass.isAssignableFrom(VendorViewModel::class.java) ->
+                VendorViewModel(repository as VendorRepository) as T
             else -> throw  IllegalArgumentException("ViewModelClass not found")
         }
     }
