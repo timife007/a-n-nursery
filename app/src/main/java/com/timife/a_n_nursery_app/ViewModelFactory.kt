@@ -2,7 +2,6 @@ package com.timife.a_n_nursery_app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.timife.a_n_nursery_app.inventory.ui.InventItemRepository
 import com.timife.a_n_nursery_app.inventory.ui.InventoryViewModel
 import com.timife.a_n_nursery_app.base.BaseRepository
 import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
@@ -19,7 +18,7 @@ import java.lang.IllegalArgumentException
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
         private val repository: BaseRepository? = null,
-        private val inventItemRepository: InventItemRepository? = null
+        private val inventItemRepository: InventoryRepository? = null
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {

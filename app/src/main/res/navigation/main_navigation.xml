@@ -14,7 +14,11 @@
         android:id="@+id/inventoryFragment"
         android:name="com.timife.a_n_nursery_app.inventory.ui.InventoryFragment"
         android:label="@string/inventory"
-        tools:layout="@layout/fragment_inventory" />
+        tools:layout="@layout/fragment_inventory" >
+        <action
+            android:id="@+id/action_inventoryFragment_to_invntBttmShtFragment"
+            app:destination="@id/invntBttmShtFragment" />
+    </fragment>
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.timife.a_n_nursery_app.info.InfoFragment"
@@ -56,4 +60,13 @@
         tools:layout="@layout/fragment_company_info"
         android:name="com.timife.a_n_nursery_app.settings.companyInfo.ui.CompanyInfoFragment"
         android:label="Company Info" />
+    <dialog
+        android:id="@+id/invntBttmShtFragment"
+        android:name="com.timife.a_n_nursery_app.inventory.ui.InvntBttmShtFragment"
+        android:label="fragment_invent_bttm_sht"
+        tools:layout="@layout/fragment_invent_bttm_sht" >
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.timife.a_n_nursery_app.inventory.response.Result" />
+    </dialog>
 </navigation>

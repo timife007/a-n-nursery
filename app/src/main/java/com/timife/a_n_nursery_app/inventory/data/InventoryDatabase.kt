@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-        entities = [InventoryItem::class],
-        version = 1
+    entities = [InventoryItem::class],
+    version = 1
 )
 abstract class InventoryDatabase : RoomDatabase(){
     abstract val getInventoryItemDao: InventoryItemDao

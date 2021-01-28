@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="viewModel"
-            type="com.timife.a_n_nursery_app.inventory.ui.InventoryViewModel" />
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <HorizontalScrollView
             android:id="@+id/categories_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:scrollbars="none"
             android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,17 +19,22 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/inv_chip_group"
+                android:layout_marginStart="16dp"
+                android:paddingStart="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry">
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/plants_chips"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:id="@+id/plant_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChipChoice"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -45,59 +42,71 @@
                     android:layout_height="wrap_content"
                     android:text="@string/trees"
                     android:id="@+id/trees_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChipChoice"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bagged Materials"
+                    android:text="@string/bagged_materials"
                     android:id="@+id/bagged_material"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChipChoice"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bulk Materials"
+                    android:text="@string/bulk_materials"
                     android:id="@+id/bulk_materials"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChipChoice"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pottery Materials"
+                    android:text="@string/pottery_materials"
                     android:id="@+id/pottery_materials"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChipChoice"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Landscape Supply"
+                    android:text="@string/landscape_supply"
                     android:id="@+id/landscape_supply"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/CustomChipChoice"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SOD"
+                    android:text="@string/sod"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:id="@+id/sod"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChipChoice"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_color"
                     app:closeIconEnabled="false" />
 
             </com.google.android.material.chip.ChipGroup>
@@ -108,14 +117,17 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:spanCount="3"
+            android:clipToPadding="false"
+            android:padding="6dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categories_scroll_view"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/inventory_item" />
+            tools:listitem="@layout/inventory_card_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/inv_add"
@@ -129,6 +141,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="45dp" />
+        <ProgressBar
+            android:id="@+id/inventory_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

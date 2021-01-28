@@ -87,6 +87,11 @@
     <string name="trees">Trees</string>
     <string name="size">Size</string>
     <string name="notifications">Notifications</string>
+    <string name="bulk_materials">Bulk Materials</string>
+    <string name="pottery_materials">Pottery Materials</string>
+    <string name="landscape_supply">Landscape Supply</string>
+    <string name="sod">SOD</string>
+    <string name="bagged_materials">Bagged Materials</string>
 
 
 </resources>

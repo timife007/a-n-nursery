@@ -5,44 +5,46 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.timife.a_n_nursery_app.databinding.InventoryCardItemBinding
 import com.timife.a_n_nursery_app.databinding.InventoryItemBinding
-import com.timife.a_n_nursery_app.inventory.response.InventoryProductsItem
+import com.timife.a_n_nursery_app.inventory.response.Result
 
 class InventAdapter(
-        var item: ArrayList<InventoryProductsItem>
-//var item: List<InventoryItem>,
-//private val viewModel: InventoryViewModel
-) : RecyclerView.Adapter<InventAdapter.InventViewHolder>() {
-   inner class InventViewHolder(private var binding: InventoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-       fun bind(inventoryProducts: InventoryProductsItem) {
-            binding.inventoryProducts = inventoryProducts
+    private val onClickListener: OnClickListener
+) : ListAdapter<Result, InventAdapter.InventViewHolder>(DiffCallback) {
+   inner class InventViewHolder(private var binding: InventoryCardItemBinding) : RecyclerView.ViewHolder(binding.root) {
+       fun bind(inventoryProducts: Result) {
+            binding.inventoryResult = inventoryProducts
            binding.executePendingBindings()
-//           binding.initials.text = item.productName
        }
    }
-//    companion object DiffCallback : DiffUtil.ItemCallback<InventoryProductsItem>() {
-//        override fun areItemsTheSame(oldItem: InventoryProductsItem, newItem: InventoryProductsItem): Boolean {
-//            return newItem === oldItem
-//        }
-//
-//        override fun areContentsTheSame(oldItem: InventoryProductsItem, newItem: InventoryProductsItem): Boolean {
-//            return newItem == oldItem
-//        }
-//
-//    }
+    companion object DiffCallback : DiffUtil.ItemCallback<Result>() {
+        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+            return newItem === oldItem
+        }
+
+        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+            return newItem == oldItem
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventViewHolder {
-        return InventViewHolder(InventoryItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return InventViewHolder(InventoryCardItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: InventViewHolder, position: Int) {
-        val inventoryProduct =item[position]
+        val inventoryProduct =getItem(position)
         holder.bind(inventoryProduct)
-//        val curShopItem = item[position]
-//        holder.bind(curShopItem)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(inventoryProduct)
+        }
+
     }
-//
-    override fun getItemCount(): Int {
-        return item.size
+
+    class OnClickListener(val clickListener: (product: Result) -> Unit) {
+        fun onClick(product: Result) {
+            clickListener(product)
+        }
     }
 }

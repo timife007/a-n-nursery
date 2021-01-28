@@ -3,16 +3,16 @@
     android:pivotX="50%"
     android:pivotY="50%"
     android:fromDegrees="0"
-    android:toDegrees="360">
+    android:toDegrees="1080">
     <shape
         android:shape="ring"
         android:innerRadiusRatio="3"
-        android:thicknessRatio="8"
+        android:thicknessRatio="12"
         android:useLevel="false">
 
         <size
-            android:width="76dp"
-            android:height="76dp"/>
+            android:width="85dp"
+            android:height="85dp"/>
         <gradient
             android:type="sweep"
             android:useLevel="false"

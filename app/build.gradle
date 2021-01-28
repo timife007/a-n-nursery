@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 //    id "androidx.navigation.safeargs"
 //    id 'androidx.navigation.safeargs'
 }
@@ -92,6 +93,8 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     implementation 'com.github.RaviKoradiya:Toolbar-Center-Title:1.0.3'
+
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha05"
 
 
 }

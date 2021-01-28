@@ -1,6 +1,10 @@
 package com.timife.a_n_nursery_app.inventory.response
 
-data class InventoryProductsItem(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Result(
     val botanical_name: String,
     val category: String,
     val classification: String,
@@ -16,4 +20,4 @@ data class InventoryProductsItem(
     val second_location: String,
     val size: String,
     val updated: String
-)
+): Parcelable

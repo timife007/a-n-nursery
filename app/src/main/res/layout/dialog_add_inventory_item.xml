@@ -1,367 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="30dp"
 
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:layout_marginBottom="30dp">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="43dp">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/product_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/product"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inv_action_bar">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="43dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/product_name"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inv_categories_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_container">
-
-        <AutoCompleteTextView
-            android:id="@+id/inv_categories"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/product_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            tools:ignore="LabelFor" />
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/product"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inv_action_bar">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lot_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/lot"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inv_categories_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lot"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inv_categories_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_container">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/cost_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/cost"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lot_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cost"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/price_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/price"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cost_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/location1_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/location_1"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/location_1"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/location2_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/location_2"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location1_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/location_2"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/size_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginStart="34dp"
-        android:hint="@string/size"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location2_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/size_text"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/variant_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/variant"
-        android:textAppearance="@style/inv_prdt_title"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/size_container" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/botanical_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/botanical_name"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/variant_title">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/botanical"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/classification_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/classification"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/botanical_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/classification"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/color_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="34dp"
-        android:hint="@string/color"
-        android:inputType="textPersonName"
-        app:boxCornerRadiusBottomEnd="7dp"
-        app:boxCornerRadiusBottomStart="7dp"
-        app:boxCornerRadiusTopEnd="7dp"
-        app:boxCornerRadiusTopStart="7dp"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/classification_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/color"
-            android:layout_width="match_parent"
-            android:layout_height="53dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/inv_action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/cancel"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_margin="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/cancel"
-                tools:layout_editor_absoluteY="26dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                android:id="@+id/inv_categories"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/product"
-                android:textColor="@color/black"
-                android:textSize="23sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:inputType="none"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="end"
-                android:text="@string/save"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lot_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/lot"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inv_categories_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lot"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/cost_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/cost"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lot_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cost"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/price_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/price"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cost_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location1_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/location_1"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_1"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location2_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/location_2"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/location1_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_2"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/size_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/size"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/location2_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/size_text"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/variant_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/variant"
+            android:textAppearance="@style/inv_prdt_title"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.093"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/size_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/botanical_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/botanical_name"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/variant_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/botanical"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/classification_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/classification"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/botanical_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/classification"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/color_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/color"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/classification_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/color"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/inv_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/cancel"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_margin="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/cancel"
+                    tools:layout_editor_absoluteY="26dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/product"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="end"
+                    android:text="@string/save"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
