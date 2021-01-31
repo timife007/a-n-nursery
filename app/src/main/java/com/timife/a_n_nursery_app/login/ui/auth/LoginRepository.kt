@@ -18,7 +18,6 @@ class LoginRepository(
         return safeApiCall {
             api.login(email, password)
         }
-
     }
 
     suspend fun saveAuthToken(token: String) {

@@ -1,4 +1,4 @@
-package com.timife.a_n_nursery_app.inventory.ui
+package com.timife.a_n_nursery_app.inventory.notused
 
 import androidx.lifecycle.LiveData
 import com.timife.a_n_nursery_app.base.BaseRepository

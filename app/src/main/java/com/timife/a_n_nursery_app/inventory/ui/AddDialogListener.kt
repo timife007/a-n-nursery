@@ -1,4 +1,4 @@
-package com.timife.a_n_nursery_app.inventory
+package com.timife.a_n_nursery_app.inventory.ui
 
 import com.timife.a_n_nursery_app.inventory.data.InventoryItem
 

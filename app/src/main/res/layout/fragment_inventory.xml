@@ -10,7 +10,7 @@
         <HorizontalScrollView
             android:id="@+id/categories_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:scrollbars="none"
             android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,6 @@
                     android:focusable="true"
                     android:id="@+id/plant_chip"
                     style="@style/CustomChipChoice"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -46,7 +45,6 @@
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -58,7 +56,6 @@
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -70,7 +67,6 @@
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -82,7 +78,6 @@
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -94,7 +89,6 @@
                     android:clickable="true"
                     android:focusable="true"
                     style="@style/CustomChipChoice"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -106,7 +100,6 @@
                     android:focusable="true"
                     android:id="@+id/sod"
                     style="@style/CustomChipChoice"
-                    android:textColor="@color/white"
                     app:closeIconEnabled="false" />
 
             </com.google.android.material.chip.ChipGroup>
@@ -116,17 +109,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:spanCount="3"
-            android:clipToPadding="false"
-            android:padding="6dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categories_scroll_view"
-            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/inventory_card_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

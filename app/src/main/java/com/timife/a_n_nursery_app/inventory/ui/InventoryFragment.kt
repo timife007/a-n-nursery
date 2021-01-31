@@ -2,21 +2,17 @@ package com.timife.a_n_nursery_app.inventory.ui
 
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
-import androidx.core.view.MenuItemCompat
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentInventoryBinding
-import com.timife.a_n_nursery_app.inventory.*
 import com.timife.a_n_nursery_app.inventory.data.InventoryItem
 import com.timife.a_n_nursery_app.inventory.network.InventoryApi
+import com.timife.a_n_nursery_app.login.ui.handleApiError
 import com.timife.a_n_nursery_app.login.ui.visible
 import kotlinx.android.synthetic.main.fragment_inventory.*
 import kotlinx.coroutines.flow.first
@@ -24,7 +20,10 @@ import kotlinx.coroutines.runBlocking
 
 class InventoryFragment :
     BaseFragment<InventoryViewModel, FragmentInventoryBinding, InventoryRepository>() {
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.getInventoryItems()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,28 +33,32 @@ class InventoryFragment :
             viewModel.displayProductDetails(it)
         })
         binding.recyclerView.adapter = adapter
-        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, {
             if (null != it) {
                 val bottomSheet = BottomSheetDialogFragment()
                 this.findNavController()
-                    .navigate(InventoryFragmentDirections.actionInventoryFragmentToInvntBttmShtFragment(it))
+                    .navigate(
+                        InventoryFragmentDirections.actionInventoryFragmentToInvntBttmShtFragment(
+                            it
+                        )
+                    )
                 viewModel.displayProductDetailsComplete()
-                bottomSheet.show(requireActivity().supportFragmentManager,"BottomSheet")
+                bottomSheet.show(requireActivity().supportFragmentManager, "BottomSheet")
             }
         })
+
 
         viewModel.products.observe(viewLifecycleOwner, {
             when (it) {
                 is Resource.Success -> {
                     binding.inventoryProgress.visible(false)
-                    bindRecyclerView(recycler_view,it.value)
+                    bindRecyclerView(recycler_view, it.value)
                     adapter.notifyDataSetChanged()
 
                 }
                 is Resource.Failure -> {
                     binding.inventoryProgress.visible(false)
-                    Toast.makeText(requireContext(), "Error loading Inventory", Toast.LENGTH_LONG)
-                        .show()
+                    handleApiError(it)
                 }
                 is Resource.Loading ->
                     binding.inventoryProgress.visible(true)
@@ -74,16 +77,30 @@ class InventoryFragment :
             })
             dialogFragment.show(requireActivity().supportFragmentManager, "signature")
         }
+        setHasOptionsMenu(true)
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.inventory_menu, menu)
-        val searchItem: MenuItem = menu.findItem(R.id.inv_menu_search)
-
-
         super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.inventory_menu, menu)
+        val searchItem = menu.findItem(R.id.inv_menu_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    binding.recyclerView.scrollToPosition(0)
+                    viewModel.getSearchItems(query.toString())
+                    searchView.clearFocus()
+                }
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 
@@ -105,17 +122,11 @@ class InventoryFragment :
                 true
             }
             else -> super.onOptionsItemSelected(item)
-
         }
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
     override fun getViewModel() = InventoryViewModel::class.java
+
 
     override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentInventoryBinding.inflate(inflater, container, false)
@@ -125,5 +136,4 @@ class InventoryFragment :
         val api = retrofitClient.buildApi(InventoryApi::class.java, token)
         return InventoryRepository(api)
     }
-
 }

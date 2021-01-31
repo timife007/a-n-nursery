@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.DialogAddInventoryItemBinding
-import com.timife.a_n_nursery_app.inventory.AddDialogListener
 import com.timife.a_n_nursery_app.inventory.data.InventoryItem
 
 class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragment() {

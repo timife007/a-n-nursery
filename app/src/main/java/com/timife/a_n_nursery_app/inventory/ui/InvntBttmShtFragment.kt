@@ -30,8 +30,6 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.addCartBtn.setOnClickListener {

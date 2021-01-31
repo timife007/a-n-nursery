@@ -16,7 +16,7 @@ class UserPreferences(context: Context) {
 
     init {
         dataStore = applicationContext.createDataStore(
-                name = "my_data_store"
+            name = "my_data_store"
         )
     }
 
@@ -30,11 +30,13 @@ class UserPreferences(context: Context) {
             preferences[KEY_AUTH] = authToken
         }
     }
-    suspend fun clear(){
+
+    suspend fun clear() {
         dataStore.edit { preferences ->
             preferences.clear()
         }
     }
+
     companion object {
         private val KEY_AUTH = preferencesKey<String>("key_auth")
     }

@@ -7,17 +7,17 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 
 class DashboardViewModel : ViewModel() {
-    private val _salesBar :MutableLiveData<BarData> = MutableLiveData()
-    val salesBar : LiveData<BarData>
-    get() = _salesBar
+    private val _salesBar: MutableLiveData<BarData> = MutableLiveData()
+    val salesBar: LiveData<BarData>
+        get() = _salesBar
 
-    private val _transactionsBar :MutableLiveData<BarData> = MutableLiveData()
-    val transactionsBar : LiveData<BarData>
+    private val _transactionsBar: MutableLiveData<BarData> = MutableLiveData()
+    val transactionsBar: LiveData<BarData>
         get() = _transactionsBar
 
     private val _pieChart: MutableLiveData<PieData> = MutableLiveData()
-    val pieChart : LiveData<PieData>
-    get() = _pieChart
+    val pieChart: LiveData<PieData>
+        get() = _pieChart
 
     init {
         salesBarData()
@@ -26,7 +26,7 @@ class DashboardViewModel : ViewModel() {
     }
 
     private fun transactionsBarData() {
-        fun barEntries3(): ArrayList<BarEntry>{
+        fun barEntries3(): ArrayList<BarEntry> {
             val barEntries: ArrayList<BarEntry> = ArrayList()
             barEntries.add(BarEntry(1f, 6F))
             barEntries.add(BarEntry(2f, 2.5F))
@@ -35,7 +35,7 @@ class DashboardViewModel : ViewModel() {
             return barEntries
         }
 
-        fun barEntries4(): ArrayList<BarEntry>{
+        fun barEntries4(): ArrayList<BarEntry> {
             val barEntries: ArrayList<BarEntry> = ArrayList()
             barEntries.add(BarEntry(1f, 3F))
             barEntries.add(BarEntry(2f, 3.5F))
@@ -43,18 +43,19 @@ class DashboardViewModel : ViewModel() {
             barEntries.add(BarEntry(4f, 5.8F))
             return barEntries
         }
-        val barDataSet1 = BarDataSet(barEntries3(),"DataSet 1")
-        barDataSet1.setColor(ColorTemplate.rgb("#50CF46"))
-        val barDataSet2 = BarDataSet(barEntries4(),"DataSet 2")
-        barDataSet2.setColor(ColorTemplate.rgb("#b19cd9"))
-        val data = BarData(barDataSet1,barDataSet2)
+
+        val barDataSet1 = BarDataSet(barEntries3(), "DataSet 1")
+        barDataSet1.color = ColorTemplate.rgb("#50CF46")
+        val barDataSet2 = BarDataSet(barEntries4(), "DataSet 2")
+        barDataSet2.color = ColorTemplate.rgb("#b19cd9")
+        val data = BarData(barDataSet1, barDataSet2)
         _transactionsBar.value = data
 
     }
 
 
-    private fun salesBarData(){
-         fun barEntries1(): ArrayList<BarEntry>{
+    private fun salesBarData() {
+        fun barEntries1(): ArrayList<BarEntry> {
             val barEntries: ArrayList<BarEntry> = ArrayList()
             barEntries.add(BarEntry(1f, 200F))
             barEntries.add(BarEntry(2f, 560F))
@@ -63,7 +64,7 @@ class DashboardViewModel : ViewModel() {
             return barEntries
         }
 
-         fun barEntries2(): ArrayList<BarEntry>{
+        fun barEntries2(): ArrayList<BarEntry> {
             val barEntries: ArrayList<BarEntry> = ArrayList()
             barEntries.add(BarEntry(1f, 180F))
             barEntries.add(BarEntry(2f, 190F))
@@ -71,24 +72,32 @@ class DashboardViewModel : ViewModel() {
             barEntries.add(BarEntry(4f, 200F))
             return barEntries
         }
-        val barDataSet1 = BarDataSet(barEntries1(),"DataSet 1")
-        barDataSet1.setColor(ColorTemplate.rgb("#0B4317"))
-        val barDataSet2 = BarDataSet(barEntries2(),"DataSet 2")
-        barDataSet2.setColor(ColorTemplate.rgb("#CD801F"))
-        val data = BarData(barDataSet1,barDataSet2)
+
+        val barDataSet1 = BarDataSet(barEntries1(), "DataSet 1")
+        barDataSet1.color = ColorTemplate.rgb("#0B4317")
+        val barDataSet2 = BarDataSet(barEntries2(), "DataSet 2")
+        barDataSet2.color = ColorTemplate.rgb("#CD801F")
+        val data = BarData(barDataSet1, barDataSet2)
         _salesBar.value = data
 
     }
-    private fun pieDataEntry(): ArrayList<PieEntry>{
-        val colorClassArray = listOf(ColorTemplate.rgb("#4E2433"),ColorTemplate.rgb("#274E24"),ColorTemplate.rgb("#50CF46"),ColorTemplate.rgb("#3245F4"),ColorTemplate.rgb("#CD801F"))
 
-        val dataVals : ArrayList<PieEntry> = ArrayList()
+    private fun pieDataEntry(): ArrayList<PieEntry> {
+        val colorClassArray = listOf(
+            ColorTemplate.rgb("#4E2433"),
+            ColorTemplate.rgb("#274E24"),
+            ColorTemplate.rgb("#50CF46"),
+            ColorTemplate.rgb("#3245F4"),
+            ColorTemplate.rgb("#CD801F")
+        )
+
+        val dataVals: ArrayList<PieEntry> = ArrayList()
         dataVals.add(PieEntry(10F, "Ecru Lab"))
-        dataVals.add(PieEntry(7F,"Yu"))
+        dataVals.add(PieEntry(7F, "Yu"))
         dataVals.add(PieEntry(3F, "Cutty"))
-        dataVals.add(PieEntry(15F,"Hyun"))
-        dataVals.add(PieEntry(10F,"Kinp"))
-        val pieDataSet = PieDataSet(dataVals,"Series PieChart")
+        dataVals.add(PieEntry(15F, "Hyun"))
+        dataVals.add(PieEntry(10F, "Kinp"))
+        val pieDataSet = PieDataSet(dataVals, "Series PieChart")
         pieDataSet.colors = colorClassArray
         val pieData = PieData(pieDataSet)
         _pieChart.value = pieData

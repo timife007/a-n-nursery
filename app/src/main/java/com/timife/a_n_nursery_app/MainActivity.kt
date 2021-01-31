@@ -14,14 +14,10 @@ import com.ravikoradiya.library.CenterTitle
 import com.timife.a_n_nursery_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration : AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
-//        val userPreferences = UserPreferences(this)
-//        userPreferences.authToken.asLiveData().observe(this,  {
-//            Toast.makeText(this,it ?: "Token is null",Toast.LENGTH_LONG).show()
-//        })
+
         val binding =
                 DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)

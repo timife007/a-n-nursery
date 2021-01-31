@@ -1,7 +1,7 @@
 package com.timife.a_n_nursery_app.login.network
 
 import androidx.databinding.library.BuildConfig
-import okhttp3.*
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,25 +13,25 @@ class RetrofitClient {
 
     fun <Api> buildApi(
         api: Class<Api>,
-        authToken:String? = null,
+        authToken: String? = null,
     ): Api {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(
                 OkHttpClient.Builder()
-                        //interceptor for auth needed endpoints
+                    //interceptor for auth needed endpoints
                     .addInterceptor { chain ->
                         chain.proceed(chain.request().newBuilder().also {
-                            it.addHeader("Authorization","Bearer $authToken")
+                            it.addHeader("Authorization", "Bearer $authToken")
                         }.build())
                     }
                     .also { client ->
-                    if (BuildConfig.DEBUG) {
-                        val logging = HttpLoggingInterceptor()
-                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                        client.addInterceptor(logging)
-                    }
-                }.build()
+                        if (BuildConfig.DEBUG) {
+                            val logging = HttpLoggingInterceptor()
+                            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                            client.addInterceptor(logging)
+                        }
+                    }.build()
             )
             .addConverterFactory(GsonConverterFactory.create())
             .build()

@@ -17,7 +17,8 @@ import com.timife.a_n_nursery_app.user.UserApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, Repo : BaseRepository> : Fragment() {
+abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, Repo : BaseRepository> :
+    Fragment() {
 
     protected lateinit var viewModel: VM
     protected lateinit var binding: B
@@ -37,6 +38,7 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, Repo : BaseRepo
         return binding.root
 
     }
+
     fun logout() = lifecycleScope.launch {
         val authToken = userPreferences.authToken.first()
         val api = retrofitClient.buildApi(UserApi::class.java, authToken)

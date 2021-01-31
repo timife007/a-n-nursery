@@ -9,60 +9,58 @@
             type="com.timife.a_n_nursery_app.inventory.response.Result" />
 
     </data>
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="20dp"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_height="60dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/card_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/yemen_beverage_supplies"
-                android:requiresFadingEdge="horizontal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/severij"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="60dp"
+                android:scaleType="fitCenter"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/severij" />
 
             <TextView
                 android:id="@+id/product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
+                android:layout_alignStart="@id/card_image"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="center"
                 android:text="@{inventoryResult.name}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_image"
-                app:layout_constraintVertical_bias="0.252" />
+                android:textStyle="bold"
+                tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
-                android:id="@+id/edit"
+                android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="29dp"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="@string/edit"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_image"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="5dp"
                 app:srcCompat="@drawable/ic_edit" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </layout>

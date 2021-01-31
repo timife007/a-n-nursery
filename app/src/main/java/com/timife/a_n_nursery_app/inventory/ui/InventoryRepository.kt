@@ -11,6 +11,10 @@ class InventoryRepository(private val api: InventoryApi) : BaseRepository() {
     suspend fun getInventoryProducts(pageNumber: Int) = safeApiCall {
         api.getInventory(pageNumber).results
     }
+
+    suspend fun getInventorySearch(searchQuery:String,pageNumber: Int)=safeApiCall{
+        api.getSearchInventory(searchQuery,pageNumber).results
+    }
 //    fun getSearchResult(query:String)=
 //        Pager(
 //            config = PagingConfig(pageSize = 15,
