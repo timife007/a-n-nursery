@@ -13,16 +13,16 @@ class InventoryPagingSource(
     private val query: String
 ) : PagingSource<Int, Result>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
-        val position = params.key ?: INVENTORY_STARTING_PAGE_INDEX
+        val pageNumber = params.key ?: INVENTORY_STARTING_PAGE_INDEX
 
         return try {
-            val response = inventoryApi.getSearchInventory(query, position)
+            val response = inventoryApi.getSearchInventory(query,pageNumber)
             val products = response.results
 
             LoadResult.Page(
                 data = products,
-                prevKey = if (position == INVENTORY_STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = if (products.isEmpty()) null else position + 1
+                prevKey = if (pageNumber == INVENTORY_STARTING_PAGE_INDEX) null else pageNumber - 1,
+                nextKey = if (products.isEmpty()) null else pageNumber + 1
             )
         } catch (exception: IOException) {
             LoadResult.Error(exception)

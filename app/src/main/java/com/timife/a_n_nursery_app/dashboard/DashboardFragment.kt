@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.timife.a_n_nursery_app.databinding.FragmentDashboardBinding
-import com.timife.a_n_nursery_app.login.ui.specs
+import com.timife.a_n_nursery_app.specs
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
@@ -21,6 +21,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.title = "DashBoard"
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding = FragmentDashboardBinding.inflate(inflater)
 

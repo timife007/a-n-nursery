@@ -1,4 +1,4 @@
-package com.timife.a_n_nursery_app.login.ui
+package com.timife.a_n_nursery_app
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.BarChart
 import com.google.android.material.snackbar.Snackbar
-import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.login.ui.auth.LoginFragment
 
@@ -14,6 +13,12 @@ fun <A : Activity> Activity.startNewActivity(activity: Class<A>) {
     Intent(this, activity).also {
         it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(it)
+    }
+}
+
+class Constants{
+    companion object{
+        const val QUERY_PAGE_SIZE = 15
     }
 }
 

@@ -10,42 +10,42 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.DialogAddVenItemBinding
-import com.timife.a_n_nursery_app.vendor.data.VendorItems
 
 class AddVenItemDialog(var addDialogListener: AddVenDialogListener) : DialogFragment() {
     private lateinit var binding: DialogAddVenItemBinding
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DialogAddVenItemBinding.inflate(inflater)
         isCancelable = false
-        val dropdownList = listOf("Fruits", "Flowers", "Trees", "Ornamental", "Perennial", "Biennial")
+        val dropdownList = listOf("Wholesale", "Retail")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, dropdownList)
-        (binding.invCategoriesContainer.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-        //binding.Categories.setText("Categories", false)
-
-//        val sizeDropdown = listOf("Inch", "Gallon", "Pound", "Small", "Medium", "Large","X-Large","Pallet","Piece")
-//        val sizeAdapter = ArrayAdapter(requireContext(), R.layout.size_item, sizeDropdown)
-//        (binding.sizeUnit.editText as? AutoCompleteTextView)?.setAdapter(sizeAdapter)
-//        binding.sizeUnitText.setText("Size", false)
+        (binding.typeContainer.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        binding.type.setText("Type", false)
 
         binding.save.setOnClickListener {
             val name = binding.vendorName.text.toString()
-            val variant = binding.botanical.text.toString()
-            val lot = binding.lot.text.toString()
-            val cost = binding.cost.text.toString()
-            val price = binding.price.text.toString()
+            val lastName = binding.lastName.text.toString()
+            val email = binding.email.text.toString()
+            val phoneNumber = binding.phoneNumber.text.toString()
+            val company = binding.company.text.toString()
 
-            val categories = binding.invCategories.text.toString()
-            if (name.isEmpty() || variant.isEmpty() || lot.isEmpty() || cost.isEmpty() || price.isEmpty() || categories.isEmpty()) {
+            val type = binding.type.text.toString()
+            if (name.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || company.isEmpty() || type.isEmpty() || type == "Type") {
 
                 Toast.makeText(context, "Please fill information", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val item = VendorItems(name , variant , cost , price , lot)
-            addDialogListener.onAddVenButtonClicked(item)
+            addDialogListener.onAddVenButtonClicked(
+                name,
+                lastName,
+                email,
+                company,
+                type,
+                phoneNumber
+            )
             dismiss()
         }
         binding.cancel.setOnClickListener {

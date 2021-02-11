@@ -8,19 +8,54 @@ import com.timife.a_n_nursery_app.inventory.data.InventoryPagingSource
 import com.timife.a_n_nursery_app.inventory.network.InventoryApi
 
 class InventoryRepository(private val api: InventoryApi) : BaseRepository() {
-    suspend fun getInventoryProducts(pageNumber: Int) = safeApiCall {
-        api.getInventory(pageNumber).results
+    companion object {
+        private const val NETWORK_PAGE_SIZE = 14
     }
 
-    suspend fun getInventorySearch(searchQuery:String,pageNumber: Int)=safeApiCall{
-        api.getSearchInventory(searchQuery,pageNumber).results
+    suspend fun postInventoryProducts(
+        productName: String,
+        botanicalName: String,
+        size: String,
+        classification: String,
+        color: String,
+        price: String,
+        cost: String,
+        lot: String,
+        location: String,
+        quantity: String,
+        category: String
+    ) = safeApiCall {
+        api.saveInventoryItem(
+            productName,
+            botanicalName,
+            size,
+            classification,
+            color,
+            price,
+            cost,
+            lot,
+            location,
+            quantity,
+            category
+        )
     }
-//    fun getSearchResult(query:String)=
-//        Pager(
-//            config = PagingConfig(pageSize = 15,
-//            maxSize = 350,
-//            enablePlaceholders = false),
-//            pagingSourceFactory = {InventoryPagingSource(api,query)}
-//        ).liveData
+
+
+//    suspend fun getFilterCategory(filterQuery:String,pageNumber: Int) =
+//        api.getFilterByCategoryInventory(filterQuery,pageNumber)
+
+
+    fun getSearchResults(searchQuery: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                maxSize = 350,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                InventoryPagingSource(api, searchQuery)
+            }
+        ).liveData
+
 
 }

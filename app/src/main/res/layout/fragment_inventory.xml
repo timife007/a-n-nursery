@@ -7,120 +7,147 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-        <HorizontalScrollView
-            android:id="@+id/categories_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:scrollbars="none"
-            android:layout_marginBottom="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <HorizontalScrollView
+        android:id="@+id/categories_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/inv_chip_group"
-                android:layout_marginStart="16dp"
-                android:paddingStart="16dp"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/inv_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginEnd="8dp"
+            app:selectionRequired="true"
+            app:singleSelection="true"
+            tools:ignore="RtlSymmetry">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/all_chip"
+                style="@style/CustomChipChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="RtlSymmetry">
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/all"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/plants_chips"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/plant_chip"
-                    style="@style/CustomChipChoice"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/plant_chip"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/plants_chips"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/trees"
-                    android:id="@+id/trees_chip"
-                    style="@style/CustomChipChoice"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/trees_chip"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/trees"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bagged_materials"
-                    android:id="@+id/bagged_material"
-                    style="@style/CustomChipChoice"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/bagged_material"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/bagged"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bulk_materials"
-                    android:id="@+id/bulk_materials"
-                    style="@style/CustomChipChoice"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/bulk_materials"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/bulk"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pottery_materials"
-                    android:id="@+id/pottery_materials"
-                    style="@style/CustomChipChoice"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/pottery_materials"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/pottery"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/landscape_supply"
-                    android:id="@+id/landscape_supply"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    style="@style/CustomChipChoice"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/landscape_supply"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/landscape"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sod"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/sod"
-                    style="@style/CustomChipChoice"
-                    app:closeIconEnabled="false" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sod"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/sod"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:closeIconEnabled="false" />
 
-            </com.google.android.material.chip.ChipGroup>
+        </com.google.android.material.chip.ChipGroup>
 
-        </HorizontalScrollView>
+    </HorizontalScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categories_scroll_view"
-            tools:listitem="@layout/inventory_card_item" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:paddingBottom="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categories_scroll_view"
+        tools:listitem="@layout/inventory_card_item" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/inv_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,11 +163,56 @@
             android:id="@+id/inventory_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:indeterminateDrawable="@drawable/progress"
             android:layout_centerInParent="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="RETRY"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:textColor="@color/black"
+        android:id="@+id/recycler_retry"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No results found for this Query"
+        android:textColor="@color/black"
+        android:id="@+id/query_no_result_text"
+        android:textSize="16sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/inventory_no_result_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inventory Items not loaded"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/recycler_retry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

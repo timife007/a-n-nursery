@@ -1,5 +1,6 @@
 package com.timife.a_n_nursery_app.inventory.ui
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.timife.a_n_nursery_app.databinding.FragmentInventBttmShtBinding
 
 class InvntBttmShtFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentInventBttmShtBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +34,9 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.addCartBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "This is an add to cart button", Toast.LENGTH_LONG)
-                .show()
-        }
+//        binding.addCartBtn.setOnClickListener {
+//            Toast.makeText(requireContext(), "This is an add to cart button", Toast.LENGTH_LONG)
+//                .show()
+//        }
     }
 }

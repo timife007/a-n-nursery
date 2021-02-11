@@ -16,8 +16,7 @@ data class InventoryItem(
     var cost: String,
     @ColumnInfo(name = "itemPrice")
     var price: String
-){
+) {
     @PrimaryKey(autoGenerate = true)
-    var id : Int? = null
-
+    var id: Int? = null
 }

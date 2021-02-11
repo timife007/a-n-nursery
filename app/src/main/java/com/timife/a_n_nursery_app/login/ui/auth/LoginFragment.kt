@@ -13,10 +13,10 @@ import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentLoginBinding
 import com.timife.a_n_nursery_app.login.network.LoginApi
-import com.timife.a_n_nursery_app.login.ui.enable
-import com.timife.a_n_nursery_app.login.ui.handleApiError
-import com.timife.a_n_nursery_app.login.ui.startNewActivity
-import com.timife.a_n_nursery_app.login.ui.visible
+import com.timife.a_n_nursery_app.enable
+import com.timife.a_n_nursery_app.handleApiError
+import com.timife.a_n_nursery_app.startNewActivity
+import com.timife.a_n_nursery_app.visible
 import kotlinx.coroutines.launch
 
 

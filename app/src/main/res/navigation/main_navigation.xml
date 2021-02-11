@@ -28,7 +28,11 @@
         android:id="@+id/vendorFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorFragment"
         android:label="Vendor"
-        tools:layout="@layout/fragment_vendor" />
+        tools:layout="@layout/fragment_vendor" >
+        <action
+            android:id="@+id/action_vendorFragment_to_vendorBttmShtFragment"
+            app:destination="@id/vendorBttmShtFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.timife.a_n_nursery_app.settings.SettingsFragment"
@@ -41,9 +45,6 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
-        <action
-            android:id="@+id/action_settingsFragment_to_companyInfoFragment"
-            app:destination="@id/companyInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -55,12 +56,7 @@
         android:name="com.timife.a_n_nursery_app.inventory.ui.AddInvItemDialog"
         tools:layout="@layout/dialog_add_inventory_item"
         android:label="AddInvItemDialog" />
-    <fragment
-        android:id="@+id/companyInfoFragment"
-        tools:layout="@layout/fragment_company_info"
-        android:name="com.timife.a_n_nursery_app.settings.companyInfo.ui.CompanyInfoFragment"
-        android:label="Company Info" />
-    <dialog
+     <dialog
         android:id="@+id/invntBttmShtFragment"
         android:name="com.timife.a_n_nursery_app.inventory.ui.InvntBttmShtFragment"
         android:label="fragment_invent_bttm_sht"
@@ -69,4 +65,18 @@
             android:name="selectedProduct"
             app:argType="com.timife.a_n_nursery_app.inventory.response.Result" />
     </dialog>
+    <dialog
+        android:id="@+id/vendorBttmShtFragment"
+        android:name="com.timife.a_n_nursery_app.vendor.VendorBttmShtFragment"
+        tools:layout="@layout/fragment_vendor_bttm_sht"
+        android:label="VendorBttmShtFragment" >
+        <argument
+            android:name="selectedVendor"
+            app:argType="com.timife.a_n_nursery_app.vendor.response.VendorItem"/>
+    </dialog>
+    <dialog
+        android:id="@+id/addVenItemDialog"
+        android:name="com.timife.a_n_nursery_app.vendor.AddVenItemDialog"
+        android:label="AddVenItemDialog"
+        tools:layout="@layout/dialog_add_ven_item"/>
 </navigation>

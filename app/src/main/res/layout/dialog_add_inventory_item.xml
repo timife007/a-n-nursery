@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:layout_marginBottom="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="10dp"
         android:layout_marginBottom="43dp">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -40,14 +40,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inv_categories_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_marginStart="34dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="34dp"
             app:boxCornerRadiusBottomEnd="7dp"
             app:boxCornerRadiusBottomStart="7dp"
+            android:hint="@string/category"
             app:boxCornerRadiusTopEnd="7dp"
             app:boxCornerRadiusTopStart="7dp"
             app:boxStrokeColor="@color/primary_color"
@@ -56,18 +57,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_container">
 
-            <AutoCompleteTextView
-                android:id="@+id/inv_categories"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/category_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                tools:ignore="LabelFor" />
+                android:layout_height="53dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lot_container"
+            android:id="@+id/lastName_container"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +108,7 @@
             app:hintTextAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lot_container">
+            app:layout_constraintTop_toBottomOf="@id/lastName_container">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/cost"
@@ -152,7 +150,7 @@
             android:layout_marginStart="34dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="34dp"
-            android:hint="@string/location_1"
+            android:hint="@string/location"
             android:inputType="textPersonName"
             app:boxCornerRadiusBottomEnd="7dp"
             app:boxCornerRadiusBottomStart="7dp"
@@ -166,32 +164,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/location_1"
-                android:layout_width="match_parent"
-                android:layout_height="53dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/location2_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="34dp"
-            android:hint="@string/location_2"
-            android:inputType="textPersonName"
-            app:boxCornerRadiusBottomEnd="7dp"
-            app:boxCornerRadiusBottomStart="7dp"
-            app:boxCornerRadiusTopEnd="7dp"
-            app:boxCornerRadiusTopStart="7dp"
-            app:boxStrokeColor="@color/primary_color"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/location1_container">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/location_2"
                 android:layout_width="match_parent"
                 android:layout_height="53dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -214,7 +186,7 @@
             app:hintTextAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/location2_container">
+            app:layout_constraintTop_toBottomOf="@id/location1_container">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/size_text"
@@ -222,18 +194,7 @@
                 android:layout_height="53dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/variant_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/variant"
-            android:textAppearance="@style/inv_prdt_title"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.093"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/size_container" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/botanical_container"
@@ -253,7 +214,7 @@
             app:hintTextAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/variant_title">
+            app:layout_constraintTop_toBottomOf="@id/size_container">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/botanical"
@@ -312,6 +273,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="53dp" />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/quantity_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
+            android:hint="@string/quantity"
+            android:inputType="textPersonName"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/color_container">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quantity"
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:id="@+id/save"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginEnd="34dp"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/primary_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/quantity_container">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/save"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
         <RelativeLayout
@@ -348,19 +366,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:gravity="end"
-                    android:text="@string/save"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,21 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentProfileBinding
-import com.timife.a_n_nursery_app.login.ui.handleApiError
-import com.timife.a_n_nursery_app.login.ui.visible
+import com.timife.a_n_nursery_app.handleApiError
+import com.timife.a_n_nursery_app.visible
 import com.timife.a_n_nursery_app.settings.profile.network.ProfileApi
 import com.timife.a_n_nursery_app.settings.profile.network.UserName
-import com.timife.a_n_nursery_app.settings.profile.response.Profile
 import com.timife.a_n_nursery_app.settings.profile.response.ProfileItem
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -33,8 +30,8 @@ class ProfileFragment :
         navController = findNavController()
         val dropdownList = listOf("Option 1", "Option 2", "Option 3")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, dropdownList)
-        (binding.dropdownMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-        binding.timeZone.setText("Time Zone", false)
+//        (binding.dropdownMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+//        binding.timeZone.setText("Time Zone", false)
 
 
 

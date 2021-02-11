@@ -59,46 +59,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:id="@+id/company_info">
-        <ImageView
-            android:id="@+id/company_info_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/company_info"
-            android:layout_marginStart="28dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/company_info" />
-
-        <TextView
-            android:id="@+id/company_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/company_info"
-            android:layout_marginStart="40dp"
-            android:textAppearance="@style/settingsText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/company_info_icon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/info_arrow"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="28dp"
-            android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/company_info_text"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533"
-            android:contentDescription="@string/company_info" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
         android:id="@+id/access_control">
 
         <ImageView

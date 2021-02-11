@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:width="50dp"
-    android:height="50dp"
-    android:viewportWidth="50"
-    android:viewportHeight="50">
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
 
     <path
-        android:fillColor="#000000"
-        android:pathData="M 5 7 A 2.0002 2.0002 0 1 0 5 11 L 26 11 A 2.0002 2.0002 0 1 0 26 7 L 5 7 z M 32 7 A 2.0002 2.0002 0 1 0 32 11 L 37 11 A 2.0002 2.0002 0 1 0 37 7 L 32 7 z M 43 7 A 2.0002 2.0002 0 1 0 43 11 L 45 11 A 2.0002 2.0002 0 1 0 45 7 L 43 7 z M 5 18 A 2.0002 2.0002 0 1 0 5 22 L 18.587891 22 A 2.0002 2.0002 0 1 0 18.587891 18 L 5 18 z M 32 18 A 2.0002 2.0002 0 1 0 32 22 L 37 22 A 2.0002 2.0002 0 1 0 37 18 L 32 18 z M 43 18 A 2.0002 2.0002 0 1 0 43 22 L 45 22 A 2.0002 2.0002 0 1 0 45 18 L 43 18 z M 5 29 A 2.0002 2.0002 0 1 0 5 33 L 22.294922 33 A 2.0002 2.0002 0 1 0 22.294922 29 L 5 29 z M 32 29 A 2.0002 2.0002 0 1 0 32 33 L 37 33 A 2.0002 2.0002 0 1 0 37 29 L 32 29 z M 43 29 A 2.0002 2.0002 0 1 0 43 33 L 45 33 A 2.0002 2.0002 0 1 0 45 29 L 43 29 z M 5 40 A 2.0002 2.0002 0 1 0 5 44 L 24.765625 44 A 2.0002 2.0002 0 1 0 24.765625 40 L 5 40 z M 32 40 A 2.0002 2.0002 0 1 0 32 44 L 37 44 A 2.0002 2.0002 0 1 0 37 40 L 32 40 z M 43 40 A 2.0002 2.0002 0 1 0 43 44 L 45 44 A 2.0002 2.0002 0 1 0 45 40 L 43 40 z"
-        tools:ignore="VectorPath" />
-
+        android:fillColor="#626262"
+        android:pathData="M19 24h4v4h-4z" />
+    <path
+        android:fillColor="#626262"
+        android:pathData="M26 24h4v4h-4z" />
+    <path
+        android:fillColor="#626262"
+        android:pathData="M19 17h4v4h-4z" />
+    <path
+        android:fillColor="#626262"
+        android:pathData="M26 17h4v4h-4z" />
+    <path
+        android:fillColor="#626262"
+        android:pathData="M17 24H4V10h24v5h2v-5a2.002 2.002 0 0 0-2-2h-6V4a2.002 2.002 0 0 0-2-2h-8a2.002 2.002 0 0 0-2 2v4H4a2.002 2.002 0 0 0-2 2v14a2.002 2.002 0 0 0 2 2h13zM12 4h8v4h-8z" />
+    <path
+        android:pathData="M 0 0 H 32 V 32 H 0 V 0 Z" />
 </vector>

@@ -92,6 +92,22 @@
     <string name="landscape_supply">Landscape Supply</string>
     <string name="sod">SOD</string>
     <string name="bagged_materials">Bagged Materials</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="company">Company</string>
+    <string name="add_vendor">Add Vendor</string>
+    <string name="business_information">Business Information</string>
+    <string name="type">Type</string>
+    <string name="location">Location</string>
+    <string name="category">Category</string>
+    <string name="quantity">Quantity</string>
+    <string name="priceColon">Price:</string>
+    <string name="bermuda_tif_419_sod">Bermuda Tif 419 Sod</string>
+    <string name="all">All</string>
+    <string name="landscape">Landscape</string>
+    <string name="pottery">Pottery</string>
+    <string name="bulk">Bulk</string>
+    <string name="bagged">Bagged</string>
 
 
 </resources>

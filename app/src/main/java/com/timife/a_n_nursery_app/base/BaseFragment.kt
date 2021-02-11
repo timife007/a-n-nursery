@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.timife.a_n_nursery_app.UserPreferences
+import com.timife.a_n_nursery_app.ViewModelFactory
 import com.timife.a_n_nursery_app.login.network.RetrofitClient
 import com.timife.a_n_nursery_app.login.ui.auth.LoginActivity
-import com.timife.a_n_nursery_app.ViewModelFactory
-import com.timife.a_n_nursery_app.login.ui.startNewActivity
+import com.timife.a_n_nursery_app.startNewActivity
 import com.timife.a_n_nursery_app.user.UserApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

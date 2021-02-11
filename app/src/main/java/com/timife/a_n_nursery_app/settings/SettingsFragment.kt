@@ -17,9 +17,6 @@ class SettingsFragment :
             this.findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
 
         }
-        binding.companyInfo.setOnClickListener {
-            this.findNavController().navigate(R.id.action_settingsFragment_to_companyInfoFragment)
-        }
         binding.logOut.setOnClickListener {
             logout()
         }

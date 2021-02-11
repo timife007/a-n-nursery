@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.asLiveData
 import com.timife.a_n_nursery_app.login.ui.auth.LoginActivity
-import com.timife.a_n_nursery_app.login.ui.startNewActivity
 
 class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
