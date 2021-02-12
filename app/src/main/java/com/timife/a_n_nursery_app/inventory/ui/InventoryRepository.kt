@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.timife.a_n_nursery_app.base.BaseRepository
+import com.timife.a_n_nursery_app.inventory.data.FilterPagingSource
 import com.timife.a_n_nursery_app.inventory.data.InventoryPagingSource
 import com.timife.a_n_nursery_app.inventory.network.InventoryApi
 
@@ -41,9 +42,17 @@ class InventoryRepository(private val api: InventoryApi) : BaseRepository() {
     }
 
 
-//    suspend fun getFilterCategory(filterQuery:String,pageNumber: Int) =
-//        api.getFilterByCategoryInventory(filterQuery,pageNumber)
-
+    fun getFilterResults(category: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                maxSize = 350,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                FilterPagingSource(api, category)
+            }
+        ).liveData
 
     fun getSearchResults(searchQuery: String) =
         Pager(

@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
@@ -30,6 +29,7 @@ class InventoryFragment :
         val adapter = InventAdapter(InventAdapter.OnClickListener {
             viewModel.displayProductDetails(it)
         })
+
         binding.apply {
             recyclerView.setHasFixedSize(true)
             recyclerView.itemAnimator = null
@@ -41,16 +41,21 @@ class InventoryFragment :
                 adapter.retry()
             }
         }
+
         viewModel.result.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
+
+        viewModel.filter.observe(viewLifecycleOwner){
+            adapter.submitData(viewLifecycleOwner.lifecycle,it)
+        }
+
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 inventoryProgress.isVisible = loadState.source.refresh is LoadState.Loading
                 recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
                 recyclerRetry.isVisible = loadState.source.refresh is LoadState.Error
                 inventoryNoResultText.isVisible = loadState.source.refresh is LoadState.Error
-
 
                 if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached &&
                     adapter.itemCount < 1
@@ -65,19 +70,14 @@ class InventoryFragment :
         }
 
         val chipGroup = binding.invChipGroup
-        chipGroup.setOnCheckedChangeListener(
-            object : ChipGroup.OnCheckedChangeListener {
-
-                override fun onCheckedChanged(group: ChipGroup?, checkedId: Int) {
-                    val chip = group?.findViewById<Chip>(checkedId)
-                    if (chip != null) {
-                        viewModel.getFilterItems(chip.text.toString())
-                        Toast.makeText(requireContext(), "Chip is" + chip.text, Toast.LENGTH_LONG)
-                            .show()
-                    }
-                }
+        chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group?.findViewById<Chip>(checkedId)
+            if (chip?.text != "All") {
+                viewModel.getFilterItems(chip?.text.toString())
+            }else{
+                viewModel.getFilterItems("")
             }
-        )
+        }
 
         viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, {
             if (null != it) {
@@ -143,20 +143,16 @@ class InventoryFragment :
         setHasOptionsMenu(true)
     }
 
-
     private fun hideProgressBar() {
         binding.inventoryProgress.visibility = View.INVISIBLE
-//        isLoading = false
     }
 
     private fun showProgressBar() {
         binding.inventoryProgress.visibility = View.VISIBLE
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-
         inflater.inflate(R.menu.inventory_menu, menu)
         val searchItem = menu.findItem(R.id.inv_menu_search)
         val searchView = searchItem.actionView as SearchView

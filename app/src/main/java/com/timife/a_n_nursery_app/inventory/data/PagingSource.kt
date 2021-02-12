@@ -31,3 +31,27 @@ class InventoryPagingSource(
         }
     }
 }
+
+class FilterPagingSource(
+    private val inventoryApi: InventoryApi,
+    private val category: String
+) : PagingSource<Int, Result>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
+        val pageNumber = params.key ?: INVENTORY_STARTING_PAGE_INDEX
+
+        return try {
+            val response = inventoryApi.getFilterByCategoryInventory(category,pageNumber)
+            val products = response.results
+
+            LoadResult.Page(
+                data = products,
+                prevKey = if (pageNumber == INVENTORY_STARTING_PAGE_INDEX) null else pageNumber - 1,
+                nextKey = if (products.isEmpty()) null else pageNumber + 1
+            )
+        } catch (exception: IOException) {
+            LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            LoadResult.Error(exception)
+        }
+    }
+}

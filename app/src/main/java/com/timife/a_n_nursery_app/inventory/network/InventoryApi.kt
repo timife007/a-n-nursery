@@ -24,7 +24,7 @@ interface InventoryApi {
     @GET("/product/list/")
     suspend fun getFilterByCategoryInventory(
         @Query("category")
-        filterQuery: String,
+        filterQuery: String?,
         @Query("page")
         pageNumber: Int = 1
     ): InventoryItems
