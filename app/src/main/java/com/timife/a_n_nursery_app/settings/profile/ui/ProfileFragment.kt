@@ -29,7 +29,7 @@ class ProfileFragment :
         binding.profileProgress.visible(false)
         navController = findNavController()
         val dropdownList = listOf("Option 1", "Option 2", "Option 3")
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, dropdownList)
+//        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, dropdownList)
 //        (binding.dropdownMenu.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 //        binding.timeZone.setText("Time Zone", false)
 

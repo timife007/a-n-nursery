@@ -14,9 +14,7 @@ interface VendorsApi {
     @GET("/vendors/list/")
     suspend fun getSearchVendors(
         @Query("first_name")
-        firstName: String? = null,
-        @Query("last_name")
-        lastName: String?=null,
+        firstName: String?,
         @Query("page")
         pageNumber: Int = 1
     ):Vendors

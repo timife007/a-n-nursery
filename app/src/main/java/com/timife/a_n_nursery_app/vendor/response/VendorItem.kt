@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-
 data class VendorItem(
     val id: Int?,
     val first_name: String?,

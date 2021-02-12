@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
+ * Use the [LoginFragment] factory method to
  * create an instance of this fragment.
  */
 class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding, LoginRepository>() {

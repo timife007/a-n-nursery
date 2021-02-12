@@ -5,11 +5,6 @@ import com.timife.a_n_nursery_app.inventory.response.Result
 import retrofit2.http.*
 
 interface InventoryApi {
-    @GET("/products/")
-    suspend fun getInventory(
-        @Query("page")
-        pageNumber: Int = 1
-    ): InventoryItems
 
     //Search api interface
     @GET("/product/list/")

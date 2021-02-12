@@ -2,18 +2,19 @@ package com.timife.a_n_nursery_app.vendor
 
 import android.os.Bundle
 import android.view.*
-import android.widget.AbsListView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.timife.a_n_nursery_app.*
+import androidx.paging.LoadState
+import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentVendorBinding
+import com.timife.a_n_nursery_app.handleApiError
 import com.timife.a_n_nursery_app.vendor.network.VendorsApi
-import com.timife.a_n_nursery_app.vendor.response.Vendors
-import kotlinx.android.synthetic.main.fragment_inventory.recycler_view
+import com.timife.a_n_nursery_app.vendor.ui.VendorLoadStateAdapter
+import com.timife.a_n_nursery_app.visible
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
@@ -21,12 +22,49 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.venProgress.visible(false)
+        binding = FragmentVendorBinding.bind(view)
 
         val adapter = VendorAdapter(VendorAdapter.OnClickListener {
             viewModel.displayVendorDetails(it)
         })
+
         binding.recyclerView.adapter = adapter
+        binding.apply {
+            recyclerView.setHasFixedSize(true)
+            recyclerView.itemAnimator = null
+            recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = VendorLoadStateAdapter { adapter.retry() },
+                footer = VendorLoadStateAdapter { adapter.retry() }
+            )
+            venRecyclerRetry.setOnClickListener {
+                adapter.retry()
+            }
+        }
+
+        viewModel.searchVendor.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                venProgress.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                venRecyclerRetry.isVisible = loadState.source.refresh is LoadState.Error
+                vendorNoResultText.isVisible = loadState.source.refresh is LoadState.Error
+
+                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached &&
+                    adapter.itemCount < 1
+                ) {
+                    recyclerView.isVisible = false
+                    vendorQueryNoResultText.isVisible = true
+
+                } else {
+                    vendorQueryNoResultText.isVisible = false
+                }
+            }
+        }
+
+
         viewModel.navigateToSelectedVendor.observe(viewLifecycleOwner, {
             if (null != it) {
                 this.findNavController()
@@ -38,59 +76,25 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
                 viewModel.displayVendorDetailsComplete()
             }
         })
+
         viewModel.saveVendor.observe(viewLifecycleOwner, {
             binding.venProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
+                    hideProgressBar()
                     Toast.makeText(requireContext(),"${it.value}",Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
+                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading ->{
+                    showProgressBar()
                     binding.venProgress.visible(true)
                 }
             }
         })
 
-        viewModel.vendors.observe(viewLifecycleOwner, {
-            when (it) {
-                is Resource.Success -> {
-                    hideProgressBar()
-                    bindVenRecyclerView(recycler_view, it.value)
-                    adapter.notifyDataSetChanged()
-                }
-                is Resource.Failure -> {
-                        hideProgressBar()
-                    handleApiError(it)
-                    Toast.makeText(requireContext(), "Error loading vendors ${it.errorBody}", Toast.LENGTH_LONG)
-                            .show()
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
-
-                }
-            }
-        })
-
-        viewModel.search.observe(viewLifecycleOwner, {
-            when (it) {
-                is Resource.Success -> {
-                    hideProgressBar()
-                    bindVenRecyclerView(binding.recyclerView, it.value)
-                    adapter.notifyDataSetChanged()
-                    val totalPages = it.value.count / Constants.QUERY_PAGE_SIZE + 2
-                    isLastPage = viewModel.searchPage == totalPages
-
-                }
-                is Resource.Failure -> {
-                    hideProgressBar()
-                    handleApiError(it)
-                }
-                is Resource.Loading ->
-                    showProgressBar()
-            }
-        })
 
         binding.venAdd.setOnClickListener {
             val dialogFragment = AddVenItemDialog(object : AddVenDialogListener {
@@ -117,12 +121,7 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
         binding.venProgress.visibility = View.VISIBLE
         isLoading = true
     }
-    private fun bindVenRecyclerView(recyclerView: RecyclerView, data: Vendors) {
-        val adapter = recyclerView.adapter as? VendorAdapter
-        adapter?.submitList(data.results.toList())
-        recyclerView.addOnScrollListener(this.scrollListener)
 
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -133,7 +132,7 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     binding.recyclerView.scrollToPosition(0)
-                    viewModel.getVendorSearchItems(query.toString(),query.toString())
+                    viewModel.getVendorSearchItems(query.toString())
                     searchView.clearFocus()
                 }
                 return true
@@ -147,41 +146,6 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
     }
 
     var isLoading = false
-    var isLastPage = false
-    var isScrolling = false
-
-    private val scrollListener =object: RecyclerView.OnScrollListener(){
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
-                isScrolling = true
-            }
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-
-            val layoutManager  = recyclerView.layoutManager as LinearLayoutManager
-            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-            val visibleItemCount = layoutManager.childCount
-            val totalItemCount = layoutManager.itemCount
-
-            val isNotLoadingAndNotLastPage =  !isLoading   &&  !isLastPage
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
-            val isNotAtBeginning = firstVisibleItemPosition >= 0
-            val isTotalMoreThanVisible = totalItemCount >= Constants.QUERY_PAGE_SIZE
-
-            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && isScrolling
-            if(shouldPaginate){
-                viewModel.getVendorItems()
-                isScrolling = false
-            }else{
-                binding.recyclerView.setPadding(0,0,0,0)
-            }
-        }
-    }
-
-
 
     override fun getViewModel() = VendorViewModel::class.java
 
@@ -189,7 +153,6 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
             inflater: LayoutInflater,
             container: ViewGroup?
     ) = FragmentVendorBinding.inflate(inflater, container, false)
-
 
     override fun getRepository(): VendorRepository {
         val token = runBlocking { userPreferences.authToken.first() }

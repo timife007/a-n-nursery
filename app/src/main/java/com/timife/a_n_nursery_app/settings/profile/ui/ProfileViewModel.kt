@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.timife.a_n_nursery_app.base.BaseViewModel
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.settings.profile.network.UserName
-import com.timife.a_n_nursery_app.settings.profile.response.Profile
 import com.timife.a_n_nursery_app.settings.profile.response.ProfileItem
 import kotlinx.coroutines.launch
 

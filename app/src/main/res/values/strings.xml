@@ -108,6 +108,9 @@
     <string name="pottery">Pottery</string>
     <string name="bulk">Bulk</string>
     <string name="bagged">Bagged</string>
+    <string name="no_results_found_for_this_query">No results found for this Query</string>
+    <string name="retry">RETRY</string>
+    <string name="vendors_not_loaded">Vendors not loaded</string>
 
 
 </resources>
