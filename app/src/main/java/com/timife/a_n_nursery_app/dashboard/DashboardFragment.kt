@@ -6,24 +6,35 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.timife.a_n_nursery_app.Resource
+import com.timife.a_n_nursery_app.base.BaseFragment
+import com.timife.a_n_nursery_app.dashboard.network.DashboardApi
 import com.timife.a_n_nursery_app.databinding.FragmentDashboardBinding
+import com.timife.a_n_nursery_app.databinding.FragmentInventoryBinding
+import com.timife.a_n_nursery_app.handleApiError
+import com.timife.a_n_nursery_app.inventory.categories.database.CategoryDatabase
+import com.timife.a_n_nursery_app.inventory.categories.database.CategoryItem
+import com.timife.a_n_nursery_app.inventory.network.InventoryApi
+import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
+import com.timife.a_n_nursery_app.inventory.ui.InventoryViewModel
 import com.timife.a_n_nursery_app.specs
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
-class DashboardFragment : Fragment() {
-    private lateinit var binding: FragmentDashboardBinding
-    private lateinit var viewModel: DashboardViewModel
+class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBinding, DashBoardRepository>() {
+//    private lateinit var binding: FragmentDashboardBinding
+//    private lateinit var viewModel: DashboardViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         activity?.title = "DashBoard"
-        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
-        binding = FragmentDashboardBinding.inflate(inflater)
+//        showProgressBar()
+        viewModel.getDashboard()
 
         val spinnerItems = arrayOf("Today", "Yesterday", "Last Week")
         binding.spinner.adapter = ArrayAdapter(
@@ -45,6 +56,25 @@ class DashboardFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+
+        viewModel.dashboard.observe(viewLifecycleOwner,{
+            when (it) {
+                is Resource.Success -> {
+                    binding.inventoryProdNum.text = it.value.low_inventory.toString()
+                    binding.productNumber.text = it.value.products_sold.toString()
+                    binding.transactionNumber.text =  it.value.transactions.toString()
+                    binding.netPrice.text = it.value.net_sales
+                    Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
+                }
+                is Resource.Failure -> {
+                    hideProgressBar()
+                    handleApiError(it)
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
         //Sales Chart Test
         viewModel.salesBar.observe(viewLifecycleOwner, {
             binding.salesBarChart.data = it
@@ -106,11 +136,34 @@ class DashboardFragment : Fragment() {
             binding.pieChart.holeRadius = 60F
             binding.pieChart.invalidate()
         })
-        return binding.root
+    }
+
+    private fun hideProgressBar() {
+        binding.dashboardProgress.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressBar() {
+        binding.dashboardProgress.visibility = View.VISIBLE
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+    }
+
+    override fun getViewModel()= DashboardViewModel::class.java
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    )   =     FragmentDashboardBinding.inflate(inflater, container, false)
+
+
+    override fun getRepository(): DashBoardRepository {
+        val token = runBlocking { userPreferences.authToken.first() }
+        val api = retrofitClient.buildApi(DashboardApi::class.java, token)
+//        val database = CategoryDatabase.invoke(requireContext())
+
+        return DashBoardRepository(api)
     }
 }

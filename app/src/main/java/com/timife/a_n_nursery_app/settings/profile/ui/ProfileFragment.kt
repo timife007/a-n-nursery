@@ -92,13 +92,15 @@ class ProfileFragment :
         }
     }
 
-    fun updateProfile(){
-       val userName   =UserName (
-               binding.firstName.text.toString().trim(),
-                binding.lastName.text.toString().trim()
-               )
+    private fun updateProfile(){
+        val firstName = binding.firstName.text.toString().trim()
+        val lastName =binding.lastName.text.toString().trim()
+//       val userName   =UserName (
+//               binding.firstName.text.toString().trim(),
+//                binding.lastName.text.toString().trim()
+//               )
         val phoneNumber = binding.phoneNumber.text.toString().trim()
-        viewModel.updateUserProfile(userName,phoneNumber)
+        viewModel.updateUserProfile(firstName,lastName,phoneNumber)
     }
 
     override fun getViewModel() = ProfileViewModel::class.java

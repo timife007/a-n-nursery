@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/bottom_sht_rect"
             android:id="@+id/bttm_sht_draw_img"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,9 +31,10 @@
             android:id="@+id/ven_txt_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:textSize="30sp"
+            android:textSize="25sp"
+            android:textColor="@color/black"
             android:text="@{viewModel.selectedVendor.type}"
             android:textAppearance="@style/inv_card_txt_app"
             android:textStyle="bold"
@@ -45,7 +46,7 @@
             android:id="@+id/vendor_first_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="3dp"
             app:layout_constraintTop_toBottomOf="@+id/ven_txt_type"
             tools:layout_editor_absoluteX="6dp">
 
@@ -62,7 +63,10 @@
 
             <TextView
                 android:id="@+id/firstName_text"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
                 android:text="@{viewModel.selectedVendor.first_name}"
@@ -93,7 +97,10 @@
 
             <TextView
                 android:id="@+id/last_name_text"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
                 android:text="@{viewModel.selectedVendor.last_name}"
@@ -124,7 +131,10 @@
 
             <TextView
                 android:id="@+id/email_text"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +167,10 @@
 
             <TextView
                 android:id="@+id/company_text"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="200dp"
@@ -188,7 +201,10 @@
 
             <TextView
                 android:id="@+id/type_text"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="200dp"
@@ -219,10 +235,13 @@
 
             <TextView
                 android:id="@+id/phone_number_text"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="200dp"
+                android:gravity="center"
                 android:text="@{viewModel.selectedVendor.phone_number}"
                 android:textAppearance="@style/inv_card_txt_app"
                 app:layout_constraintBottom_toBottomOf="parent"

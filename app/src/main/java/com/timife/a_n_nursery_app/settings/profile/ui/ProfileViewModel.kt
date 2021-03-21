@@ -25,8 +25,8 @@ class ProfileViewModel(
         _profile.value = profileRepository.getProfile()
     }
 
-    fun updateUserProfile(userName: UserName,phoneNumber: String)= viewModelScope.launch {
+    fun updateUserProfile(firstName: String,lastName:String,phoneNumber: String)= viewModelScope.launch {
         _update.value = Resource.Loading
-        _update.value = profileRepository.updateProfile(userName,phoneNumber)
+        _update.value = profileRepository.updateProfile(firstName,lastName,phoneNumber)
     }
 }

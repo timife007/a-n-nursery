@@ -5,13 +5,9 @@ import com.timife.a_n_nursery_app.vendor.response.Vendors
 import retrofit2.http.*
 
 interface VendorsApi {
-    @GET("/vendors/")
-    suspend fun getVendors(
-        @Query("page")
-        pageNumber: Int = 1
-    ): Vendors
 
-    @GET("/vendors/list/")
+
+    @GET("/vendor/list/")
     suspend fun getSearchVendors(
         @Query("first_name")
         firstName: String?,

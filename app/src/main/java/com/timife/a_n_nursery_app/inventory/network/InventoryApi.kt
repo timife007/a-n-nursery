@@ -1,13 +1,33 @@
 package com.timife.a_n_nursery_app.inventory.network
 
+import com.timife.a_n_nursery_app.inventory.categories.network.CategoryItems
+import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationItems
+import com.timife.a_n_nursery_app.inventory.locations.network.LocationItems
+import com.timife.a_n_nursery_app.inventory.lots.network.LotItems
 import com.timife.a_n_nursery_app.inventory.response.InventoryItems
 import com.timife.a_n_nursery_app.inventory.response.Result
 import retrofit2.http.*
 
 interface InventoryApi {
 
+    @GET("/categories/")
+    suspend fun getCategories(
+    ): CategoryItems
+
+    @GET("/locations/")
+    suspend fun getLocations(
+    ): LocationItems
+
+    @GET("/lots/")
+    suspend fun getLots(
+    ):LotItems
+
+    @GET("/classifications/")
+    suspend fun getClassification(
+    ):ClassificationItems
+
     //Search api interface
-    @GET("/product/list/")
+    @GET("/product/list/") 
     suspend fun getSearchInventory(
         @Query("name")
         searchQuery: String?,
@@ -21,24 +41,29 @@ interface InventoryApi {
         @Query("category")
         filterQuery: String?,
         @Query("page")
-        pageNumber: Int = 1
+        pageNumber: Int?
     ): InventoryItems
 
+    @DELETE("/products/{id}/")
+    suspend fun deleteInventoryItems(
+        @Path("id")
+        deleteId:Int?
+    ):Nothing
 
 
     @FormUrlEncoded
-    @POST("/products/")
+    @POST("/product/create/")
     suspend fun saveInventoryItem(
         @Field("name") productName: String,
         @Field("botanical_name") botanicalName: String,
         @Field("size") size: String,
-        @Field("classification") classification: String,
+        @Field("classification") classification: Int,
         @Field("color") color: String,
         @Field("price") price: String,
         @Field("cost") cost: String,
-        @Field("lot") lot: String,
-        @Field("location") location: String,
-        @Field("quantity") quantity: String,
-        @Field("category") category: String
+        @Field("lot") lot: Int,
+        @Field("location") location: Int,
+        @Field("quantity") quantity: Int,
+        @Field("category") category: Int
     ): Result
 }

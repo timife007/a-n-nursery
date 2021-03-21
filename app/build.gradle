@@ -97,5 +97,14 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime:3.0.0-alpha05"
 
+    //Scanner
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+    //viewPager
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+
+
+
 
 }

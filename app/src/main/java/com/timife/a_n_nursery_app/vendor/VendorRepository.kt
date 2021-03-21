@@ -18,7 +18,7 @@ class VendorRepository(private val api: VendorsApi): BaseRepository(){
         private const val NETWORK_PAGE_SIZE = 14
     }
 
-    fun getSearchVendorsResults(searchVendor: String) =
+    fun getSearchVendorsResults(firstNameSearch: String) =
         Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
@@ -26,7 +26,7 @@ class VendorRepository(private val api: VendorsApi): BaseRepository(){
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                VendorPagingSource(api, searchVendor)
+                VendorPagingSource(api, firstNameSearch)
             }
         ).liveData
 

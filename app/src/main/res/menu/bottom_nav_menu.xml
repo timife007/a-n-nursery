@@ -17,9 +17,9 @@
             android:title="@string/vendor"
             />
         <item
-            android:id="@+id/infoFragment"
-            android:icon="@drawable/info_24_filled"
-            android:title="@string/info"
+            android:id="@+id/salesFragment"
+            android:icon="@drawable/ic_sales"
+            android:title="@string/sales"
             />
         <item
             android:id="@+id/settingsFragment"

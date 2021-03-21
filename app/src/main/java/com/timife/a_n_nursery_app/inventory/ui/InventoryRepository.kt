@@ -1,30 +1,79 @@
 package com.timife.a_n_nursery_app.inventory.ui
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.timife.a_n_nursery_app.base.BaseRepository
+import com.timife.a_n_nursery_app.inventory.categories.database.CategoryDatabase
+import com.timife.a_n_nursery_app.inventory.categories.database.CategoryItem
+import com.timife.a_n_nursery_app.inventory.classifications.database.ClassificationItem
 import com.timife.a_n_nursery_app.inventory.data.FilterPagingSource
 import com.timife.a_n_nursery_app.inventory.data.InventoryPagingSource
+import com.timife.a_n_nursery_app.inventory.locations.database.LocationItem
+import com.timife.a_n_nursery_app.inventory.lots.database.LotItem
 import com.timife.a_n_nursery_app.inventory.network.InventoryApi
 
-class InventoryRepository(private val api: InventoryApi) : BaseRepository() {
+class InventoryRepository(private val api: InventoryApi,private val database: CategoryDatabase) : BaseRepository() {
     companion object {
         private const val NETWORK_PAGE_SIZE = 14
     }
+
+    suspend fun getCategory() = safeApiCall {
+        api.getCategories()
+    }
+
+    suspend fun getLocations()= safeApiCall{
+        api.getLocations()
+    }
+
+    suspend fun getClassifications()= safeApiCall {
+        api.getClassification()
+    }
+
+    suspend fun getlots() = safeApiCall {
+        api.getLots()
+    }
+
+    suspend fun deleteInventoryProduct(id:Int) = safeApiCall {
+        api.deleteInventoryItems(id)
+    }
+
+
+//
+//    suspend fun delete(item: CategoryItem){
+//        database?.getCategoryDao?.delete(item)
+//    }
+//
+    suspend fun insertUpdateAll(item:List<CategoryItem>){
+        database.getCategoryDao.insertUpdateAll(item)
+    }
+
+    suspend fun insertUpdateAllLots(item:List<LotItem>){
+        database.getLotDao.insertUpdateAll(item)
+    }
+    suspend fun insertUpdateAllLocations(item:List<LocationItem>){
+        database.getLocationDao.insertUpdateAll(item)
+    }
+    suspend fun insertUpdateAllClassifications(item:List<ClassificationItem>){
+        database.getClassificationDao.insertUpdateAll(item)
+    }
+//    val getAllCategoryItem : LiveData<List<CategoryItem>> = database?.getCategoryDao!!.getAllCategoryItems()
+
+
 
     suspend fun postInventoryProducts(
         productName: String,
         botanicalName: String,
         size: String,
-        classification: String,
+        classification: Int,
         color: String,
         price: String,
         cost: String,
-        lot: String,
-        location: String,
-        quantity: String,
-        category: String
+        lot: Int,
+        location: Int,
+        quantity: Int,
+        category: Int
     ) = safeApiCall {
         api.saveInventoryItem(
             productName,

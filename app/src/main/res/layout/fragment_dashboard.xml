@@ -6,7 +6,21 @@
     <data>
 
     </data>
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/dashboard_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:indeterminateDrawable="@drawable/progress"
+                android:layout_centerInParent="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/fragment_dashboard"
@@ -42,6 +56,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -61,7 +76,6 @@
                             android:text="@string/net_sales"
                             android:textAppearance="@style/text_net_sales"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.501"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,17 +83,26 @@
                             android:id="@+id/net_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:width="177dp"
-                            android:height="56dp"
-                            android:text="@string/_9089_43"
+                            android:text="@string/_0number"
                             android:textAppearance="@style/net_sum"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.584"
+                            app:layout_constraintHorizontal_bias="0.525"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/net_title"
-                            app:layout_constraintVertical_bias="1.0" />
+                            app:layout_constraintTop_toBottomOf="@+id/net_title" />
+
+                        <TextView
+                            android:id="@+id/dollar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$"
+                            app:layout_constraintTop_toTopOf="@id/net_price"
+                            app:layout_constraintBottom_toBottomOf="@id/net_price"
+                            android:textAppearance="@style/net_sum"
+                            app:layout_constraintEnd_toStartOf="@+id/net_price"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:layout_editor_absoluteY="64dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -110,13 +133,12 @@
 
                         <TextView
                             android:id="@+id/gross_title"
-                            android:layout_width="117dp"
-                            android:layout_height="22dp"
-                            android:layout_marginTop="28dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
                             android:text="@string/gross_profit"
                             android:textAppearance="@style/text_net_sales"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.576"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -124,16 +146,38 @@
                             android:id="@+id/gross_profit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginBottom="16dp"
-                            android:width="177dp"
-                            android:height="56dp"
-                            android:text="@string/_405_22"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/_0number"
                             android:textAppearance="@style/net_sum"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.517"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintHorizontal_bias="0.523"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/gross_title" />
+
+                        <TextView
+                            android:id="@+id/dollar_gross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="$"
+                            android:textAppearance="@style/net_sum"
+                            app:layout_constraintBottom_toBottomOf="@id/gross_profit"
+                            app:layout_constraintEnd_toStartOf="@id/gross_profit"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/gross_profit"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:srcCompat="@drawable/grossrec"
+                            tools:layout_editor_absoluteX="0dp"
+                            tools:layout_editor_absoluteY="0dp"
+                            android:contentDescription="TODO" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -164,26 +208,23 @@
                             android:id="@+id/transaction_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:width="62dp"
-                            android:height="71dp"
-                            android:text="@string/_60"
+                            android:text="@string/_0number"
+                            android:layout_marginTop="15dp"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:textAppearance="@style/transaction_num"
                             app:layout_constraintBottom_toTopOf="@+id/transaction_text"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView"
-                            app:layout_constraintHorizontal_bias="0.733"
+                            app:layout_constraintEnd_toEndOf="@+id/imageView"
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
                             android:id="@+id/transaction_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="60dp"
                             android:text="@string/transactions"
                             android:textAppearance="@style/transaction_text"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView"
-                            app:layout_constraintHorizontal_bias="0.863"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/imageView" />
+                            app:layout_constraintTop_toBottomOf="@id/transaction_number" />
 
                         <ImageView
                             android:id="@+id/imageView"
@@ -226,14 +267,10 @@
                             android:id="@+id/product_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="56dp"
-                            android:width="62dp"
-                            android:height="71dp"
-                            android:text="@string/_48"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/_0number"
                             android:textAppearance="@style/transaction_num"
-                            app:layout_constraintEnd_toStartOf="@+id/product_back"
-                            app:layout_constraintHorizontal_bias="0.872"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -244,9 +281,8 @@
                             android:layout_marginBottom="16dp"
                             android:text="@string/product_sold"
                             android:textAppearance="@style/transaction_text"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/product_back"
-                            app:layout_constraintHorizontal_bias="0.858"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/product_number"
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <ImageView
@@ -417,15 +453,16 @@
                             android:id="@+id/gross_margin_percent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="80dp"
-                            android:layout_marginEnd="10dp"
-                            android:height="71dp"
-                            android:text="@string/_79_9"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/_0number"
                             android:textAppearance="@style/transaction_num"
-
-                            app:layout_constraintEnd_toStartOf="@+id/gross_margin_back"
+                            app:flow_horizontalBias="1.0"
+                            app:layout_constraintBottom_toBottomOf="@id/percentage"
+                            app:layout_constraintEnd_toStartOf="@id/percentage"
+                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="@id/percentage"
+                            app:layout_constraintVertical_bias="1.0" />
 
                         <TextView
                             android:id="@+id/gross_margin_text"
@@ -443,11 +480,23 @@
                             android:id="@+id/gross_margin_back"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:layout_gravity="right"
+                            android:layout_marginEnd="4dp"
                             android:contentDescription="@string/gross_profit_margin"
                             android:src="@drawable/grossvec"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/_"
+                            android:textAppearance="@style/transaction_num"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.566"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -481,12 +530,10 @@
                             android:id="@+id/inventory_prod_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="80dp"
-                            android:height="71dp"
-                            android:text="@string/_22"
+                            android:text="@string/_0number"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:textAppearance="@style/transaction_num"
                             app:layout_constraintBottom_toTopOf="@id/inventory_prod_text"
-                            app:layout_constraintEnd_toStartOf="@+id/inventory_prod_back"
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
@@ -504,7 +551,6 @@
                             android:id="@+id/inventory_prod_back"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:layout_gravity="right"
                             android:contentDescription="@string/low_inventory_prod"
                             android:src="@drawable/inventoryvec"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -525,10 +571,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

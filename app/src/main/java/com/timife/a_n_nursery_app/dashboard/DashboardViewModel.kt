@@ -3,10 +3,15 @@ package com.timife.a_n_nursery_app.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.timife.a_n_nursery_app.Resource
+import com.timife.a_n_nursery_app.base.BaseViewModel
+import com.timife.a_n_nursery_app.dashboard.response.DashboardItems
+import kotlinx.coroutines.launch
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) : BaseViewModel(dashBoardRepository) {
     private val _salesBar: MutableLiveData<BarData> = MutableLiveData()
     val salesBar: LiveData<BarData>
         get() = _salesBar
@@ -14,6 +19,10 @@ class DashboardViewModel : ViewModel() {
     private val _transactionsBar: MutableLiveData<BarData> = MutableLiveData()
     val transactionsBar: LiveData<BarData>
         get() = _transactionsBar
+
+    private val _dashboard : MutableLiveData<Resource<DashboardItems>> = MutableLiveData()
+    val dashboard : LiveData<Resource<DashboardItems>>
+    get()= _dashboard
 
     private val _pieChart: MutableLiveData<PieData> = MutableLiveData()
     val pieChart: LiveData<PieData>
@@ -103,5 +112,9 @@ class DashboardViewModel : ViewModel() {
         _pieChart.value = pieData
         return dataVals
 
+    }
+
+     fun getDashboard() = viewModelScope.launch {
+        _dashboard.value = dashBoardRepository.getDashboard()
     }
 }

@@ -15,11 +15,12 @@ class ProfileRepository(
     }
 
     suspend fun updateProfile(
-        userName: UserName,
+        firstName: String,
+        lastName:String,
         phoneNumber: String
     ): Resource<ProfileItem> {
         return safeApiCall {
-            api.updateProfile(userName, phoneNumber)
+            api.updateProfile(firstName,lastName,phoneNumber)
         }
     }
 }

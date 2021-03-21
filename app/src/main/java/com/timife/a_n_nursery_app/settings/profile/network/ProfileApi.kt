@@ -15,7 +15,8 @@ interface ProfileApi {
     @FormUrlEncoded
     @PUT("/profile/update/")
     suspend fun updateProfile(
-        @Field("user") userName: UserName,
+        @Field("user.first_name") firstName: String,
+        @Field("user.last_name") lastName:String,
         @Field("phone_number") phoneNumber: String
     ): ProfileItem
 }

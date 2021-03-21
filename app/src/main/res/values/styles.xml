@@ -113,6 +113,4 @@
         <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
         <item name="android:textColor">@color/txt_chip_state_list</item>
     </style>
-
-
 </resources>

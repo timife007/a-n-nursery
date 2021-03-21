@@ -1,0 +1,15 @@
+package com.timife.a_n_nursery_app.inventory.locations.ui
+
+import com.timife.a_n_nursery_app.base.BaseRepository
+import com.timife.a_n_nursery_app.inventory.locations.network.LocationApi
+import com.timife.a_n_nursery_app.inventory.network.InventoryApi
+
+class LocationRepository(private val api: LocationApi): BaseRepository() {
+    suspend fun getLocation() = safeApiCall {
+        api.getLocations()
+    }
+
+    suspend fun saveLocation(locationName: String) = safeApiCall {
+        api.saveLocation(locationName)
+    }
+}

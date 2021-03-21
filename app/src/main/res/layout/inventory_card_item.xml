@@ -70,22 +70,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/category_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            app:chipStrokeColor="@color/primary_color"
-            app:chipStrokeWidth="1dp"
-            app:chipBackgroundColor="@color/white"
-            android:layout_marginEnd="4dp"
-            android:text="@{inventoryResult.quantity}"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/dropdown"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.885" />
+
 
         <View
             android:layout_width="match_parent"

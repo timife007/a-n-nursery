@@ -20,6 +20,10 @@ class SettingsFragment :
         binding.logOut.setOnClickListener {
             logout()
         }
+        
+        binding.accessControl.setOnClickListener{
+            this.findNavController().navigate(R.id.action_settingsFragment_to_accessControlFragment)
+        }
     }
 
     override fun getViewModel() = SettingsViewModel::class.java

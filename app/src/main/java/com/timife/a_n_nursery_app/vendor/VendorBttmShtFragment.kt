@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.FragmentVendorBttmShtBinding
 
 class VendorBttmShtFragment : BottomSheetDialogFragment() {
@@ -32,5 +33,9 @@ class VendorBttmShtFragment : BottomSheetDialogFragment() {
             Toast.makeText(requireContext(), "This is an add to cart button", Toast.LENGTH_LONG)
                 .show()
         }
+    }
+
+    override fun getTheme(): Int {
+        return R.style.AppBottomSheetDialogFragment
     }
 }

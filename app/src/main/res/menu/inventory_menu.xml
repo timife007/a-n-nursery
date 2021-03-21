@@ -8,16 +8,9 @@
         android:title="@string/search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
-
     <item
-        android:id="@+id/inv_menu_edit"
-        android:icon="@drawable/ic_edit"
-        android:title="@string/edit_category"
-        app:showAsAction="never" />
+        android:id="@+id/inv_add_items"
+        android:title="@string/add_categories"
+        />
 
-    <item
-        android:id="@+id/inv_menu_add"
-        android:icon="@drawable/ic_add"
-        android:title="@string/add_category"
-        app:showAsAction="never" />
 </menu>

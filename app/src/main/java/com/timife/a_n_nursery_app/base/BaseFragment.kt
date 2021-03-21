@@ -36,7 +36,6 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, Repo : BaseRepo
         lifecycleScope.launch { userPreferences.authToken.first() }
         setHasOptionsMenu(true)
         return binding.root
-
     }
 
     fun logout() = lifecycleScope.launch {

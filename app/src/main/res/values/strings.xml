@@ -111,6 +111,37 @@
     <string name="no_results_found_for_this_query">No results found for this Query</string>
     <string name="retry">RETRY</string>
     <string name="vendors_not_loaded">Vendors not loaded</string>
+    <string name="sales">Sales</string>
+    <string name="scanned_item">Scanned Item</string>
+    <string name="yucca_red_snapdragon">Yucca Red-Snapdragon</string>
+    <string name="_2_inches">2 inches</string>
+    <string name="_6_78">$6.78</string>
+    <string name="place_your_order">Place your Order</string>
+    <string name="ship_to">Shop to</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="check_inventory">Check Inventory</string>
+    <string name="now_you_can_order_for_fresh_seedlings_you_can_get_it_as_fast_as_possible">Now you can order for fresh seedlings, you can get it as fast as possible.</string>
+    <string name="skip">Skip</string>
+    <string name="access_your_daily_data">Access your Daily Data</string>
+    <string name="order_for_fresh_plants">Order for Fresh Plants</string>
+    <string name="_0">$0</string>
+    <string name="_0number">0</string>
+    <string name="_0percent">0%</string>
+    <string name="_">%</string>
+    <string name="add">Add</string>
+    <string name="perennials">Perennials</string>
+    <string name="add_location">add location</string>
+    <string name="add_lot">add lot</string>
+    <string name="new_category">New Category</string>
+    <string name="create">Create</string>
+    <string name="name">Name</string>
+    <string name="new_location">New Location</string>
+    <string name="new_lot">New Lot</string>
+    <string name="new_classification">New Classification</string>
+    <string name="edit_lot">Edit Lot</string>
+    <string name="edit_classification">Edit Classification</string>
+    <string name="edit_location">Edit Location</string>
+    <string name="lot_fab">Lot Fab</string>
 
 
 </resources>

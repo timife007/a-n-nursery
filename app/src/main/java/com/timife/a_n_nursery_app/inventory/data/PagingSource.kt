@@ -11,7 +11,7 @@ private const val INVENTORY_STARTING_PAGE_INDEX = 1
 class InventoryPagingSource(
     private val inventoryApi: InventoryApi,
     private val query: String
-) : PagingSource<Int, Result>() {
+) : PagingSource<Int,Result>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         val pageNumber = params.key ?: INVENTORY_STARTING_PAGE_INDEX
 

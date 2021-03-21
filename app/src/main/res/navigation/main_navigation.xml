@@ -16,14 +16,20 @@
         android:label="@string/inventory"
         tools:layout="@layout/fragment_inventory" >
         <action
+            android:id="@+id/action_inventoryFragment_to_updateInventoryDialog"
+            app:destination="@id/updateInventoryDialog" />
+        <action
             android:id="@+id/action_inventoryFragment_to_invntBttmShtFragment"
             app:destination="@id/invntBttmShtFragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_addItemsFragment"
+            app:destination="@id/addItemsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/infoFragment"
-        android:name="com.timife.a_n_nursery_app.info.InfoFragment"
-        android:label="Info"
-        tools:layout="@layout/fragment_info" />
+        android:id="@+id/salesFragment"
+        android:name="com.timife.a_n_nursery_app.sales.SalesFragment"
+        android:label="Sales"
+        tools:layout="@layout/fragment_sales" />
     <fragment
         android:id="@+id/vendorFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorFragment"
@@ -45,6 +51,13 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_settingsFragment_to_accessControlFragment"
+            app:destination="@id/accessControlFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -53,19 +66,19 @@
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/addInvItemDialog"
-        android:name="com.timife.a_n_nursery_app.inventory.ui.AddInvItemDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.ui.addInventoryDialog.AddInvItemDialog"
         tools:layout="@layout/dialog_add_inventory_item"
         android:label="AddInvItemDialog" />
      <dialog
         android:id="@+id/invntBttmShtFragment"
-        android:name="com.timife.a_n_nursery_app.inventory.ui.InvntBttmShtFragment"
+        android:name="com.timife.a_n_nursery_app.inventory.ui.bottomsheet.InvntBttmShtFragment"
         android:label="fragment_invent_bttm_sht"
         tools:layout="@layout/fragment_invent_bttm_sht" >
         <argument
             android:name="selectedProduct"
             app:argType="com.timife.a_n_nursery_app.inventory.response.Result" />
-    </dialog>
-    <dialog
+     </dialog>
+    <fragment
         android:id="@+id/vendorBttmShtFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorBttmShtFragment"
         tools:layout="@layout/fragment_vendor_bttm_sht"
@@ -73,10 +86,107 @@
         <argument
             android:name="selectedVendor"
             app:argType="com.timife.a_n_nursery_app.vendor.response.VendorItem"/>
-    </dialog>
+    </fragment>
     <dialog
         android:id="@+id/addVenItemDialog"
         android:name="com.timife.a_n_nursery_app.vendor.AddVenItemDialog"
         android:label="AddVenItemDialog"
         tools:layout="@layout/dialog_add_ven_item"/>
+    <dialog
+        android:id="@+id/updateInventoryDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.ui.updateDialog.UpdateInventoryDialog"
+        tools:layout="@layout/dialog_updatedit_inventory_items"
+        android:label="dialog_updatedit_inventory_items" >
+        <argument
+            android:name="selectedEdit"
+            app:argType="com.timife.a_n_nursery_app.inventory.response.Result"/>
+    </dialog>
+    <fragment
+        android:id="@+id/accessControlFragment"
+        android:name="com.timife.a_n_nursery_app.settings.access_control.AccessControlFragment"
+        android:label="fragment_access_control"
+        tools:layout="@layout/fragment_access_control" />
+    <fragment
+        android:id="@+id/addItemsFragment"
+        tools:layout="@layout/fragment_add_items"
+        android:name="com.timife.a_n_nursery_app.inventory.AddItemsFragment"
+        android:label="Add Items" >
+        <action
+            android:id="@+id/action_addItemsFragment_to_editLocationDialog"
+            app:destination="@id/editLocationDialog" />
+        <action
+            android:id="@+id/action_addItemsFragment_to_editLotDialog"
+            app:destination="@id/editLotDialog" />
+        <action
+            android:id="@+id/action_addItemsFragment_to_editCategoryDialog"
+            app:destination="@id/editCategoryDialog" />
+        <action
+            android:id="@+id/action_addItemsFragment_to_editClassificationDialog"
+            app:destination="@id/editClassificationDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.timife.a_n_nursery_app.inventory.categories.ui.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/lotFragment"
+        android:name="com.timife.a_n_nursery_app.inventory.lots.ui.LotFragment"
+        android:label="fragment_lot"
+        tools:layout="@layout/fragment_lot" />
+    <fragment
+        android:id="@+id/classificationFragment"
+        android:name="com.timife.a_n_nursery_app.inventory.classifications.ui.ClassificationFragment"
+        android:label="fragment_classification"
+        tools:layout="@layout/fragment_classification" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.timife.a_n_nursery_app.inventory.locations.ui.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+    <dialog
+        android:id="@+id/editLocationDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.locations.ui.editLocations.EditLocationDialog"
+        android:label="EditLocationDialog"
+        tools:layout="@layout/dialog_edit_location">
+
+        <argument
+            android:name="selectedEditLocation"
+            app:argType="com.timife.a_n_nursery_app.inventory.locations.network.Location" />
+    </dialog>
+    <dialog
+        android:id="@+id/editCategoryDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.categories.ui.editCategories.EditCategoryDialog"
+        android:label="EditCategoryDialog"
+        tools:layout="@layout/dialog_edit_category">
+
+        <argument
+            android:name="selectedEditCategory"
+            app:argType="com.timife.a_n_nursery_app.inventory.categories.network.Category" />
+    </dialog>
+    <dialog
+        android:id="@+id/editLotDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.lots.ui.editLots.EditLotDialog"
+        android:label="EditLotDialog"
+        tools:layout="@layout/dialog_edit_lot">
+
+
+        <argument
+            android:name="selectedEditLot"
+            app:argType="com.timife.a_n_nursery_app.inventory.lots.network.Lot" />
+    </dialog>
+    <dialog
+        android:id="@+id/editClassificationDialog"
+        android:name="com.timife.a_n_nursery_app.inventory.classifications.ui.editClassifications.EditClassificationDialog"
+        android:label="EditClassificationDialog"
+        tools:layout="@layout/dialog_edit_classification">
+
+
+        <argument
+            android:name="selectedEditClassification"
+            app:argType="com.timife.a_n_nursery_app.inventory.classifications.network.Classification" />
+    </dialog>
+
 </navigation>

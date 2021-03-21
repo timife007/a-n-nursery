@@ -3,8 +3,6 @@ package com.timife.a_n_nursery_app.vendor
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.timife.a_n_nursery_app.inventory.response.Result
-import com.timife.a_n_nursery_app.inventory.ui.InvntBttmShtViewModel
 import com.timife.a_n_nursery_app.vendor.response.VendorItem
 
 class VendorBttmShtViewModelFactory (
