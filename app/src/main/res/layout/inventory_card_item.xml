@@ -15,7 +15,18 @@
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/custom_ripple"
-        android:layout_height="70dp">
+        android:layout_height="85dp">
+
+        <ImageButton
+            android:layout_width="77dp"
+            android:id="@+id/image"
+            android:layout_height="77dp"
+            android:layout_marginStart="10dp"
+            app:imageUrl="@{inventoryResult.image}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/inventory" />
 
         <TextView
             android:id="@+id/product_name"
@@ -29,7 +40,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -43,7 +54,7 @@
             android:layout_marginBottom="6dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintTop_toBottomOf="@id/product_name" />
 
         <TextView
@@ -75,6 +86,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="100dp"
             android:background="@color/primary_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

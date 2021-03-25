@@ -42,4 +42,9 @@ class VendorRepository(private val api: VendorsApi): BaseRepository(){
             api.postVendors(firstName, lastName, email, company, type, phoneNumber)
         }
     }
+    suspend fun getVendors(
+
+    ) {
+    }
+
 }

@@ -78,7 +78,7 @@
             android:name="selectedProduct"
             app:argType="com.timife.a_n_nursery_app.inventory.response.Result" />
      </dialog>
-    <fragment
+    <dialog
         android:id="@+id/vendorBttmShtFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorBttmShtFragment"
         tools:layout="@layout/fragment_vendor_bttm_sht"
@@ -86,7 +86,7 @@
         <argument
             android:name="selectedVendor"
             app:argType="com.timife.a_n_nursery_app.vendor.response.VendorItem"/>
-    </fragment>
+    </dialog>
     <dialog
         android:id="@+id/addVenItemDialog"
         android:name="com.timife.a_n_nursery_app.vendor.AddVenItemDialog"

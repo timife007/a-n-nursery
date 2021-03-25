@@ -142,6 +142,7 @@
     <string name="edit_classification">Edit Classification</string>
     <string name="edit_location">Edit Location</string>
     <string name="lot_fab">Lot Fab</string>
+    <string name="download_barcode">Download Barcode</string>
 
 
 </resources>

@@ -107,6 +107,9 @@
         <item name="android:textColor">
             @color/primary_color
         </item>
+        <item name="android:textStyle">
+            bold
+        </item>
 
     </style>
     <style name="CustomChipChoice" parent="Widget.MaterialComponents.Chip.Choice">

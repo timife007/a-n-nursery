@@ -18,12 +18,13 @@ class AddVenItemDialog(var addDialogListener: AddVenDialogListener) : DialogFrag
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.round_corner_dialog)
         binding = DialogAddVenItemBinding.inflate(inflater)
         isCancelable = false
         val dropdownList = listOf("Wholesale", "Retail")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, dropdownList)
         (binding.typeContainer.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-        binding.type.setText("Type", false)
+//        binding.type.setText("Type", false)
 
         binding.save.setOnClickListener {
             val name = binding.vendorName.text.toString()
@@ -54,7 +55,10 @@ class AddVenItemDialog(var addDialogListener: AddVenDialogListener) : DialogFrag
         return binding.root
     }
 
-    override fun getTheme(): Int {
-        return R.style.DialogTheme
+    override fun onStart() {
+        super.onStart()
+        val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
+        dialog?.window?.setLayout(width,ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 }
