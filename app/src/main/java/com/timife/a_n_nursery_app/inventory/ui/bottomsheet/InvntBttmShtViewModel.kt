@@ -15,5 +15,4 @@ class InvntBttmShtViewModel(product:Result, application: Application) :
     init {
         _selectedProduct.value = product
     }
-
 }

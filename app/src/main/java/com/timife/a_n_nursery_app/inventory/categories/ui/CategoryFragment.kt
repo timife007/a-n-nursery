@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.a_n_nursery_app.Resource
@@ -87,7 +88,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
             }
         })
 
-        viewModel.saveCategory.observe(viewLifecycleOwner, {
+        viewModel.saveCategory.observe(viewLifecycleOwner) {
             binding.categoryProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -103,7 +104,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
                     binding.categoryProgress.visible(true)
                 }
             }
-        })
+        }
         binding.addCategory.setOnClickListener {
             val categoryDialogFragment = AddCategoryDialog(object : AddCategoryListener {
                 override fun onAddCategoryButtonClicked(categoryName: String) {

@@ -16,7 +16,4 @@ class AddInvRepository(private val database: CategoryDatabase) {
     val getAllLocationItems : LiveData<List<LocationItem>> = database.getLocationDao.getAllCategoryItems()
 
     val getAllClassificationItems : LiveData<List<ClassificationItem>> = database.getClassificationDao.getAllClassificationItems()
-
-
-
 }

@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -79,7 +80,7 @@ class InventoryFragment :
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        viewModel.category.observe(viewLifecycleOwner, {
+        viewModel.category.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Resource.Success -> {
@@ -89,7 +90,7 @@ class InventoryFragment :
                         categoryList.forEach {
                             val category = CategoryItem(it.id!!, it.name!!)
                             viewModel.upsert(listOf(category))
-                    }
+                        }
 
                     }catch (e:Exception){
                         Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
@@ -97,16 +98,16 @@ class InventoryFragment :
                     Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-//                    hideProgressBar()
+    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
                     showProgressBar()
                 }
             }
-        })
+        }
 
-        viewModel.location.observe(viewLifecycleOwner, {
+        viewModel.location.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -115,7 +116,7 @@ class InventoryFragment :
                         locationList.forEach {
                             val location = LocationItem(it.id!!, it.name!!)
                             viewModel.upsertLocation(listOf(location))
-                    }
+                        }
 
                     }catch (e:Exception){
                         Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
@@ -123,17 +124,17 @@ class InventoryFragment :
                     Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-//                    hideProgressBar()
+    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
                     showProgressBar()
                 }
             }
-        })
+        }
 
 
-        viewModel.lots.observe(viewLifecycleOwner, {
+        viewModel.lots.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -142,7 +143,7 @@ class InventoryFragment :
                         lotsList.forEach {
                             val lot = LotItem(it.id, it.name)
                             viewModel.upsertLot(listOf(lot))
-                    }
+                        }
 
                     }catch (e:Exception){
                         Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
@@ -150,16 +151,16 @@ class InventoryFragment :
                     Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-//                    hideProgressBar()
+    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
                     showProgressBar()
                 }
             }
-        })
+        }
 
-        viewModel.classification.observe(viewLifecycleOwner, {
+        viewModel.classification.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -168,7 +169,7 @@ class InventoryFragment :
                         classificationList.forEach {
                             val classification = ClassificationItem(it.id, it.name)
                             viewModel.upsertClassification(listOf(classification))
-                    }
+                        }
 
                     }catch (e:Exception){
                         Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
@@ -176,14 +177,14 @@ class InventoryFragment :
                     Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-//                    hideProgressBar()
+    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
                     showProgressBar()
                 }
             }
-        })
+        }
 
 
         adapter.addLoadStateListener { loadState ->
@@ -215,17 +216,15 @@ class InventoryFragment :
             }
         }
 
-        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, {
-            if (null != it) {
-                this.findNavController()
-                    .navigate(
-                        InventoryFragmentDirections.actionInventoryFragmentToInvntBttmShtFragment(
-                            it
-                        )
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner) {
+            this.findNavController()
+                .navigate(
+                    InventoryFragmentDirections.actionInventoryFragmentToInvntBttmShtFragment(
+                        it
                     )
-                viewModel.displayProductDetailsComplete()
-            }
-        })
+                )
+            viewModel.displayProductDetailsComplete()
+        }
 
 //        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner,{
 //            if (null != it){
@@ -239,7 +238,7 @@ class InventoryFragment :
 //            }
 //        })
 
-        viewModel.saveInventory.observe(viewLifecycleOwner, {
+        viewModel.saveInventory.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -253,7 +252,7 @@ class InventoryFragment :
                     showProgressBar()
                 }
             }
-        })
+        }
 
         binding.invAdd.setOnClickListener {
             val dialogFragment = AddInvItemDialog(object : AddDialogListener {

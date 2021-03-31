@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.timife.a_n_nursery_app.MainActivity
 import com.timife.a_n_nursery_app.R
@@ -35,11 +36,11 @@ class SplashFragment : Fragment() {
         Handler().postDelayed({
             if (onBoardingFinished()){
                 val userPreferences = UserPreferences(requireContext())
-                userPreferences.authToken.asLiveData().observe(viewLifecycleOwner,  {
+                userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
                     val activity = if (it == null) LoginActivity::class.java else MainActivity::class.java
                     requireActivity().startNewActivity(activity)
-                     requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
-                })
+                    requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+                }
             }else{
                 findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
             }

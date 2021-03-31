@@ -18,4 +18,11 @@ interface LocationApi {
     suspend fun saveLocation(
         @Field("name") locationName: String
     ): Location
+
+    @FormUrlEncoded
+    @PUT("/locations/{id}/")
+    suspend fun updateLocation(
+        @Path("id") locationId: Int,
+        @Field("name") locationName: String
+    ): Location
 }

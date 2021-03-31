@@ -16,4 +16,11 @@ interface ClassificationApi {
     suspend fun saveClassification(
         @Field("name") classificationName: String
     ): Classification
+
+    @FormUrlEncoded
+    @PUT("/classifications/{id}/")
+    suspend fun updateClassification(
+        @Path("id") categoryId: Int,
+        @Field("name") classificationName: String
+    ): Classification
 }

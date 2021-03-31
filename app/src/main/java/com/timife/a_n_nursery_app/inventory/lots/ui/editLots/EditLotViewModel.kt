@@ -8,10 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.inventory.categories.network.Category
 import com.timife.a_n_nursery_app.inventory.lots.network.Lot
+import com.timife.a_n_nursery_app.inventory.lots.ui.LotRepository
 import kotlinx.coroutines.launch
 
 //,private val editLotRepository: EditLotRepository
-class EditLotViewModel (lot: Lot, application: Application) :
+class EditLotViewModel (lot: Lot, application: Application,private val lotRepository:LotRepository) :
     AndroidViewModel(application) {
     private val _selectedEditLot = MutableLiveData<Lot>()
     val selectedEditLot: LiveData<Lot>
@@ -25,8 +26,8 @@ class EditLotViewModel (lot: Lot, application: Application) :
         _selectedEditLot.value = lot
     }
 
-//    fun updateLot(lotName: String)= viewModelScope.launch {
-//        _updateLot.value = Resource.Loading
-//        _updateLot.value = editLotRepository.updateProfile(lotName)
-//    }
+    fun updateLot(lotId:Int,lotName: String)= viewModelScope.launch {
+        _updateLot.value = Resource.Loading
+        _updateLot.value = lotRepository.updateLot(lotId, lotName)
+    }
 }

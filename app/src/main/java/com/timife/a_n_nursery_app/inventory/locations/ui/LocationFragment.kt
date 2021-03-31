@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.a_n_nursery_app.Resource
@@ -69,7 +70,7 @@ class LocationFragment : BaseFragment<LocationViewModel,FragmentLocationBinding,
         })
 
 
-        viewModel.saveLocation.observe(viewLifecycleOwner, {
+        viewModel.saveLocation.observe(viewLifecycleOwner) {
             binding.locationProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -85,7 +86,7 @@ class LocationFragment : BaseFragment<LocationViewModel,FragmentLocationBinding,
                     binding.locationProgress.visible(true)
                 }
             }
-        })
+        }
 
         binding.addLocation.setOnClickListener {
             val locationDialogFragment = AddLocationDialog(object : AddLocationListener {

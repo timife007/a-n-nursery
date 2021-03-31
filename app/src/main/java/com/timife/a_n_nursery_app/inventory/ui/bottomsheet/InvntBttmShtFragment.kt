@@ -28,6 +28,7 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
         PRDownloader.initialize(requireContext())
         binding = FragmentInventBttmShtBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        binding.barcodeProgress.visibility = View.GONE
         val product = InvntBttmShtFragmentArgs.fromBundle(requireArguments()).selectedProduct
         val viewModelFactory = InvntBttmShtViewModelFactory(product, application)
         binding.viewModel =
@@ -36,10 +37,12 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
         val viewModel = ViewModelProvider(this,viewModelFactory).get(InvntBttmShtViewModel::class.java)
 
        viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
-             val barcodeUrl = it.barcode_url
+           Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
+             val barcodeUrl: String = it.barcode_url.toString()
+           val fileName = """${it.name.toString()}.pdf"""
              binding.downloadBarcode.setOnClickListener {
                  binding.barcodeProgress.visibility = View.VISIBLE
-                 downloadPdfFromInternet(barcodeUrl!!,BarcodeExtras.getRootDirPath(requireContext()),"")
+                 downloadPdfFromInternet(barcodeUrl,BarcodeExtras.getRootDirPath(requireContext()),fileName)
              }
          })
         return binding.root
@@ -50,10 +53,12 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
             url,dirPath,fileName
         ).build().start(object : OnDownloadListener{
             override fun onDownloadComplete() {
+                binding.barcodeProgress.visibility = View.GONE
                 Toast.makeText(requireContext(),"BarCode successfully downloaded!",Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(error: Error?) {
+                binding.barcodeProgress.visibility = View.GONE
                 Toast.makeText(requireContext(),"Error in downloading file : $error",Toast.LENGTH_LONG).show()
             }
 

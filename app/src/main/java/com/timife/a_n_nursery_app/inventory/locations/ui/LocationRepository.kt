@@ -12,4 +12,8 @@ class LocationRepository(private val api: LocationApi): BaseRepository() {
     suspend fun saveLocation(locationName: String) = safeApiCall {
         api.saveLocation(locationName)
     }
+
+    suspend fun updateLocation(locationId: Int,locationName: String)= safeApiCall{
+        api.updateLocation(locationId, locationName)
+    }
 }

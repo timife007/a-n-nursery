@@ -51,7 +51,7 @@ class InventAdapter(
 
     override fun onBindViewHolder(holder: InventViewHolder, position: Int) {
         val inventoryProduct = getItem(position)
-//        val inven
+
         if (inventoryProduct != null) {
             holder.bind(inventoryProduct)
         }

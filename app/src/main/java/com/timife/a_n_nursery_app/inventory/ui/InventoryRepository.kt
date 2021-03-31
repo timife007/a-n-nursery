@@ -89,6 +89,36 @@ class InventoryRepository(private val api: InventoryApi,private val database: Ca
         )
     }
 
+    suspend fun updateInventoryProduct(
+        inventoryId: Int,
+        productName: String,
+        botanicalName: String,
+        size: String,
+        classification: String,
+        color: String,
+        price: String,
+        cost: String,
+        lot: String,
+        location: String,
+        quantity: Int,
+        category: String
+    ) =safeApiCall {
+        api.updateInventoryItem(
+            inventoryId,
+            productName,
+            botanicalName,
+            size,
+            classification,
+            color,
+            price,
+            cost,
+            lot,
+            location,
+            quantity,
+            category
+        )
+    }
+
 
     fun getFilterResults(category: String) =
         Pager(

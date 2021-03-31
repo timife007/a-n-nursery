@@ -35,14 +35,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
+            android:layout_marginTop="52dp"
             android:text="@string/access_your_daily_data"
-            app:layout_constraintTop_toBottomOf="@id/access_inventory_image"
             android:textColor="#595A5C"
-            android:layout_marginTop="45dp"
             android:textSize="31sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/access_inventory_image" />
 
         <TextView
             android:id="@+id/access_inventory_note"

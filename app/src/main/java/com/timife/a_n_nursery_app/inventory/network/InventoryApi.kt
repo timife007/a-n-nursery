@@ -66,4 +66,23 @@ interface InventoryApi {
         @Field("quantity") quantity: Int,
         @Field("category") category: Int
     ): Result
+
+    @FormUrlEncoded
+    @PUT("/products/{id}/")
+    suspend fun updateInventoryItem(
+        @Path("id") productId: Int,
+        @Field("name") productName: String,
+        @Field("botanical_name") botanicalName: String,
+        @Field("size") size: String,
+        @Field("classification.name") classification: String,
+        @Field("color") color: String,
+        @Field("price") price: String,
+        @Field("cost") cost: String,
+        @Field("lot.name") lot: String,
+        @Field("location.name") location: String,
+        @Field("quantity") quantity: Int,
+        @Field("category.name") category: String
+    ): Result
+
+
 }

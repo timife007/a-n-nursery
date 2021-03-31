@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.DialogAddInventoryItemBinding
 import com.timife.a_n_nursery_app.inventory.categories.database.CategoryDatabase
@@ -78,7 +79,7 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
         binding.invCategoriesContainer.adapter = categoryAdapter
 
 
-        viewModel.getAllLotItems.observe(viewLifecycleOwner, {
+        viewModel.getAllLotItems.observe(viewLifecycleOwner) {
             it.forEach {
                 lotAdapter.add(it.name)
             }
@@ -100,11 +101,11 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                 }
             }
             Toast.makeText(requireContext(),"$it.value.",Toast.LENGTH_LONG).show()
-        })
+        }
         binding.lotContainer.adapter = lotAdapter
 
 
-        viewModel.getAllLocationItems.observe(viewLifecycleOwner, {
+        viewModel.getAllLocationItems.observe(viewLifecycleOwner) {
             it.forEach {
                 locationAdapter.add(it.name)
             }
@@ -125,11 +126,11 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                 }
             }
             Toast.makeText(requireContext(),"$it.value.",Toast.LENGTH_LONG).show()
-        })
+        }
 
         binding.location1Container.adapter = locationAdapter
 
-        viewModel.getAllClassificationItems.observe(viewLifecycleOwner, {
+        viewModel.getAllClassificationItems.observe(viewLifecycleOwner) {
             it.forEach {
                 classificationAdapter.add(it.name)
             }
@@ -151,7 +152,7 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
             }
 
             Toast.makeText(requireContext(), "$it.value.", Toast.LENGTH_LONG).show()
-        })
+        }
 
         binding.classificationContainer.adapter = classificationAdapter
 

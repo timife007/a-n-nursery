@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/edit_location_title">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/category_name"
+                    android:id="@+id/location_name"
                     android:layout_width="match_parent"
                     android:text="@{viewModel.selectedEditLocation.name}"
                     android:layout_height="53dp" />

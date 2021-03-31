@@ -18,8 +18,9 @@ interface LotApi {
     ): Lot
 
     @FormUrlEncoded
-    @PUT("/lots/")
+    @PUT("/lots/{id}/")
     suspend fun updateLot(
+        @Path("id") lotId: Int,
         @Field("name") lotName: String
-    )
+    ): Lot
 }

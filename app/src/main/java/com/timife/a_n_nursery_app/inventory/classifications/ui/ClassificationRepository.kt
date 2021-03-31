@@ -12,4 +12,9 @@ class ClassificationRepository (private val api: ClassificationApi): BaseReposit
     suspend fun saveClassification(classificationName: String) = safeApiCall {
         api.saveClassification(classificationName)
     }
+
+
+    suspend fun updateClassification(classificationId: Int,classificationName: String)= safeApiCall{
+        api.updateClassification(classificationId, classificationName)
+    }
 }

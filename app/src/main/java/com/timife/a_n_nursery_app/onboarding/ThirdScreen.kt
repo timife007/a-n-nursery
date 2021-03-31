@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.observe
 import com.timife.a_n_nursery_app.MainActivity
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.UserPreferences
@@ -30,12 +31,12 @@ class ThirdScreen : Fragment() {
 
         binding.finish.setOnClickListener {
             val userPreferences = UserPreferences(requireContext())
-            userPreferences.authToken.asLiveData().observe(viewLifecycleOwner,  {
+            userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
                 val activity =  LoginActivity::class.java
                 requireActivity().startNewActivity(activity)
                 onBoardingFinished()
                 requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
-            })
+            }
         }
         // Inflate the layout for this fragment
         return binding.root
