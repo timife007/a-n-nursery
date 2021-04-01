@@ -6,19 +6,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.timife.a_n_nursery_app.Resource
-import com.timife.a_n_nursery_app.inventory.data.InventoryItem
-import com.timife.a_n_nursery_app.inventory.response.Result
+import com.timife.a_n_nursery_app.inventory.response.Inventory
 import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
 import kotlinx.coroutines.launch
 
-class UpdateInventoryDialogViewModel (product:Result, application: Application,private val inventoryRepository: InventoryRepository) :
+class UpdateInventoryDialogViewModel (product:Inventory, application: Application,private val inventoryRepository: InventoryRepository) :
     AndroidViewModel(application) {
-    private val _selectedEdit = MutableLiveData<Result>()
-    val selectedEdit: LiveData<Result>
+    private val _selectedEdit = MutableLiveData<Inventory>()
+    val selectedEdit: LiveData<Inventory>
         get() = _selectedEdit
 
-    private val _updateInventoryItem : MutableLiveData<Resource<Result>> = MutableLiveData()
-    val updateInventoryItem : LiveData<Resource<Result>>
+    private val _updateInventoryItem : MutableLiveData<Resource<Inventory>> = MutableLiveData()
+    val updateInventoryItem : LiveData<Resource<Inventory>>
     get() = _updateInventoryItem
 
     init {

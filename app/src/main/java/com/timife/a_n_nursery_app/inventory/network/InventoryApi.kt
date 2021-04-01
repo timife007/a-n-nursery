@@ -4,8 +4,8 @@ import com.timife.a_n_nursery_app.inventory.categories.network.CategoryItems
 import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationItems
 import com.timife.a_n_nursery_app.inventory.locations.network.LocationItems
 import com.timife.a_n_nursery_app.inventory.lots.network.LotItems
+import com.timife.a_n_nursery_app.inventory.response.Inventory
 import com.timife.a_n_nursery_app.inventory.response.InventoryItems
-import com.timife.a_n_nursery_app.inventory.response.Result
 import retrofit2.http.*
 
 interface InventoryApi {
@@ -65,7 +65,7 @@ interface InventoryApi {
         @Field("location") location: Int,
         @Field("quantity") quantity: Int,
         @Field("category") category: Int
-    ): Result
+    ): Inventory
 
     @FormUrlEncoded
     @PUT("/products/{id}/")
@@ -82,7 +82,7 @@ interface InventoryApi {
         @Field("location.name") location: String,
         @Field("quantity") quantity: Int,
         @Field("category.name") category: String
-    ): Result
+    ):Inventory
 
 
 }

@@ -6,18 +6,16 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.timife.a_n_nursery_app.databinding.InventoryCardItemBinding
-import com.timife.a_n_nursery_app.inventory.response.Result
-import kotlinx.android.synthetic.main.inventory_card_item.view.*
+import com.timife.a_n_nursery_app.inventory.response.Inventory
 
 class InventAdapter(
     private val context:Context,
     private val onClickListener: OnClickListener
-) : PagingDataAdapter<Result, InventAdapter.InventViewHolder>(INVENTORY_COMPARATOR) {
+) : PagingDataAdapter<Inventory, InventAdapter.InventViewHolder>(INVENTORY_COMPARATOR) {
     inner class InventViewHolder(private var binding: InventoryCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(inventoryProducts: Result) {
+        fun bind(inventoryProducts: Inventory) {
             val dropdown = binding.dropdown
             dropdown.setOnClickListener {
 
@@ -29,11 +27,11 @@ class InventAdapter(
     }
 
     companion object {
-        private val INVENTORY_COMPARATOR = object : DiffUtil.ItemCallback<Result>() {
-            override fun areItemsTheSame(oldItem:Result, newItem:Result) =
+        private val INVENTORY_COMPARATOR = object : DiffUtil.ItemCallback<Inventory>() {
+            override fun areItemsTheSame(oldItem:Inventory, newItem:Inventory) =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem:Result, newItem: Result) =
+            override fun areContentsTheSame(oldItem:Inventory, newItem: Inventory) =
                 oldItem == newItem
         }
     }
@@ -70,11 +68,11 @@ class InventAdapter(
 //        }
     }
 
-    class OnClickListener(val clickListener: (product:Result) -> Unit) {
-        fun onClick(product:Result) {
+    class OnClickListener(val clickListener: (product:Inventory) -> Unit) {
+        fun onClick(product:Inventory) {
             clickListener(product)
         }
-        fun onClickEdit(product: Result){
+        fun onClickEdit(product: Inventory){
             clickListener(product)
         }
     }

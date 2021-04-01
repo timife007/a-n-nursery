@@ -15,7 +15,7 @@ import com.timife.a_n_nursery_app.inventory.locations.database.LocationItem
 import com.timife.a_n_nursery_app.inventory.locations.network.LocationItems
 import com.timife.a_n_nursery_app.inventory.lots.database.LotItem
 import com.timife.a_n_nursery_app.inventory.lots.network.LotItems
-import com.timife.a_n_nursery_app.inventory.response.Result
+import com.timife.a_n_nursery_app.inventory.response.Inventory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -74,13 +74,13 @@ class InventoryViewModel(
         get() = _lots
 
 
-    private val _navigateToSelectedProduct = MutableLiveData<Result>()
-    val navigateToSelectedProduct: LiveData<Result>
+    private val _navigateToSelectedProduct = MutableLiveData<Inventory>()
+    val navigateToSelectedProduct: LiveData<Inventory>
         get() = _navigateToSelectedProduct
 
 
-    private val _saveInventory: MutableLiveData<Resource<Result>> = MutableLiveData()
-    val saveInventory: LiveData<Resource<Result>>
+    private val _saveInventory: MutableLiveData<Resource<Inventory>> = MutableLiveData()
+    val saveInventory: LiveData<Resource<Inventory>>
         get() = _saveInventory
 
 
@@ -160,7 +160,7 @@ class InventoryViewModel(
         )
     }
 
-    fun displayProductDetails(product: Result){
+    fun displayProductDetails(product: Inventory){
         _navigateToSelectedProduct.value = product
     }
 

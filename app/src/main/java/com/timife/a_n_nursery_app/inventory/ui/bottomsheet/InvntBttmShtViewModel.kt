@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.timife.a_n_nursery_app.inventory.response.Result
+import com.timife.a_n_nursery_app.inventory.response.Inventory
 
-class InvntBttmShtViewModel(product:Result, application: Application) :
+class InvntBttmShtViewModel(product:Inventory, application: Application) :
     AndroidViewModel(application) {
-    private val _selectedProduct = MutableLiveData<Result>()
-    val selectedProduct: LiveData<Result>
+    private val _selectedProduct = MutableLiveData<Inventory>()
+    val selectedProduct: LiveData<Inventory>
         get() = _selectedProduct
 
     init {

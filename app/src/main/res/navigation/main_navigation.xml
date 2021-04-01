@@ -76,7 +76,7 @@
         tools:layout="@layout/fragment_invent_bttm_sht" >
         <argument
             android:name="selectedProduct"
-            app:argType="com.timife.a_n_nursery_app.inventory.response.Result" />
+            app:argType="com.timife.a_n_nursery_app.inventory.response.Inventory" />
      </dialog>
     <dialog
         android:id="@+id/vendorBttmShtFragment"
@@ -99,7 +99,7 @@
         android:label="dialog_updatedit_inventory_items" >
         <argument
             android:name="selectedEdit"
-            app:argType="com.timife.a_n_nursery_app.inventory.response.Result"/>
+            app:argType="com.timife.a_n_nursery_app.inventory.response.Inventory"/>
     </dialog>
     <fragment
         android:id="@+id/accessControlFragment"

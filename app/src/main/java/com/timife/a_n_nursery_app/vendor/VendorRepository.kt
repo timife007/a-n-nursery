@@ -5,9 +5,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseRepository
-import com.timife.a_n_nursery_app.inventory.data.InventoryPagingSource
-import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
-import com.timife.a_n_nursery_app.login.response.LoginResponse
 import com.timife.a_n_nursery_app.vendor.network.VendorPagingSource
 import com.timife.a_n_nursery_app.vendor.network.VendorsApi
 import com.timife.a_n_nursery_app.vendor.response.VendorItem

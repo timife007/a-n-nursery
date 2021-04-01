@@ -21,7 +21,6 @@ import com.timife.a_n_nursery_app.inventory.classifications.database.Classificat
 import com.timife.a_n_nursery_app.inventory.locations.database.LocationItem
 import com.timife.a_n_nursery_app.inventory.lots.database.LotItem
 import com.timife.a_n_nursery_app.inventory.network.InventoryApi
-import com.timife.a_n_nursery_app.inventory.response.Result
 import com.timife.a_n_nursery_app.inventory.ui.addInventoryDialog.AddDialogListener
 import com.timife.a_n_nursery_app.inventory.ui.addInventoryDialog.AddInvItemDialog
 import kotlinx.android.synthetic.main.fragment_inventory.*
@@ -45,6 +44,7 @@ class InventoryFragment :
         val adapter = InventAdapter(requireContext(), InventAdapter.OnClickListener {
             viewModel.displayProductDetails(it)
         })
+
         var data = PagingData
         binding.swipeRefreshInventory.setOnRefreshListener {
             swipeCount += 1
@@ -226,17 +226,15 @@ class InventoryFragment :
             viewModel.displayProductDetailsComplete()
         }
 
-//        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner,{
-//            if (null != it){
+//        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner) {
 //
-//                this.findNavController()
-//                    .navigate(InventoryFragmentDirections.actionInventoryFragmentToUpdateInventoryDialog(
-//                        it
-//                    )
-//                    )
-//                viewModel.displayProductDetailsComplete()
-//            }
-//        })
+//            this.findNavController()
+//                .navigate(InventoryFragmentDirections.actionInventoryFragmentToUpdateInventoryDialog(
+//                    it
+//                )
+//                )
+//            viewModel.displayProductDetailsComplete()
+//        }
 
         viewModel.saveInventory.observe(viewLifecycleOwner) {
             when (it) {

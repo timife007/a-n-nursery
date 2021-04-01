@@ -11,7 +11,7 @@ interface VendorsApi {
         firstName: String?,
         @Query("page")
         pageNumber: Int?
-    ):Vendors
+    ): Vendors
 
 
 

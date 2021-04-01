@@ -6,7 +6,7 @@
 
         <variable
             name="inventoryResult"
-            type="com.timife.a_n_nursery_app.inventory.response.Result" />
+            type="com.timife.a_n_nursery_app.inventory.response.Inventory" />
 
     </data>
 
