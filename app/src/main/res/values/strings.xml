@@ -143,6 +143,7 @@
     <string name="edit_location">Edit Location</string>
     <string name="lot_fab">Lot Fab</string>
     <string name="download_barcode">Download Barcode</string>
+    <string name="invited_users_not_loaded">Invited Users not loaded</string>
 
 
 </resources>

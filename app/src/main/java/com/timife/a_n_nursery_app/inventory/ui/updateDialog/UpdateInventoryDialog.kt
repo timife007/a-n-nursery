@@ -38,13 +38,15 @@ class UpdateInventoryDialog: DialogFragment() {
         dialog?.window?.setBackgroundDrawableResource(R.drawable.round_corner_dialog)
         val application = requireNotNull(activity).application
         binding = DialogUpdateditInventoryItemsBinding.inflate(inflater)
+
         binding.lifecycleOwner = this
+
         val product = UpdateInventoryDialogArgs.fromBundle(requireArguments()).selectedEdit
         val productId = UpdateInventoryDialogArgs.fromBundle(requireArguments()).selectedEdit.id
 
         //Dependency Injection needed
         userPreferences = UserPreferences(requireContext())
-        val token = runBlocking { userPreferences.authToken.first() }
+        val token = runBlocking { userPreferences.authToken.first()}
         val api = retrofitClient.buildApi(InventoryApi::class.java, token)
         val database = CategoryDatabase.invoke(requireContext())
         val inventoryRepository = InventoryRepository(api,database)
@@ -54,6 +56,10 @@ class UpdateInventoryDialog: DialogFragment() {
             ViewModelProvider(this, viewModelFactory).get(UpdateInventoryDialogViewModel::class.java)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(UpdateInventoryDialogViewModel::class.java)
+
+        binding.cancel.setOnClickListener {
+            dismiss()
+        }
 
         binding.updateProduct.setOnClickListener {
             val productName = binding.productName.text.toString()
@@ -68,22 +74,20 @@ class UpdateInventoryDialog: DialogFragment() {
             val quantity = binding.quantity.text.toString().toInt()
             val category = binding.categoryName.text.toString()
 
-            if (productId != null) {
-                viewModel.updateInventoryItem(
-                    productId,
-                    productName,
-                    botanicalName,
-                    size,
-                    classification,
-                    color,
-                    price,
-                    cost,
-                    lot,
-                    location,
-                    quantity,
-                    category
-                )
-            }
+            viewModel.updateInventoryItem(
+                productId,
+                productName,
+                botanicalName,
+                size,
+                classification,
+                color,
+                price,
+                cost,
+                lot,
+                location,
+                quantity,
+                category
+            )
             viewModel.updateInventoryItem.observe(viewLifecycleOwner, Observer{
                 when(it){
                     is Resource.Success ->{

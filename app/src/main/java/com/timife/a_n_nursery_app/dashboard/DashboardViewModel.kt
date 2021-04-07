@@ -2,7 +2,6 @@ package com.timife.a_n_nursery_app.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate

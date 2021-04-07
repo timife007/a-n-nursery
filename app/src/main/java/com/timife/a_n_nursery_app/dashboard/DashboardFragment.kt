@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.timife.a_n_nursery_app.Resource
@@ -57,7 +58,7 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
             }
         }
 
-        viewModel.dashboard.observe(viewLifecycleOwner,{
+        viewModel.dashboard.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     binding.inventoryProdNum.text = it.value.low_inventory.toString()
@@ -74,9 +75,9 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
                     showProgressBar()
                 }
             }
-        })
+        }
         //Sales Chart Test
-        viewModel.salesBar.observe(viewLifecycleOwner, {
+        viewModel.salesBar.observe(viewLifecycleOwner) {
             binding.salesBarChart.data = it
             val time = arrayOf("1pm", "2pm", "3pm", "4pm")
             val xAxis = binding.salesBarChart.xAxis
@@ -100,10 +101,10 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
             binding.salesBarChart.groupBars(0f, groupSpace, barSpace)
             specs(binding.salesBarChart)
             binding.salesBarChart.invalidate()
-        })
+        }
 
         //TransactionsChart Test
-        viewModel.transactionsBar.observe(viewLifecycleOwner, {
+        viewModel.transactionsBar.observe(viewLifecycleOwner) {
             binding.transactionsBarChart.data = it
             val time = arrayOf("1pm", "2pm", "3pm", "4pm")
             val xAxis = binding.transactionsBarChart.xAxis
@@ -126,16 +127,16 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
             binding.transactionsBarChart.groupBars(0f, groupSpace, barSpace)
             specs(binding.transactionsBarChart)
             binding.transactionsBarChart.invalidate()
-        })
+        }
 
         //PieChartTest
-        viewModel.pieChart.observe(viewLifecycleOwner, {
+        viewModel.pieChart.observe(viewLifecycleOwner) {
             binding.pieChart.data = it
             binding.pieChart.transparentCircleRadius = 0F
             binding.pieChart.setDrawEntryLabels(false)
             binding.pieChart.holeRadius = 60F
             binding.pieChart.invalidate()
-        })
+        }
     }
 
     private fun hideProgressBar() {

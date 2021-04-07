@@ -16,9 +16,6 @@
         android:label="@string/inventory"
         tools:layout="@layout/fragment_inventory" >
         <action
-            android:id="@+id/action_inventoryFragment_to_updateInventoryDialog"
-            app:destination="@id/updateInventoryDialog" />
-        <action
             android:id="@+id/action_inventoryFragment_to_invntBttmShtFragment"
             app:destination="@id/invntBttmShtFragment" />
         <action
@@ -77,6 +74,9 @@
         <argument
             android:name="selectedProduct"
             app:argType="com.timife.a_n_nursery_app.inventory.response.Inventory" />
+         <action
+             android:id="@+id/action_invntBttmShtFragment_to_updateInventoryDialog"
+             app:destination="@id/updateInventoryDialog" />
      </dialog>
     <dialog
         android:id="@+id/vendorBttmShtFragment"

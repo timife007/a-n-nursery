@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.timife.a_n_nursery_app">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -10,12 +11,11 @@
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
-        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="A &amp; N"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        >
+        tools:targetApi="m">
         <activity
             android:name=".BaseActivity"
             android:screenOrientation="portrait"

@@ -165,6 +165,6 @@ class InventoryViewModel(
     }
 
     fun displayProductDetailsComplete() {
-        _navigateToSelectedProduct.value = null
+//        _navigateToSelectedProduct.value = null
     }
 }

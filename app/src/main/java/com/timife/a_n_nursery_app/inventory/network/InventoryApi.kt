@@ -83,6 +83,4 @@ interface InventoryApi {
         @Field("quantity") quantity: Int,
         @Field("category.name") category: String
     ):Inventory
-
-
 }

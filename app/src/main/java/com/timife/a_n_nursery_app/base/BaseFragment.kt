@@ -1,6 +1,7 @@
 package com.timife.a_n_nursery_app.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,13 +30,19 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, Repo : BaseRepo
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userPreferences = UserPreferences(requireContext())
-        binding = getFragmentBinding(inflater, container)
-        val factory = ViewModelFactory(getRepository())
-        viewModel = ViewModelProvider(this, factory).get(getViewModel())
-        lifecycleScope.launch { userPreferences.authToken.first() }
-        setHasOptionsMenu(true)
+        try{
+
+            userPreferences = UserPreferences(requireContext())
+            binding = getFragmentBinding(inflater, container)
+            val factory = ViewModelFactory(getRepository())
+            viewModel = ViewModelProvider(this, factory).get(getViewModel())
+            lifecycleScope.launch { userPreferences.authToken.first() }
+            setHasOptionsMenu(true)
+        }catch (e:Exception){
+            Log.d("TAG","onCreateView",e)
+        }
         return binding.root
+
     }
 
     fun logout() = lifecycleScope.launch {

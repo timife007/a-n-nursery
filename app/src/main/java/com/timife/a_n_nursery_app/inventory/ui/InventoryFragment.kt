@@ -45,7 +45,7 @@ class InventoryFragment :
             viewModel.displayProductDetails(it)
         })
 
-        var data = PagingData
+//        var data = PagingData
         binding.swipeRefreshInventory.setOnRefreshListener {
             swipeCount += 1
             if (swipeCount > 0){
@@ -55,10 +55,7 @@ class InventoryFragment :
                 adapter.notifyDataSetChanged()
                 binding.swipeRefreshInventory.isRefreshing = false
             }
-
         }
-
-
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
@@ -81,7 +78,6 @@ class InventoryFragment :
         }
 
         viewModel.category.observe(viewLifecycleOwner) {
-
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -132,7 +128,6 @@ class InventoryFragment :
                 }
             }
         }
-
 
         viewModel.lots.observe(viewLifecycleOwner) {
             when (it) {
@@ -186,7 +181,6 @@ class InventoryFragment :
             }
         }
 
-
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 inventoryProgress.isVisible = loadState.source.refresh is LoadState.Loading
@@ -225,16 +219,6 @@ class InventoryFragment :
                 )
             viewModel.displayProductDetailsComplete()
         }
-
-//        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner) {
-//
-//            this.findNavController()
-//                .navigate(InventoryFragmentDirections.actionInventoryFragmentToUpdateInventoryDialog(
-//                    it
-//                )
-//                )
-//            viewModel.displayProductDetailsComplete()
-//        }
 
         viewModel.saveInventory.observe(viewLifecycleOwner) {
             when (it) {
@@ -321,8 +305,10 @@ class InventoryFragment :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+
             R.id.inv_add_items ->
                 this.findNavController().navigate(R.id.action_inventoryFragment_to_addItemsFragment)
+            
         }
         return true
     }

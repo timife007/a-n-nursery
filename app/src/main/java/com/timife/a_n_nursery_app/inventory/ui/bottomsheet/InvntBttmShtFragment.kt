@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
@@ -36,11 +37,23 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
 
         val viewModel = ViewModelProvider(this,viewModelFactory).get(InvntBttmShtViewModel::class.java)
 
+        binding.editInventory.setOnClickListener {
+            viewModel.displayProductEdit(product)
+        }
+
+        viewModel.navigateToEditProduct.observe(viewLifecycleOwner, Observer {
+            this.findNavController().navigate(
+                InvntBttmShtFragmentDirections.actionInvntBttmShtFragmentToUpdateInventoryDialog(it)
+            )
+        })
+
+
        viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
            Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
              val barcodeUrl: String = it.barcode_url.toString()
-           val fileName = """${it.name.toString()}.pdf"""
+           val fileName = """${it.name}.pdf"""
              binding.downloadBarcode.setOnClickListener {
+                 Toast.makeText(requireContext(), fileName,Toast.LENGTH_SHORT).show()
                  binding.barcodeProgress.visibility = View.VISIBLE
                  downloadPdfFromInternet(barcodeUrl,BarcodeExtras.getRootDirPath(requireContext()),fileName)
              }

@@ -187,12 +187,12 @@
             app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="RETRY"
+        android:text="@string/retry"
         android:gravity="center"
         android:visibility="gone"
         tools:visibility="visible"
@@ -201,7 +201,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No results found for this Query"
+        android:text="@string/no_results_found_for_this_query"
         android:textColor="@color/black"
         android:id="@+id/query_no_result_text"
         android:textSize="16sp"

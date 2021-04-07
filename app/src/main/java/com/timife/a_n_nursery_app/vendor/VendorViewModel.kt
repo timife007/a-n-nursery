@@ -55,6 +55,6 @@ class VendorViewModel(
     }
 
     fun displayVendorDetailsComplete() {
-        _navigateToSelectedVendor.value = null
+//        _navigateToSelectedVendor.value = null
     }
 }

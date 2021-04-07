@@ -1,4 +1,4 @@
-package com.timife.a_n_nursery_app.inventory.ui
+package com.timife.a_n_nursery_app.settings.access_control
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,11 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.timife.a_n_nursery_app.databinding.InventoryLoadStateFooterBinding
+import com.timife.a_n_nursery_app.databinding.AccessLoadstateFooterBinding
 
-class InventoryLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<InventoryLoadStateAdapter.LoadStateViewHolder>(){
-    inner class LoadStateViewHolder(private val binding: InventoryLoadStateFooterBinding):
-            RecyclerView.ViewHolder(binding.root){
+class AccessLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<AccessLoadStateAdapter.LoadStateViewHolder>(){
+    inner class LoadStateViewHolder(private val binding: AccessLoadstateFooterBinding):
+        RecyclerView.ViewHolder(binding.root){
 
         init {
             binding.retryButton.setOnClickListener {
@@ -38,7 +38,7 @@ class InventoryLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
-        val binding  = InventoryLoadStateFooterBinding.inflate(
+        val binding  = AccessLoadstateFooterBinding.inflate(
             LayoutInflater.from(parent.context),parent,false
         )
         return LoadStateViewHolder(binding)
