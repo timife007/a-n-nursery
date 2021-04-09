@@ -25,6 +25,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/cancel"
+                android:background="@drawable/custom_ripple"
                 tools:layout_editor_absoluteY="26dp"
                 android:contentDescription="@string/new_category" />
 
@@ -80,6 +81,7 @@
                 android:layout_marginEnd="18dp"
                 android:background="@drawable/button_back"
                 android:text="@string/update"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

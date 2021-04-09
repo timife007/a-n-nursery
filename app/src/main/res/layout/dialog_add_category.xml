@@ -75,16 +75,17 @@
                 app:layout_constraintTop_toBottomOf="@id/category_add"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/cancel"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
                 android:layout_margin="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/custom_ripple"
                 tools:layout_editor_absoluteY="26dp"
                 android:contentDescription="@string/new_category"
-                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+                android:src="@drawable/cancel"
              />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

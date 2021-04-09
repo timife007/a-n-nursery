@@ -17,6 +17,10 @@ class AccessControlRepository(
         private const val NETWORK_PAGE_SIZE = 14
     }
 
+    suspend fun inviteUser(userEmail:String,userName: String) = safeApiCall {
+        accessControlApi.inviteUser(userEmail,userName)
+    }
+
     fun getInvitedUsers() =
         Pager(
             config = PagingConfig(

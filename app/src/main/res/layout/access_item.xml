@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:text="Favour"
+            android:text="@{inviteeResult.name.toString()}"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -31,26 +31,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/last_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Ohanekwu"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/email"
-            app:layout_constraintStart_toEndOf="@id/first_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="fohanekwu@gmail.com"
+            android:text="@{inviteeResult.email.toString()}"
             android:textColor="@color/black"
             android:textSize="13sp"
             android:layout_marginBottom="6dp"

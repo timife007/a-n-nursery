@@ -104,7 +104,7 @@
     <fragment
         android:id="@+id/accessControlFragment"
         android:name="com.timife.a_n_nursery_app.settings.access_control.AccessControlFragment"
-        android:label="fragment_access_control"
+        android:label="Access Control"
         tools:layout="@layout/fragment_access_control" />
     <fragment
         android:id="@+id/addItemsFragment"

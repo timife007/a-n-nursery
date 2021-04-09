@@ -8,60 +8,38 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/download_barcode"
+        android:id="@+id/invite"
         android:layout_width="wrap_content"
         android:layout_height="39dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/custom_ripple"
-        android:layout_marginStart="35dp"
         app:cardBackgroundColor="@color/primary_color"
         app:cardCornerRadius="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toTopOf="@id/access_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/access_recycler_view">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/invite_text"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/invite_image"
-                android:text="Invite"
-                android:textColor="@color/white" />
+        app:layout_constraintVertical_bias="0.607">
 
-            <ImageView
-                android:id="@+id/invite_image"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/invite_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Invite"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/access_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:listitem="@layout/access_item" />
