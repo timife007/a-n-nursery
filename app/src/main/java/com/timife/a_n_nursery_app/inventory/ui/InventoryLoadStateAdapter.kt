@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.timife.a_n_nursery_app.databinding.InventoryLoadStateFooterBinding
 
 class InventoryLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<InventoryLoadStateAdapter.LoadStateViewHolder>(){
-    inner class LoadStateViewHolder(private val binding: InventoryLoadStateFooterBinding):
+    inner class LoadStateViewHolder(private val binding: InventoryLoadStateFooterBinding,    retry: () -> Unit
+    ):
             RecyclerView.ViewHolder(binding.root){
 
         init {
@@ -19,15 +20,19 @@ class InventoryLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter
         }
         fun bind(loadState: LoadState){
             binding.apply {
+
+//                if (loadState is LoadState.Error) {
+//                    errorText.isVisible  = true
+//                }
                 footerProgressBar.isVisible = loadState is LoadState.Loading
-                retryButton.isVisible = loadState is LoadState.Error
-                errorText.isVisible = loadState is LoadState.Error
+                retryButton.isVisible = loadState !is LoadState.Loading
+                errorText.isVisible = loadState !is LoadState.Loading
 
 
-                if (loadState.endOfPaginationReached ){
-                    retryButton.isVisible = false
-                    errorText.isVisible = false
-                }
+//                if (loadState.endOfPaginationReached ){
+//                    retryButton.isVisible = false
+//                    errorText.isVisible = false
+//                }
             }
         }
 
@@ -41,6 +46,6 @@ class InventoryLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter
         val binding  = InventoryLoadStateFooterBinding.inflate(
             LayoutInflater.from(parent.context),parent,false
         )
-        return LoadStateViewHolder(binding)
+        return LoadStateViewHolder(binding,retry)
     }
 }

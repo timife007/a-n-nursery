@@ -59,7 +59,6 @@ class InventoryFragment :
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
-            recyclerView.itemAnimator = null
             recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = InventoryLoadStateAdapter { adapter.retry() },
                 footer = InventoryLoadStateAdapter { adapter.retry() }
@@ -183,20 +182,22 @@ class InventoryFragment :
 
         adapter.addLoadStateListener { loadState ->
             binding.apply {
-                inventoryProgress.isVisible = loadState.source.refresh is LoadState.Loading
-                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
-                recyclerRetry.isVisible = loadState.source.refresh is LoadState.Error
-                inventoryNoResultText.isVisible = loadState.source.refresh is LoadState.Error
-
-                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached &&
-                    adapter.itemCount < 1
-                ) {
-                    recyclerView.isVisible = false
-                    queryNoResultText.isVisible = true
-
-                } else {
-                    queryNoResultText.isVisible = false
-                }
+                inventoryProgress.isVisible = loadState.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.refresh is LoadState.NotLoading
+                recyclerRetry.isVisible = loadState.refresh is LoadState.Error
+                inventoryNoResultText.isVisible = loadState.refresh is LoadState.Error
+//                if(loadState.append.endOfPaginationReached){
+//                    inventoryNoResultText.isVisible =false
+//                    queryNoResultText.isVisible = false
+//                }
+//                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached &&
+//                    adapter.itemCount < 1
+//                ) {
+//                    recyclerView.isVisible = false
+//                    queryNoResultText.isVisible = true
+//                } else {
+//                    queryNoResultText.isVisible = false
+//                }
             }
         }
 

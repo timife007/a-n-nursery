@@ -49,60 +49,50 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/edit_email_container"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="?attr/actionBarSize"
-                            android:layout_marginStart="60dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginEnd="60dp"
-                            android:hint="Email"
-                            android:inputType="textPersonName"
-                            app:boxCornerRadiusBottomEnd="7dp"
-                            app:hintTextColor="@color/black"
-                            app:boxCornerRadiusBottomStart="7dp"
-                            app:boxCornerRadiusTopEnd="7dp"
-                            app:boxCornerRadiusTopStart="7dp"
-                            app:boxStrokeColor="@color/primary_color"
-                            app:hintTextAppearance="@style/TextAppearance.AppCompat"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/welcome_back">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editEmail"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="53dp" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/edit_password_container"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <EditText
+                            android:id="@+id/editEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
                             android:layout_marginTop="20dp"
+                            android:layout_marginStart="60dp"
                             android:layout_marginEnd="60dp"
-                            app:hintTextColor="@color/black"
-                            android:hint="Password"
-                            android:inputType="textPersonName"
-                            app:boxCornerRadiusBottomEnd="7dp"
-                            app:boxCornerRadiusBottomStart="7dp"
-                            app:boxCornerRadiusTopEnd="7dp"
-                            app:boxCornerRadiusTopStart="7dp"
-                            app:boxStrokeColor="@color/primary_color"
-                            app:hintTextAppearance="@style/TextAppearance.AppCompat"
+                            android:textCursorDrawable="@null"
+                            android:backgroundTint="@color/black"
+                            android:textColor="@color/black"
+                            android:textColorHint="#808080"
+                            android:shadowColor="@color/secondary_color"
+                            android:ems="10"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress"
+                            app:layout_constraintBottom_toTopOf="@id/editPassword"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.426"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/edit_email_container">
+                            app:layout_constraintTop_toBottomOf="@id/welcome_back"
+                            app:layout_constraintVertical_bias="0.38"
+                            android:autofillHints="" />
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editPassword"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="53dp" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                        <EditText
+                            android:id="@+id/editPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:ems="10"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="60dp"
+                            android:textColor="@color/black"
+                            android:backgroundTint="@color/black"
+                            android:textCursorDrawable="@null"
+                            android:shadowColor="@color/secondary_color"
+                            android:textColorHint="#808080"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.426"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/editEmail"
+                            tools:ignore="MissingConstraints"
+                            android:autofillHints="" />
 
                         <ImageView
                             android:id="@+id/leaf_view"
@@ -161,7 +151,7 @@
                             android:text="@string/forgot_password"
                             android:textColor="@color/primary_color"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/edit_password_container" />
+                            app:layout_constraintTop_toBottomOf="@id/editPassword" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 

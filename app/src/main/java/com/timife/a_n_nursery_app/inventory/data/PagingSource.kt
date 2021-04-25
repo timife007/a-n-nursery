@@ -27,6 +27,12 @@ class InventoryPagingSource(
         } catch (exception: IOException) {
             LoadResult.Error(exception)
         } catch (exception: HttpException) {
+            if(
+                exception.code() == 404
+                    ){
+                return LoadResult.Page(emptyList(), pageNumber-1 ,null)
+
+            }
             LoadResult.Error(exception)
         }
     }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.timife.a_n_nursery_app.MainActivity
 import com.timife.a_n_nursery_app.R
@@ -36,7 +37,7 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding, LoginRe
         binding.loginprogress.visible(false)
         binding.fab.enable(false)
 
-        viewModel.loginResponse.observe(viewLifecycleOwner, {
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
             binding.loginprogress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -51,7 +52,7 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding, LoginRe
                     }
                 }
             }
-        })
+        }
 
         binding.editPassword.addTextChangedListener {
             val email = binding.editEmail.text.toString().trim()

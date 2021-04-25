@@ -17,7 +17,7 @@ import com.timife.a_n_nursery_app.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         if(resources.getBoolean(R.bool.portrait_only)){
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
         binding.bottomNavView.setupWithNavController(navController)
         CenterTitle.centerTitle(binding.toolbar,true)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

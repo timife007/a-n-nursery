@@ -18,7 +18,6 @@
         tools:targetApi="m">
         <activity
             android:name=".BaseActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +26,9 @@
         </activity>
         <activity
             android:name=".login.ui.auth.LoginActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Annurseryapp" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.BaseActivity">
 
             <!-- <intent-filter> -->
