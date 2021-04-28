@@ -20,7 +20,12 @@ interface ClassificationApi {
     @FormUrlEncoded
     @PUT("/classifications/{id}/")
     suspend fun updateClassification(
-        @Path("id") categoryId: Int,
+        @Path("id") classificationId: Int,
         @Field("name") classificationName: String
     ): Classification
+
+    @DELETE("/classifications/{id}/")
+    suspend fun deleteClassification(
+        @Path("id") classificationId: Int
+    )
 }

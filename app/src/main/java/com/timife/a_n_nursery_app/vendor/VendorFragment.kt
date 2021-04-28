@@ -27,7 +27,10 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
 
         val adapter = VendorAdapter(VendorAdapter.OnClickListener {
             viewModel.displayVendorDetails(it)
-        })
+        }, VendorAdapter.OnDeleteListener{
+            viewModel.deleteVendorItem(it)
+            Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
+        },requireContext())
 
         binding.recyclerView.adapter = adapter
         binding.apply {
@@ -66,19 +69,17 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
         }
 
 
-        viewModel.navigateToSelectedVendor.observe(viewLifecycleOwner, {
-            if (null != it) {
-                this.findNavController()
-                    .navigate(
-                        VendorFragmentDirections.actionVendorFragmentToVendorBttmShtFragment(
-                            it
-                        )
+        viewModel.navigateToSelectedVendor.observe(viewLifecycleOwner) {
+            this.findNavController()
+                .navigate(
+                    VendorFragmentDirections.actionVendorFragmentToVendorBttmShtFragment(
+                        it
                     )
-                viewModel.displayVendorDetailsComplete()
-            }
-        })
+                )
+            viewModel.displayVendorDetailsComplete()
+        }
 
-        viewModel.saveVendor.observe(viewLifecycleOwner, {
+        viewModel.saveVendor.observe(viewLifecycleOwner) {
             binding.venProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -94,7 +95,7 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
                     binding.venProgress.visible(true)
                 }
             }
-        })
+        }
 
 
         binding.venAdd.setOnClickListener {

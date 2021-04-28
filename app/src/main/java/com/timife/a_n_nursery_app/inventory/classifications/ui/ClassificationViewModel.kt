@@ -35,6 +35,10 @@ class ClassificationViewModel (private val classificationRepository: Classificat
         _classification.value = classificationRepository.getClassifications()
     }
 
+    fun deleteClassification(classificationId:Int) = viewModelScope.launch {
+        classificationRepository.deleteClassification(classificationId)
+    }
+
 
     fun saveClassificationItem(classificationName: String) = viewModelScope.launch {
         _saveClassification.value = Resource.Loading

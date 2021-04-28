@@ -39,9 +39,20 @@ class VendorRepository(private val api: VendorsApi): BaseRepository(){
             api.postVendors(firstName, lastName, email, company, type, phoneNumber)
         }
     }
-    suspend fun getVendors(
+    suspend fun deleteVendor(vendorId: Int) = safeApiCall {
+        api.deleteVendor(vendorId)
+    }
 
-    ) {
+    suspend fun updateVendor(
+        vendorId:Int,
+        firstName: String,
+        lastName: String,
+        email: String,
+        company: String,
+        type: String,
+        phoneNumber:String
+    ) = safeApiCall {
+        api.updateVendor(vendorId, firstName, lastName, email, company, type, phoneNumber)
     }
 
 }

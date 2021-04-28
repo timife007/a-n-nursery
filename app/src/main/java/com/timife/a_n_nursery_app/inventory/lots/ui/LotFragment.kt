@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.a_n_nursery_app.R
@@ -47,7 +48,9 @@ class LotFragment  : BaseFragment<LotViewModel, FragmentLotBinding, LotRepositor
 
         binding.lotRecycler.adapter = LotAdapter(LotAdapter.OnClickListener{
             viewModel.displayEditLot(it)
-        })
+        },LotAdapter.OnDeleteListener{
+            viewModel.deleteLotItem(it)
+        },requireContext())
 
         viewModel.lot.observe(viewLifecycleOwner, Observer {
             when(it){

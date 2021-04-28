@@ -48,7 +48,7 @@ interface InventoryApi {
     suspend fun deleteInventoryItems(
         @Path("id")
         deleteId:Int?
-    ):Nothing
+    )
 
 
     @FormUrlEncoded

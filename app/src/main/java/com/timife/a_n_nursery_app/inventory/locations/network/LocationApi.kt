@@ -25,4 +25,9 @@ interface LocationApi {
         @Path("id") locationId: Int,
         @Field("name") locationName: String
     ): Location
+
+    @DELETE("/locations/{id}/")
+    suspend fun deleteLocation(
+        @Path("id") locationId: Int
+    )
 }

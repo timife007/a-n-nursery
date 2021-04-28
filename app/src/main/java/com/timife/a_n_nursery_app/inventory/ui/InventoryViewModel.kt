@@ -160,6 +160,10 @@ class InventoryViewModel(
         )
     }
 
+    fun deleteInventoryItem(productId:Int)= viewModelScope.launch {
+        inventoryRepository.deleteInventoryProduct(productId)
+    }
+
     fun displayProductDetails(product: Inventory){
         _navigateToSelectedProduct.value = product
     }

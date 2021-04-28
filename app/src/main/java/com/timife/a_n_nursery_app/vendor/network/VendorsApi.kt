@@ -25,4 +25,20 @@ interface VendorsApi {
         @Field("type") type: String,
         @Field("phone_number") phoneNumber: String
     ): VendorItem
+
+    @DELETE("/vendors/{id}/")
+    suspend fun deleteVendor(
+        @Path("id") vendorId: Int
+    )
+
+    @PUT("/vendors/{id}/")
+    suspend fun updateVendor(
+        @Path("id") vendorId: Int,
+        @Field("first_name") firstName: String,
+        @Field("last_name") lastName: String,
+        @Field("email") email: String,
+        @Field("company") company: String,
+        @Field("type") type: String,
+        @Field("phone_number") phoneNumber: String
+    ): VendorItem
 }

@@ -23,4 +23,9 @@ interface LotApi {
         @Path("id") lotId: Int,
         @Field("name") lotName: String
     ): Lot
+
+    @DELETE("/lots/{id}/")
+    suspend fun deleteLot(
+        @Path("id") lotId: Int
+    )
 }

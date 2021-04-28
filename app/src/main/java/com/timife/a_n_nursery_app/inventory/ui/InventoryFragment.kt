@@ -43,6 +43,8 @@ class InventoryFragment :
 
         val adapter = InventAdapter(requireContext(), InventAdapter.OnClickListener {
             viewModel.displayProductDetails(it)
+        },InventAdapter.OnDeleteListener{
+            viewModel.deleteInventoryItem(it)
         })
 
 //        var data = PagingData
@@ -135,7 +137,7 @@ class InventoryFragment :
                     try {
                         val lotsList = it.value.results
                         lotsList.forEach {
-                            val lot = LotItem(it.id, it.name)
+                            val lot = LotItem(it.id!!, it.name)
                             viewModel.upsertLot(listOf(lot))
                         }
 

@@ -16,4 +16,8 @@ class LotRepository (private val api: LotApi): BaseRepository() {
     suspend fun updateLot(lotId: Int,lotName: String)= safeApiCall{
         api.updateLot(lotId, lotName)
     }
+
+    suspend fun deleteLot(lotId: Int)=safeApiCall {
+        api.deleteLot(lotId)
+    }
 }

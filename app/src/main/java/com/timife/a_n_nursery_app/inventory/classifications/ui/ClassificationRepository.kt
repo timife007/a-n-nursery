@@ -17,4 +17,8 @@ class ClassificationRepository (private val api: ClassificationApi): BaseReposit
     suspend fun updateClassification(classificationId: Int,classificationName: String)= safeApiCall{
         api.updateClassification(classificationId, classificationName)
     }
+
+    suspend fun deleteClassification(classificationId: Int)=safeApiCall {
+        api.deleteClassification(classificationId)
+    }
 }

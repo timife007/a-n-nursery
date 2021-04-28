@@ -54,7 +54,7 @@ class EditLotDialog: DialogFragment() {
 
         binding.updateLot.setOnClickListener {
             val lotName = binding.lotName.text.toString()
-            viewModel.updateLot(lotId,lotName)
+            viewModel.updateLot(lotId!!,lotName)
 
             //Update check
             viewModel.updateLot.observe(viewLifecycleOwner){

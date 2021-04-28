@@ -32,6 +32,9 @@ class LotViewModel (private val lotRepository: LotRepository): BaseViewModel(lot
     fun getLotItems() = viewModelScope.launch {
         _lot.value = lotRepository.getLot()
     }
+    fun deleteLotItem(lotId:Int) =  viewModelScope.launch {
+        lotRepository.deleteLot(lotId)
+    }
 
 
     fun saveLotName(lotName: String) = viewModelScope.launch {

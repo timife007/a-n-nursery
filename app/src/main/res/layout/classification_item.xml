@@ -41,7 +41,7 @@
             android:id="@+id/classification_text"/>
 
         <ImageView
-            android:id="@+id/delete"
+            android:id="@+id/delete_classification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -55,7 +55,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/delete"
+            app:layout_constraintEnd_toStartOf="@id/delete_classification"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/edit_item_classification"

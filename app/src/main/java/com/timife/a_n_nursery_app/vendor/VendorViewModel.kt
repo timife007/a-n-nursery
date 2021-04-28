@@ -29,6 +29,8 @@ class VendorViewModel(
     val saveVendor: LiveData<Resource<VendorItem>>
         get() = _saveVendor
 
+
+
     private val _navigateToSelectedVendor = MutableLiveData<VendorItem>()
     val navigateToSelectedVendor: LiveData<VendorItem>
         get() = _navigateToSelectedVendor
@@ -38,6 +40,12 @@ class VendorViewModel(
     fun getVendorSearchItems(firstName: String) {
        currentVendorQuery.value = firstName
     }
+
+    fun deleteVendorItem(vendorId: Int)= viewModelScope.launch {
+        vendorRepository.deleteVendor(vendorId)
+    }
+
+
 
     fun saveVendorItem(firstName: String,
         lastName: String,

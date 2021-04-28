@@ -33,6 +33,9 @@ class LocationViewModel (private val locationRepository: LocationRepository): Ba
         _location.value = locationRepository.getLocation()
     }
 
+    fun deleteLocationItem(locationId:Int) = viewModelScope.launch {
+        locationRepository.deleteLocation(locationId)
+    }
 
     fun saveLocationName(locationName: String) = viewModelScope.launch {
         _saveLocation.value = Resource.Loading

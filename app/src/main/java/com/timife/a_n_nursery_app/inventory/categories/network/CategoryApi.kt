@@ -1,5 +1,6 @@
 package com.timife.a_n_nursery_app.inventory.categories.network
 
+import okhttp3.Response
 import retrofit2.http.*
 
 interface CategoryApi {
@@ -19,4 +20,9 @@ interface CategoryApi {
         @Path("id") categoryId: Int,
         @Field("name") categoryName: String
     ): Category
+
+    @DELETE("/categories/{id}/")
+    suspend fun deleteCategory(
+        @Path("id") categoryId: Int
+    )
 }

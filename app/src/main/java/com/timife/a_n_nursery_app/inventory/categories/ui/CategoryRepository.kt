@@ -17,4 +17,8 @@ class CategoryRepository(private val api: CategoryApi): BaseRepository() {
     suspend fun updateCategory(categoryId: Int,categoryName: String)= safeApiCall{
         api.updateCategory(categoryId, categoryName)
     }
+
+    suspend fun deleteCategory(categoryId: Int)=safeApiCall {
+        api.deleteCategory(categoryId)
+    }
 }

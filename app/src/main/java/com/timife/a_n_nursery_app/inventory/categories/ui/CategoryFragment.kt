@@ -42,7 +42,11 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
 
         val adapter = CategoryAdapter(CategoryAdapter.OnClickListener{
             viewModel.displayEditCategory(it)
-        })
+            Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
+        }, CategoryAdapter.OnDeleteListener{
+            viewModel.deleteCategoryItem(it)
+            Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
+        }, requireContext())
 
         binding.categoryRecycler.adapter = adapter
         val data = ArrayList<Category>()

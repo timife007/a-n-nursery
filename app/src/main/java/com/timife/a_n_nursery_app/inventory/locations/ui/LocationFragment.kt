@@ -38,7 +38,9 @@ class LocationFragment : BaseFragment<LocationViewModel,FragmentLocationBinding,
 
         binding.locationRecycler.adapter = LocationAdapter(LocationAdapter.OnClickListener{
             viewModel.displayEditLocation(it)
-        })
+        },LocationAdapter.OnDeleteListener{
+            viewModel.deleteLocationItem(it)
+        },requireContext())
 
         viewModel.location.observe(viewLifecycleOwner, Observer {
             when(it){
