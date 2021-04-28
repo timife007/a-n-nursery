@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.a_n_nursery_app.Resource
@@ -56,7 +57,7 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
                     }
                 })
 
-                viewModel.navigateToEditClassification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.navigateToEditClassification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                     if (null != it) {
                         this.findNavController()
                     .navigate(
@@ -68,8 +69,7 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
             }
         })
 
-
-        viewModel.saveClassification.observe(viewLifecycleOwner, {
+        viewModel.saveClassification.observe(viewLifecycleOwner) { it->
             binding.classificationProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -85,10 +85,7 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
                     binding.classificationProgress.visible(true)
                 }
             }
-        })
-
-
-
+        }
 
         binding.addClassification.setOnClickListener {
             val classificationDialogFragment = AddClassificationDialog(object : AddClassificationListener {

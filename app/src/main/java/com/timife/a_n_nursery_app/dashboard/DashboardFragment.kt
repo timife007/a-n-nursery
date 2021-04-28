@@ -149,7 +149,7 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(DashboardViewModel::class.java)
     }
 
     override fun getViewModel()= DashboardViewModel::class.java
