@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.FragmentVendorBttmShtBinding
+import com.timife.a_n_nursery_app.inventory.ui.bottomsheet.InvntBttmShtFragmentDirections
+import com.timife.a_n_nursery_app.inventory.ui.bottomsheet.InvntBttmShtViewModel
 
 class VendorBttmShtFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentVendorBttmShtBinding
@@ -24,15 +28,25 @@ class VendorBttmShtFragment : BottomSheetDialogFragment() {
         val viewModelFactory = VendorBttmShtViewModelFactory(vendor, application)
         binding.viewModel =
             ViewModelProvider(this, viewModelFactory).get(VendorBttmShtViewModel::class.java)
+
+        val viewModel = ViewModelProvider(this,viewModelFactory).get(VendorBttmShtViewModel::class.java)
+        binding.addCartBtn.setOnClickListener {
+            viewModel.displayVendorEdit(vendor)
+
+        }
+
+        viewModel.navigateToEditVendor.observe(viewLifecycleOwner, Observer {
+
+            this.findNavController().navigate(
+                VendorBttmShtFragmentDirections.actionVendorBttmShtFragmentToUpdateVendorDialog(it)
+            )
+        })
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.addCartBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "This is an add to cart button", Toast.LENGTH_LONG)
-                .show()
-        }
+
     }
 
     override fun getTheme(): Int {

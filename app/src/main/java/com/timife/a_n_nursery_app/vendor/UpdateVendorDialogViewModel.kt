@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class UpdateVendorDialogViewModel (vendor:VendorItem, application: Application, private val vendorRepository: VendorRepository) :
 AndroidViewModel(application) {
-    private val _selectedEdit = MutableLiveData<Inventory>()
-    val selectedEdit: LiveData<Inventory>
+    private val _selectedEdit = MutableLiveData<VendorItem>()
+    val selectedEdit: LiveData<VendorItem>
         get() = _selectedEdit
 
     private val _updateVendorItem: MutableLiveData<Resource<VendorItem>> = MutableLiveData()

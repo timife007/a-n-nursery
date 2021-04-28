@@ -53,6 +53,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/vendor_name"
                         android:layout_width="match_parent"
+                        android:text="@{viewModel.selectedEdit.first_name}"
                         android:layout_height="53dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +81,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/lastName"
                         android:layout_width="match_parent"
+                        android:text="@{viewModel.selectedEdit.last_name}"
                         android:layout_height="53dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,6 +108,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
+                        android:text="@{viewModel.selectedEdit.email}"
                         android:layout_height="53dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,6 +134,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/company"
+                        android:text="@{viewModel.selectedEdit.company}"
                         android:layout_width="match_parent"
                         android:layout_height="53dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -158,6 +162,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone_number"
                         android:layout_width="match_parent"
+                        android:text="@{viewModel.selectedEdit.phone_number}"
                         android:layout_height="53dp"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -186,6 +191,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
                         android:inputType="none"
+                        android:text="@{viewModel.selectedEdit.type}"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         tools:ignore="LabelFor" />
 

@@ -22,6 +22,7 @@ import com.timife.a_n_nursery_app.inventory.ui.updateDialog.UpdateInventoryDialo
 import com.timife.a_n_nursery_app.inventory.ui.updateDialog.UpdateInventoryDialogViewModel
 import com.timife.a_n_nursery_app.inventory.ui.updateDialog.UpdateInventoryViewModelFactory
 import com.timife.a_n_nursery_app.login.network.RetrofitClient
+import com.timife.a_n_nursery_app.vendor.network.VendorsApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
@@ -48,17 +49,17 @@ class UpdateVendorDialog : DialogFragment() {
 
         binding.lifecycleOwner = this
 
-        val vendor = UpdateInventoryDialogArgs.fromBundle(requireArguments()).selectedEdit
-        val vendorId = UpdateInventoryDialogArgs.fromBundle(requireArguments()).selectedEdit.id
+        val vendor = UpdateVendorDialogArgs.fromBundle(requireArguments()).selectedEditVendor
+        val vendorId = UpdateVendorDialogArgs.fromBundle(requireArguments()).selectedEditVendor.id
 
         //Dependency Injection needed
         userPreferences = UserPreferences(requireContext())
         val token = runBlocking { userPreferences.authToken.first()}
-        val api = retrofitClient.buildApi(InventoryApi::class.java, token)
-        val database = CategoryDatabase.invoke(requireContext())
-        val inventoryRepository = InventoryRepository(api,database)
+        val api = retrofitClient.buildApi(VendorsApi::class.java, token)
+//        val database = CategoryDatabase.invoke(requireContext())
+        val vendorRepository = VendorRepository(api)
 
-        val viewModelFactory = UpdateInventoryViewModelFactory(vendor, application,inventoryRepository)
+        val viewModelFactory = UpdateVendorViewModelFactory(vendor, application,vendorRepository)
         binding.viewModel =
             ViewModelProvider(this, viewModelFactory).get(UpdateVendorDialogViewModel::class.java)
         viewModel =
@@ -75,14 +76,10 @@ class UpdateVendorDialog : DialogFragment() {
             val company = binding.company.text.toString()
             val type = binding.type.text.toString()
             val phoneNumber = binding.phoneNumber.text.toString()
-//            val cost = binding.cost.text.toString()
-//            val lot = binding.lot.text.toString()
-//            val location = binding.location1.text.toString()
-//            val quantity = binding.quantity.text.toString().toInt()
-//            val category = binding.categoryName.text.toString()
+
 
             viewModel.updateVendorItem(
-                vendorId,
+                vendorId!!,
                 firstName,
                 lastName,
                 email,
@@ -93,7 +90,7 @@ class UpdateVendorDialog : DialogFragment() {
             viewModel.updateVendorItem.observe(viewLifecycleOwner, Observer{
                 when(it){
                     is Resource.Success ->{
-                        Toast.makeText(requireContext(),"Product Updated Successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),"Vendor Updated Successfully", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading ->{
                         Toast.makeText(requireContext(),"Updating...", Toast.LENGTH_LONG).show()
@@ -108,27 +105,10 @@ class UpdateVendorDialog : DialogFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(UpdateInventoryDialogViewModel::class.java)
-//        // TODO: Use the ViewModel
-    }
-
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
         dialog?.window?.setLayout(width,ViewGroup.LayoutParams.WRAP_CONTENT)
     }
-
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        dialog?.window?.setBackgroundDrawableResource(R.drawable.round_corner_dialog)
-//        return inflater.inflate(R.layout.dialog_updatedit_vendor_item, container, false)
-//    }
-
 }
