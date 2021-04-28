@@ -57,8 +57,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
-    private val retrofitClient = RetrofitClient()
-    private lateinit var userPreferences: UserPreferences
+    protected val retrofitClient = RetrofitClient()
+    protected lateinit var userPreferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(resources.getBoolean(R.bool.portrait_only)){
@@ -76,8 +76,9 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
         binding.bottomNavView.setupWithNavController(navController)
         CenterTitle.centerTitle(binding.toolbar,true)
-        instantiateViewModels()
-
+        CoroutineScope(Dispatchers.IO).launch {
+            instantiateViewModels()
+       }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -87,8 +88,8 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun instantiateViewModels(){
-        val token = runBlocking { userPreferences.authToken.first() }
+    private suspend fun instantiateViewModels(){
+        val token = userPreferences.authToken.first()
         val profileApi = retrofitClient.buildApi(ProfileApi::class.java, token)
         ViewModelProvider(this, ViewModelFactory(ProfileRepository(profileApi))).get(ProfileViewModel::class.java)
         val inventoryApi = retrofitClient.buildApi(InventoryApi::class.java, token)
