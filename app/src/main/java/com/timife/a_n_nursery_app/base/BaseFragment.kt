@@ -31,11 +31,10 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, Repo : BaseRepo
         savedInstanceState: Bundle?
     ): View? {
         try{
-
             userPreferences = UserPreferences(requireContext())
             binding = getFragmentBinding(inflater, container)
             val factory = ViewModelFactory(getRepository())
-            viewModel = ViewModelProvider(this, factory).get(getViewModel())
+            viewModel = ViewModelProvider(requireActivity(), factory).get(getViewModel())
             lifecycleScope.launch { userPreferences.authToken.first() }
             setHasOptionsMenu(true)
         }catch (e:Exception){

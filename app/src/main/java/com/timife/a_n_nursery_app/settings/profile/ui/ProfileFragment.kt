@@ -110,6 +110,7 @@ class ProfileFragment :
         container: ViewGroup?
     ) = FragmentProfileBinding.inflate(inflater, container, false)
 
+
     override fun getRepository(): ProfileRepository {
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(ProfileApi::class.java, token)
