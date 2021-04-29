@@ -39,7 +39,9 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
 
         binding.classificationRecycler.adapter = ClassificationAdapter(ClassificationAdapter.OnClickListener{
             viewModel.displayEditClassification(it)
-        })
+        },ClassificationAdapter.OnDeleteListener{
+            viewModel.deleteClassification(it)
+        },requireContext())
 
         viewModel.classification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                     when(it){
