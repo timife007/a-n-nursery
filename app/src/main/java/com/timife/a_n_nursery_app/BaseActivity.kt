@@ -3,8 +3,13 @@ package com.timife.a_n_nursery_app
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import com.timife.a_n_nursery_app.base.BaseRepository
+import com.timife.a_n_nursery_app.base.BaseViewModel
 import com.timife.a_n_nursery_app.login.ui.auth.LoginActivity
 
 class BaseActivity : AppCompatActivity() {
@@ -24,4 +29,5 @@ class BaseActivity : AppCompatActivity() {
 //
 //        })
     }
+
 }

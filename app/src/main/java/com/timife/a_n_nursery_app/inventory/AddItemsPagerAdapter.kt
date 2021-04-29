@@ -3,26 +3,23 @@ package com.timife.a_n_nursery_app.inventory
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class AddItemsPagerAdapter(fm: FragmentManager) :
-    FragmentPagerAdapter(fm) {
-    private val mFragmentList : ArrayList<Fragment> = ArrayList()
-    private val mFragmentTitleList : ArrayList<String> = ArrayList()
+class AddItemsPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
+    private var mFragmentList: ArrayList<Fragment> = ArrayList()
 
-    fun addFragment(fragment: Fragment,title:String){
-        mFragmentList.add(fragment)
-        mFragmentTitleList.add(title)
-    }
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return mFragmentList.size
     }
 
-    override fun getItem(position: Int): Fragment {
+    fun addFragment(fragments: Fragment) {
+        mFragmentList.add(fragments)
+        notifyDataSetChanged()
+    }
+
+    override fun createFragment(position: Int): Fragment {
         return mFragmentList[position]
     }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return mFragmentTitleList[position]
-    }
-
 }

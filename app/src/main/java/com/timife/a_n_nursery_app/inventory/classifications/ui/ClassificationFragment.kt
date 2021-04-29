@@ -39,9 +39,7 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
 
         binding.classificationRecycler.adapter = ClassificationAdapter(ClassificationAdapter.OnClickListener{
             viewModel.displayEditClassification(it)
-        },ClassificationAdapter.OnDeleteListener{
-            viewModel.deleteClassification(it)
-        },requireContext())
+        })
 
         viewModel.classification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                     when(it){
@@ -59,7 +57,7 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
                     }
                 })
 
-                viewModel.navigateToEditClassification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.navigateToEditClassification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                     if (null != it) {
                         this.findNavController()
                     .navigate(
@@ -71,8 +69,7 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
             }
         })
 
-
-        viewModel.saveClassification.observe(viewLifecycleOwner) {
+        viewModel.saveClassification.observe(viewLifecycleOwner) { it->
             binding.classificationProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -89,9 +86,6 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
                 }
             }
         }
-
-
-
 
         binding.addClassification.setOnClickListener {
             val classificationDialogFragment = AddClassificationDialog(object : AddClassificationListener {
