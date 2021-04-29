@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="25dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/scanner_constraint"
+        android:layout_height="wrap_content">
+
 
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
@@ -14,43 +19,69 @@
         android:layout_height="250dp"
         app:autoFocusButtonColor="@android:color/white"
         app:autoFocusButtonVisible="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:flashButtonColor="@android:color/white"
         app:flashButtonVisible="true"
         android:layout_marginStart="45dp"
         android:background="@drawable/rounded_corner_shape"
         android:layout_marginEnd="45dp"
         android:layout_marginTop="20dp"
-        app:frameColor="#FF0000"
+        app:frameColor="@color/white"
         app:frameCornersSize="50dp"
         app:frameCornersRadius="30dp"
-        app:frameAspectRatioWidth="1"
-        app:frameAspectRatioHeight="1"
+        app:frameAspectRatioWidth="0.5"
+        app:frameAspectRatioHeight="0.5"
         app:frameSize="0.75"
         app:frameThickness="2dp"
-        app:maskColor="#77000000"/>
+        app:maskColor="@color/inv_crd_color"/>
 
     <TextView
         android:id="@+id/scan_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/scanner_view"
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="15dp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
+        app:layout_constraintTop_toBottomOf="@id/scanner_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="15dp"
-        android:text="Scan something..."
+        android:hint="@string/barcode"
+        android:paddingStart="15dp"
+        android:paddingEnd="2dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/black_outline"
         android:textColor="@color/black"
         android:textSize="20sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@id/scanner_constraint"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        tools:listitem="@layout/inventory_card_item"
         android:id="@+id/scanner_recycler"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_below="@id/scan_text"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
+        android:id="@+id/summary_card"
+        android:paddingBottom="15dp"
         android:layout_below="@id/scanner_recycler"
         app:cardBackgroundColor="@color/primary_color"
         app:cardCornerRadius="10dp"
@@ -103,7 +134,7 @@
                 android:layout_toEndOf="@id/total_amount"
                 android:gravity="end"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="40dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -120,21 +151,101 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="18"
+
                 android:textColor="@color/white"
                 android:layout_below="@id/amount_text"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/total_quantity"
                 android:gravity="end"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="40dp"
                 />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/total_line"
+                android:background="@color/white"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@id/total_quantity"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/balance"
+                android:id="@+id/total"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/total_line"
+                android:layout_marginTop="15dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="$247"
+                android:id="@+id/total_text"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@id/total"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="15dp"
+                android:gravity="end"
+                android:layout_below="@id/total_line"
+                android:layout_alignParentEnd="true"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/white"
+                android:layout_below="@id/total_text"
+                android:id="@+id/total_line2"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/proceed"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_ripple"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:layout_below="@id/total_line2">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="PROCEED"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_color" />
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/proceed_progress"
+                    android:visibility="gone"
+                    android:layout_gravity="end"/>
+
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>
 
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
 </RelativeLayout>
-</androidx.core.widget.NestedScrollView>

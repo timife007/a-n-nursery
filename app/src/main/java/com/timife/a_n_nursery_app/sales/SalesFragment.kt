@@ -82,6 +82,8 @@ class SalesFragment : Fragment() {
                 activity.runOnUiThread {
                     val scanText = view.findViewById<TextView>(R.id.scan_text)
                     scanText.text = it.text
+
+
                 }
             }
 
