@@ -21,9 +21,9 @@ AndroidViewModel(application) {
     val updateVendorItem: LiveData<Resource<VendorItem>>
         get() = _updateVendorItem
 
-//    init {
-//        _selectedEdit.value = product
-//    }
+    init {
+        _selectedEdit.value = vendor
+    }
 
     fun updateVendorItem(
         vendorId: Int,

@@ -191,13 +191,13 @@
             android:name="selectedEditClassification"
             app:argType="com.timife.a_n_nursery_app.inventory.classifications.network.Classification" />
     </dialog>
-    <fragment
+    <dialog
         android:id="@+id/updateVendorDialog"
         android:name="com.timife.a_n_nursery_app.vendor.UpdateVendorDialog"
         android:label="UpdateVendorDialog" >
         <argument
             android:name="selectedEditVendor"
             app:argType="com.timife.a_n_nursery_app.vendor.response.VendorItem"/>
-    </fragment>
+    </dialog>
 
 </navigation>

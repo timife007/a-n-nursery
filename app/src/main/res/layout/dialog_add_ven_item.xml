@@ -165,7 +165,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="34dp"
                 android:layout_marginEnd="34dp"
-                android:hint="Type"
+                android:hint="@string/type"
                 app:boxCornerRadiusBottomEnd="7dp"
                 app:boxCornerRadiusBottomStart="7dp"
                 app:boxCornerRadiusTopEnd="7dp"

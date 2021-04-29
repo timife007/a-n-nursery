@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
-        android:layout_height="446dp"
+        android:layout_height="250dp"
         app:autoFocusButtonColor="@android:color/white"
         app:autoFocusButtonVisible="true"
         app:flashButtonColor="@android:color/white"
         app:flashButtonVisible="true"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="45dp"
         android:background="@drawable/rounded_corner_shape"
-        android:layout_margin="40dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginTop="20dp"
         app:frameColor="#FF0000"
         app:frameCornersSize="50dp"
         app:frameCornersRadius="30dp"
@@ -27,13 +30,111 @@
         app:maskColor="#77000000"/>
 
     <TextView
+        android:id="@+id/scan_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/scanner_view"
-        android:text="Scan something..."
-        android:id="@+id/scan_text"
-        android:textSize="20sp"
-        android:textColor="@color/black"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"/>
+        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Scan something..."
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scanner_recycler"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@id/scan_text"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/scanner_recycler"
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="Summary"
+                android:id="@+id/summary_title"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:id="@+id/title_liner"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@id/summary_title"
+                android:background="@color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Total Amount"
+                android:id="@+id/total_amount"
+                android:layout_below="@id/title_liner"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="$66"
+                android:id="@+id/amount_text"
+                android:textColor="@color/white"
+                android:layout_below="@id/title_liner"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/total_amount"
+                android:gravity="end"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Total Quantity"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:id="@+id/total_quantity"
+                android:layout_below="@id/total_amount"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="18"
+                android:textColor="@color/white"
+                android:layout_below="@id/amount_text"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/total_quantity"
+                android:gravity="end"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                />
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
