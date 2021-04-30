@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
@@ -17,6 +18,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentSalesBinding
 import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationApi
@@ -88,7 +90,19 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread {
                     val scanText = view.findViewById<TextView>(R.id.scan_text)
-                    scanText.text = it.text
+                    scanText.text = it.toString()
+
+                    binding.fetchButton.setOnClickListener {
+                        viewModel.searchByBarcode(scanText.text.toString())
+
+//                        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
+//                            when(it){
+//                                is Resource.Success ->
+//
+//                            }
+//                        })
+                    }
+
 
 
                 }

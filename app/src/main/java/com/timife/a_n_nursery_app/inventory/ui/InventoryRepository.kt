@@ -143,6 +143,4 @@ class InventoryRepository(private val api: InventoryApi,private val database: Ca
                 InventoryPagingSource(api, searchQuery)
             }
         ).liveData
-
-
 }
