@@ -57,7 +57,7 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
         val barDataSet2 = BarDataSet(barEntries4(), "DataSet 2")
         barDataSet2.color = ColorTemplate.rgb("#b19cd9")
         val data = BarData(barDataSet1, barDataSet2)
-        _transactionsBar.value = data
+//        _transactionsBar.value = data
 
     }
 
@@ -86,7 +86,8 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
         val barDataSet2 = BarDataSet(barEntries2(), "DataSet 2")
         barDataSet2.color = ColorTemplate.rgb("#CD801F")
         val data = BarData(barDataSet1, barDataSet2)
-        _salesBar.value = data
+//        _salesBar.value = data
+//        _salesBar.postValue(data)
 
     }
 
@@ -108,7 +109,7 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
         val pieDataSet = PieDataSet(dataVals, "Series PieChart")
         pieDataSet.colors = colorClassArray
         val pieData = PieData(pieDataSet)
-        _pieChart.value = pieData
+//        _pieChart.value = pieData
         return dataVals
 
     }

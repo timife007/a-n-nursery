@@ -17,13 +17,20 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.base.BaseFragment
+import com.timife.a_n_nursery_app.databinding.FragmentSalesBinding
+import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationApi
+import com.timife.a_n_nursery_app.inventory.classifications.ui.ClassificationRepository
+import com.timife.a_n_nursery_app.sales.network.SalesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 
 private const val CAMERA_REQUEST_CODE = 101
-class SalesFragment : Fragment() {
+class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepository>() {
     private lateinit var codeScanner : CodeScanner
 
-    private lateinit var viewModel: SalesViewModel
+//    private lateinit var viewModel: SalesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +65,7 @@ class SalesFragment : Fragment() {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED){
                     Toast.makeText(requireContext(),"You need the camera permission to be able to scan",
                         Toast.LENGTH_SHORT).show()
-                }else {
+                }else{
                     //
                 }
             }
@@ -105,14 +112,29 @@ class SalesFragment : Fragment() {
         codeScanner.releaseResources()
         super.onPause()
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
-    }
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//        viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.sales_menu,menu)
+    }
+
+    override fun getViewModel()= SalesViewModel::class.java
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    )= FragmentSalesBinding.inflate(inflater)
+
+    override fun getRepository(): SalesRepository {
+        val token = runBlocking { userPreferences.authToken.first() }
+        val api = retrofitClient.buildApi(SalesApi::class.java, token)
+//        val database = CategoryDatabase.invoke(requireContext())
+
+        return SalesRepository(api)
     }
 
 }

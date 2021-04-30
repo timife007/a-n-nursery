@@ -17,6 +17,8 @@ import com.timife.a_n_nursery_app.inventory.lots.ui.LotViewModel
 import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
 import com.timife.a_n_nursery_app.login.ui.auth.LoginRepository
 import com.timife.a_n_nursery_app.login.ui.auth.LoginViewModel
+import com.timife.a_n_nursery_app.sales.SalesRepository
+import com.timife.a_n_nursery_app.sales.SalesViewModel
 import com.timife.a_n_nursery_app.settings.SettingsRepository
 import com.timife.a_n_nursery_app.settings.SettingsViewModel
 import com.timife.a_n_nursery_app.settings.access_control.AccessControlRepository
@@ -55,6 +57,8 @@ class ViewModelFactory(
                 LotViewModel(repository as LotRepository) as T
             modelClass.isAssignableFrom(ClassificationViewModel::class.java) ->
                 ClassificationViewModel(repository as ClassificationRepository) as T
+            modelClass.isAssignableFrom(SalesViewModel::class.java) ->
+                SalesViewModel(repository as SalesRepository) as T
             else -> throw  IllegalArgumentException("ViewModelClass not found")
         }
     }
