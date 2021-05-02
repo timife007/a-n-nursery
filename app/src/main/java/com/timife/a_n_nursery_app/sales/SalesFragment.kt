@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
@@ -21,6 +22,7 @@ import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentSalesBinding
+import com.timife.a_n_nursery_app.enable
 import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationApi
 import com.timife.a_n_nursery_app.inventory.classifications.ui.ClassificationRepository
 import com.timife.a_n_nursery_app.sales.network.SalesApi
@@ -90,18 +92,38 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread {
                     val scanText = view.findViewById<TextView>(R.id.scan_text)
-                    scanText.text = it.toString()
+                    scanText.text = it.text
+                    if(scanText.text != null){
+                        binding.fetchButton.enable(true)
+                        binding.fetchButton.setOnClickListener {
+                            viewModel.searchByBarcode(scanText.text.toString())
 
-                    binding.fetchButton.setOnClickListener {
-                        viewModel.searchByBarcode(scanText.text.toString())
+                            viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
+                                when(it){
+                                    is Resource.Success ->{
+                                        binding.salesProgress.visibility = View.GONE
+                                        viewModel.navigateToScannedItem.observe(viewLifecycleOwner,
+                                            Observer {
+                                                this@SalesFragment.findNavController().navigate(
+                                                    SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(it)
+                                                )
+                                            })
+                                    }
 
-//                        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
-//                            when(it){
-//                                is Resource.Success ->
-//
-//                            }
-//                        })
+                                    is Resource.Failure ->{
+                                        binding.salesProgress.visibility = View.GONE
+                                        Toast.makeText(requireContext(),"Unable to fetch scanned item",Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    is Resource.Loading ->
+                                        binding.salesProgress.visibility = View.VISIBLE
+                                }
+                            })
+                        }
+                    }else{
+                        binding.fetchButton.enable(false)
                     }
+
 
 
 

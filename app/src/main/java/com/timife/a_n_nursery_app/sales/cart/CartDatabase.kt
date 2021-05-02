@@ -11,15 +11,15 @@ import androidx.room.RoomDatabase
     version = 1
 )
 abstract class CartDatabase: RoomDatabase() {
-    abstract fun cartDao():CartDao
+    abstract val cartDao:CartDao
 
     companion object{
         @Volatile
-        private var instance: CartDatabase? = null
-        private var LOCK = Any()
+        private var INSTANCE: CartDatabase? = null
+        private val LOCK = Any()
 
-        operator fun invoke(context: Context) =  instance ?: synchronized(LOCK){
-            instance ?: createDatabase(context).also{ instance = it}
+        operator fun invoke(context: Context) =  INSTANCE ?: synchronized(LOCK){
+            INSTANCE ?: createDatabase(context).also{ INSTANCE = it}
         }
 
         private fun createDatabase(context: Context)=

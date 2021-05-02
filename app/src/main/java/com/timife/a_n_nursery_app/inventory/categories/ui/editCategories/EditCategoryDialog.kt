@@ -59,7 +59,7 @@ class EditCategoryDialog: DialogFragment(){
                 viewModel.updateCategory.observe(viewLifecycleOwner){
                     when(it){
                         is Resource.Success -> {
-                            Toast.makeText(requireContext(),"Category Updated Successfully",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),"$it Updated Successfully",Toast.LENGTH_SHORT).show()
                             dismiss()
                         }
                         is Resource.Failure ->{

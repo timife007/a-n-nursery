@@ -26,7 +26,11 @@
         android:id="@+id/salesFragment"
         android:name="com.timife.a_n_nursery_app.sales.SalesFragment"
         android:label="Sales"
-        tools:layout="@layout/fragment_sales" />
+        tools:layout="@layout/fragment_sales" >
+        <action
+            android:id="@+id/action_salesFragment_to_salesBttmShtFragment"
+            app:destination="@id/salesBttmShtFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vendorFragment"
         android:name="com.timife.a_n_nursery_app.vendor.VendorFragment"
@@ -198,6 +202,14 @@
         <argument
             android:name="selectedEditVendor"
             app:argType="com.timife.a_n_nursery_app.vendor.response.VendorItem"/>
+    </dialog>
+    <dialog
+        android:id="@+id/salesBttmShtFragment"
+        android:name="com.timife.a_n_nursery_app.sales.SalesBttmShtFragment"
+        android:label="SalesBttmShtFragment" >
+        <argument
+            android:name="scannedProduct"
+            app:argType="com.timife.a_n_nursery_app.inventory.response.Inventory"/>
     </dialog>
 
 </navigation>

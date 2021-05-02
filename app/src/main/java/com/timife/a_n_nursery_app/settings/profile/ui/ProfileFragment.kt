@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.timife.a_n_nursery_app.R
@@ -36,7 +37,7 @@ class ProfileFragment :
 
 
         viewModel.getUserProfile()
-        viewModel.profile.observe(viewLifecycleOwner, {
+        viewModel.profile.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     binding.profileProgress.visible(false)
@@ -50,28 +51,28 @@ class ProfileFragment :
                 is Resource.Loading ->
                     binding.profileProgress.visible(true)
             }
-        })
+        }
 
 
-            viewModel.update.observe(viewLifecycleOwner,  {
-                binding.profileProgress.visible(it is Resource.Loading)
-                when(it){
-                    is Resource.Success ->{
-                        binding.profileProgress.visible(false)
-                        Toast.makeText(requireContext(),"Profile Successfully Updated!",Toast.LENGTH_SHORT).show()
-                        updateUI(it.value)
-                    }
-                    is Resource.Failure ->{
-                        handleApiError(it){
-                            updateProfile()
-                        }
-                        binding.profileProgress.visible(false)
-                    }
-                    is Resource.Loading ->{
-                        binding.profileProgress.visible(true)
-                    }
+        viewModel.update.observe(viewLifecycleOwner) {
+            binding.profileProgress.visible(it is Resource.Loading)
+            when(it){
+                is Resource.Success ->{
+                    binding.profileProgress.visible(false)
+                    Toast.makeText(requireContext(),"Profile Successfully Updated!",Toast.LENGTH_SHORT).show()
+                    updateUI(it.value)
                 }
-            })
+                is Resource.Failure ->{
+                    handleApiError(it){
+                        updateProfile()
+                    }
+                    binding.profileProgress.visible(false)
+                }
+                is Resource.Loading ->{
+                    binding.profileProgress.visible(true)
+                }
+            }
+        }
 
         binding.update.setOnClickListener {
             updateProfile()
