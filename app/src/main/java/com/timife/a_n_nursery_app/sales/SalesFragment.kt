@@ -36,14 +36,15 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
 
 //    private lateinit var viewModel: SalesViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        setUpPermissions()
-        setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_sales, container, false)
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        setUpPermissions()
+//        setHasOptionsMenu(true)
+//
+////        return inflater.inflate(R.layout.fragment_sales, container, false)
+//    }
 
     private fun setUpPermissions() {
         val permission = ContextCompat.checkSelfPermission(requireContext(),
@@ -78,6 +79,8 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpPermissions()
+//        binding
 
         val scannerView = view.findViewById<CodeScannerView>(R.id.scanner_view)
         val activity = requireActivity()
@@ -86,7 +89,7 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
             camera = CodeScanner.CAMERA_BACK
             formats = CodeScanner.ALL_FORMATS
             autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.CONTINUOUS
+            scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
             isFlashEnabled = false
             decodeCallback = DecodeCallback {
@@ -94,20 +97,15 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
                     val scanText = view.findViewById<TextView>(R.id.scan_text)
                     scanText.text = it.text
                     if(scanText.text != null){
-                        binding.fetchButton.enable(true)
-                        binding.fetchButton.setOnClickListener {
-                            viewModel.searchByBarcode(scanText.text.toString())
+                        viewModel.searchByBarcode(scanText.text.toString())
+
 
                             viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
                                 when(it){
                                     is Resource.Success ->{
+                                        binding.fetchButton.enable(true)
                                         binding.salesProgress.visibility = View.GONE
-                                        viewModel.navigateToScannedItem.observe(viewLifecycleOwner,
-                                            Observer {
-                                                this@SalesFragment.findNavController().navigate(
-                                                    SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(it)
-                                                )
-                                            })
+                                        Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
                                     }
 
                                     is Resource.Failure ->{
@@ -119,7 +117,18 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
                                         binding.salesProgress.visibility = View.VISIBLE
                                 }
                             })
-                        }
+
+                        viewModel.navigateToScannedItem.observe(viewLifecycleOwner,
+                            Observer {
+                                val scannedProduct = it
+                                binding.fetchButton.setOnClickListener {
+                                    viewModel.displayScannedItem(scannedProduct)
+                                }
+                                this@SalesFragment.findNavController().navigate(
+                                    SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(it)
+                                )
+
+                            })
                     }else{
                         binding.fetchButton.enable(false)
                     }

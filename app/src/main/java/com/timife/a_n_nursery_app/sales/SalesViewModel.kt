@@ -23,7 +23,7 @@ class SalesViewModel(private val salesRepository: SalesRepository) : BaseViewMod
 
 
     fun searchByBarcode(barcode_digit:String) = viewModelScope.launch {
-       salesRepository.searchByBarcode(barcode_digit)
+       _barcodeItem.value = salesRepository.searchByBarcode(barcode_digit)
     }
 
     fun displayScannedItem(inventory:Inventory)  {
