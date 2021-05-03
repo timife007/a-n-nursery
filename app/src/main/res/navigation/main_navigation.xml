@@ -206,7 +206,8 @@
     <dialog
         android:id="@+id/salesBttmShtFragment"
         android:name="com.timife.a_n_nursery_app.sales.SalesBttmShtFragment"
-        android:label="SalesBttmShtFragment" >
+        android:label="SalesBttmShtFragment"
+        tools:layout="@layout/sales_bttm_sht_fragment">
         <argument
             android:name="scannedProduct"
             app:argType="com.timife.a_n_nursery_app.inventory.response.Inventory"/>

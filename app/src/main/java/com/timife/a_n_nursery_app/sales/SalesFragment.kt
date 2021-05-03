@@ -103,7 +103,7 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
                             viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
                                 when(it){
                                     is Resource.Success ->{
-                                        binding.fetchButton.enable(true)
+//                                        binding.fetchButton.enable(true)
                                         binding.salesProgress.visibility = View.GONE
                                         Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
                                     }
@@ -129,10 +129,7 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
                                 )
 
                             })
-                    }else{
-                        binding.fetchButton.enable(false)
                     }
-
 
 
 
