@@ -1,5 +1,6 @@
 package com.timife.a_n_nursery_app.sales
 
+import android.content.Context
 import android.content.pm.PackageManager
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -25,14 +26,16 @@ import com.timife.a_n_nursery_app.databinding.FragmentSalesBinding
 import com.timife.a_n_nursery_app.enable
 import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationApi
 import com.timife.a_n_nursery_app.inventory.classifications.ui.ClassificationRepository
+import com.timife.a_n_nursery_app.inventory.response.Inventory
 import com.timife.a_n_nursery_app.sales.network.SalesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
 
 private const val CAMERA_REQUEST_CODE = 101
-class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepository>() {
-    private lateinit var codeScanner : CodeScanner
+
+class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRepository>() {
+    private lateinit var codeScanner: CodeScanner
 
 //    private lateinit var viewModel: SalesViewModel
 
@@ -47,17 +50,21 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
 //    }
 
     private fun setUpPermissions() {
-        val permission = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.CAMERA)
+        val permission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            android.Manifest.permission.CAMERA
+        )
 
-        if (permission != PackageManager.PERMISSION_GRANTED){
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest()
         }
     }
 
     private fun makeRequest() {
-        ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.CAMERA),
-            CAMERA_REQUEST_CODE)
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(android.Manifest.permission.CAMERA),
+            CAMERA_REQUEST_CODE
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -65,12 +72,14 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        when(requestCode){
-            CAMERA_REQUEST_CODE ->{
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(requireContext(),"You need the camera permission to be able to scan",
-                        Toast.LENGTH_SHORT).show()
-                }else{
+        when (requestCode) {
+            CAMERA_REQUEST_CODE -> {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(
+                        requireContext(), "You need the camera permission to be able to scan",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
                     //
                 }
             }
@@ -96,48 +105,66 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
                 activity.runOnUiThread {
                     val scanText = view.findViewById<TextView>(R.id.scan_text)
                     scanText.text = it.text
-                    if(scanText.text != null){
+                    if (scanText.text != null) {
                         viewModel.searchByBarcode(scanText.text.toString())
-
-
-                            viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
-                                when(it){
-                                    is Resource.Success ->{
+                        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
+                            when (it) {
+                                is Resource.Success -> {
 //                                        binding.fetchButton.enable(true)
-                                        binding.salesProgress.visibility = View.GONE
-                                        Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
-                                    }
-
-                                    is Resource.Failure ->{
-                                        binding.salesProgress.visibility = View.GONE
-                                        Toast.makeText(requireContext(),"Unable to fetch scanned item",Toast.LENGTH_SHORT).show()
-                                    }
-
-                                    is Resource.Loading ->
-                                        binding.salesProgress.visibility = View.VISIBLE
+                                    binding.salesProgress.visibility = View.GONE
+                                    Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT)
+                                        .show()
+                                    val inventory = Inventory(
+                                        it.value.results[0].barcode_digit,
+                                        it.value.results[0].barcode_url,
+                                        it.value.results[0].botanical_name,
+                                        it.value.results[0].category,
+                                        it.value.results[0].classification,
+                                        it.value.results[0].color,
+                                        it.value.results[0].cost,
+                                        it.value.results[0].created,
+                                        it.value.results[0].id,
+                                        it.value.results[0].image,
+                                        it.value.results[0].location,
+                                        it.value.results[0].lot,
+                                        it.value.results[0].name,
+                                        it.value.results[0].price,
+                                        it.value.results[0].quantity,
+                                        it.value.results[0].size,
+                                        it.value.results[0].updated
+                                    )
+                                    this@SalesFragment.findNavController().navigate(
+                                        SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(
+                                            inventory
+                                        )
+                                    )
                                 }
-                            })
 
-                        viewModel.navigateToScannedItem.observe(viewLifecycleOwner,
-                            Observer {
-                                val scannedProduct = it
-                                binding.fetchButton.setOnClickListener {
-                                    viewModel.displayScannedItem(scannedProduct)
+                                is Resource.Failure -> {
+                                    binding.salesProgress.visibility = View.GONE
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Unable to fetch scanned item",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                                this@SalesFragment.findNavController().navigate(
-                                    SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(it)
-                                )
 
-                            })
+                                is Resource.Loading ->
+                                    binding.salesProgress.visibility = View.VISIBLE
+                            }
+                        })
+                        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
+                            val scannedProduct = it
+                            binding.fetchButton.setOnClickListener {
+                                viewModel.displayScannedItem(scannedProduct)
+                            }
+                        })
                     }
-
-
-
                 }
             }
 
             errorCallback = ErrorCallback {
-                Log.e("Main","Camera initialization error:${it.message}")
+                Log.e("Main", "Camera initialization error:${it.message}")
             }
         }
         scannerView.setOnClickListener {
@@ -161,15 +188,15 @@ class SalesFragment : BaseFragment<SalesViewModel,FragmentSalesBinding,SalesRepo
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.sales_menu,menu)
+        inflater.inflate(R.menu.sales_menu, menu)
     }
 
-    override fun getViewModel()= SalesViewModel::class.java
+    override fun getViewModel() = SalesViewModel::class.java
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    )= FragmentSalesBinding.inflate(inflater)
+    ) = FragmentSalesBinding.inflate(inflater)
 
     override fun getRepository(): SalesRepository {
         val token = runBlocking { userPreferences.authToken.first() }
