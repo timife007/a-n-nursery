@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="30dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".sales.cart.CartFragment">
 
@@ -20,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 tools:listitem="@layout/cart_item"
-                android:id="@+id/scanner_recycler"
+                android:id="@+id/cart_recycler"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"/>
@@ -29,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/summary_card"
                 android:paddingBottom="15dp"
-                android:layout_below="@id/scanner_recycler"
+                android:layout_below="@id/cart_recycler"
                 app:cardBackgroundColor="@color/primary_color"
                 app:cardCornerRadius="10dp"
                 android:layout_marginStart="20dp"

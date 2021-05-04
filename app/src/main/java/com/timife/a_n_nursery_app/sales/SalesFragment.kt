@@ -131,13 +131,9 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                                     binding.salesProgress.visibility = View.VISIBLE
                             }
                         })
-                        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
-                            val scannedProduct = it
-                            binding.fetchButton.setOnClickListener {
-                                viewModel.displayScannedItem(scannedProduct)
-                            }
-                        })
+                     
                     }
+
                 }
             }
 
@@ -147,6 +143,17 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
         }
         scannerView.setOnClickListener {
             codeScanner.startPreview()
+        }
+
+        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
+            val scannedProduct = it
+            binding.fetchButton.setOnClickListener {
+                viewModel.displayScannedItem(scannedProduct)
+            }
+        })
+
+        binding.cartFab.setOnClickListener {
+            this
         }
     }
 

@@ -212,5 +212,10 @@
             android:name="scannedProduct"
             app:argType="com.timife.a_n_nursery_app.inventory.response.Inventory"/>
     </dialog>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.timife.a_n_nursery_app.sales.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 
 </navigation>

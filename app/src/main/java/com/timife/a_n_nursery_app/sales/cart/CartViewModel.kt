@@ -9,6 +9,10 @@ class CartViewModel(
     private val cartRepository: CartRepository
 ): ViewModel() {
 
-fun getAllCartItems()=
+    fun getAllCartItems()=
     cartRepository.getAllCartItems()
+
+    fun upsert(item:CartItem) = CoroutineScope(Dispatchers.Main).launch {
+        cartRepository.upsert(item)
+    }
 }

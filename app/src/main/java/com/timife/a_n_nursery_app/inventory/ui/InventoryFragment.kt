@@ -70,10 +70,12 @@ class InventoryFragment :
 
         viewModel.result.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
+            adapter.notifyDataSetChanged()
         }
 
         viewModel.filter.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
+            adapter.notifyDataSetChanged()
         }
 
         viewModel.category.observe(viewLifecycleOwner) {
