@@ -13,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp"
         tools:context=".sales.SalesBttmShtFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -59,12 +60,12 @@
             android:id="@+id/size_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
             android:layout_marginTop="19dp"
             android:text="@string/size"
             android:textColor="@color/black"
             android:textSize="19sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/property_line"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_name" />
 
@@ -73,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
-            android:layout_marginEnd="96dp"
+            app:layout_constraintStart_toEndOf="@id/property_line"
             android:text="@string/quantity"
             android:textColor="@color/black"
             android:textSize="19sp"
@@ -85,12 +86,12 @@
             android:id="@+id/size_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@{viewModel.scannedProduct.size}"
             android:textColor="@color/black"
             android:textSize="19sp"
+            app:layout_constraintEnd_toStartOf="@id/property_line"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/size_title" />
 
@@ -99,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="124dp"
+            app:layout_constraintStart_toEndOf="@id/property_line"
             android:gravity="center"
             android:text="1"
             android:textColor="@color/black"
@@ -137,26 +138,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:text="$"
-            app:layout_constraintEnd_toStartOf="@id/item_price"
             android:textColor="#37B34A"
             android:textSize="61sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/add_cart_btn"
+            app:layout_constraintEnd_toStartOf="@id/item_price"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/value_title"
-            app:layout_constraintVertical_bias="0.509"
-            tools:layout_editor_absoluteX="117dp" />
+            app:layout_constraintVertical_bias="0.509" />
 
         <TextView
             android:id="@+id/item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="116dp"
             android:text="6.78"
             android:textColor="#37B34A"
             android:textSize="61sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/dollar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/dollar"
             app:layout_constraintVertical_bias="0.0" />
 

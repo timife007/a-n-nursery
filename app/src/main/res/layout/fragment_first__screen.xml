@@ -23,7 +23,7 @@
             android:textColor="@color/primary_color"
             android:textSize="31sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.031"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,12 +31,12 @@
             android:id="@+id/check_inventory_note"
             android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="16dp"
             android:text="@string/now_you_can_order_for_fresh_seedlings_you_can_get_it_as_fast_as_possible"
             android:textColor="@color/primary_color"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
+            app:layout_constraintHorizontal_bias="0.222"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/check_inventory" />
 
@@ -44,6 +44,8 @@
             android:id="@+id/check_inventory_image"
             android:layout_width="match_parent"
             android:layout_height="245dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
             android:contentDescription="@string/check_inventory"
             android:src="@drawable/first_onboard"
             app:layout_constraintBottom_toBottomOf="parent"

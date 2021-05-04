@@ -66,14 +66,12 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                     id: Long
                 ) {
                     categoryId = categoryList[position].id
-                    Toast.makeText(requireContext(),"$categoryId",Toast.LENGTH_LONG).show()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
             }
-            Toast.makeText(requireContext(),"$it.value.",Toast.LENGTH_LONG).show()
         })
 
         binding.invCategoriesContainer.adapter = categoryAdapter
@@ -93,14 +91,12 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                     id: Long
                 ) {
                     lotId= lotsList[position].id
-                    Toast.makeText(requireContext(),"$lotId",Toast.LENGTH_LONG).show()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
             }
-            Toast.makeText(requireContext(),"$it.value.",Toast.LENGTH_LONG).show()
         }
         binding.lotContainer.adapter = lotAdapter
 
@@ -118,14 +114,12 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                     id: Long
                 ) {
                     locationId= locationList[position].id
-                    Toast.makeText(requireContext(),"$locationId",Toast.LENGTH_LONG).show()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
             }
-            Toast.makeText(requireContext(),"$it.value.",Toast.LENGTH_LONG).show()
         }
 
         binding.location1Container.adapter = locationAdapter
@@ -143,15 +137,12 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                     id: Long
                 ) {
                     classificationId= classificationList[position].id
-                    Toast.makeText(requireContext(),"$classificationId",Toast.LENGTH_LONG).show()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
             }
-
-            Toast.makeText(requireContext(), "$it.value.", Toast.LENGTH_LONG).show()
         }
 
         binding.classificationContainer.adapter = classificationAdapter

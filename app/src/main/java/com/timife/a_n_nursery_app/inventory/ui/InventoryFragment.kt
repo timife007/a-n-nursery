@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import com.google.android.material.chip.Chip
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
@@ -31,7 +30,6 @@ import kotlinx.coroutines.runBlocking
 class InventoryFragment :
     BaseFragment<InventoryViewModel, FragmentInventoryBinding, InventoryRepository>() {
     var swipeCount = 0
-    //    private lateinit var navController : NavController
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLocationItems()
@@ -43,14 +41,14 @@ class InventoryFragment :
 
         val adapter = InventAdapter(requireContext(), InventAdapter.OnClickListener {
             viewModel.displayProductDetails(it)
-        },InventAdapter.OnDeleteListener{
+        }, InventAdapter.OnDeleteListener {
             viewModel.deleteInventoryItem(it)
         })
 
 //        var data = PagingData
         binding.swipeRefreshInventory.setOnRefreshListener {
             swipeCount += 1
-            if (swipeCount > 0){
+            if (swipeCount > 0) {
                 viewModel.result.observe(viewLifecycleOwner) {
                     adapter.submitData(viewLifecycleOwner.lifecycle, it)
                 }
@@ -82,20 +80,18 @@ class InventoryFragment :
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    try{
+                    try {
                         val categoryList = it.value.results
                         categoryList.forEach {
                             val category = CategoryItem(it.id!!, it.name!!)
                             viewModel.upsert(listOf(category))
                         }
 
-                    }catch (e:Exception){
-                        Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -115,13 +111,11 @@ class InventoryFragment :
                             viewModel.upsertLocation(listOf(location))
                         }
 
-                    }catch (e:Exception){
-                        Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -141,13 +135,11 @@ class InventoryFragment :
                             viewModel.upsertLot(listOf(lot))
                         }
 
-                    }catch (e:Exception){
-                        Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -167,13 +159,11 @@ class InventoryFragment :
                             viewModel.upsertClassification(listOf(classification))
                         }
 
-                    }catch (e:Exception){
-                        Toast.makeText(requireContext(),"$e",Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
-    //                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -227,7 +217,6 @@ class InventoryFragment :
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(), "${it.value}", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
                     hideProgressBar()
@@ -307,11 +296,11 @@ class InventoryFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
 
             R.id.inv_add_items ->
                 this.findNavController().navigate(R.id.action_inventoryFragment_to_addItemsFragment)
-            
+
         }
         return true
     }
@@ -326,6 +315,6 @@ class InventoryFragment :
         val api = retrofitClient.buildApi(InventoryApi::class.java, token)
         val database = CategoryDatabase.invoke(requireContext())
 
-        return InventoryRepository(api,database)
+        return InventoryRepository(api, database)
     }
 }

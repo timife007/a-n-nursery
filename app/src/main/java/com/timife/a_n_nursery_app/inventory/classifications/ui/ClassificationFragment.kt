@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,8 @@ import com.timife.a_n_nursery_app.visible
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClassificationBinding, ClassificationRepository>(){
+class ClassificationFragment :
+    BaseFragment<ClassificationViewModel, FragmentClassificationBinding, ClassificationRepository>() {
 
     companion object {
         fun newInstance() = ClassificationFragment()
@@ -37,52 +37,54 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
         super.onViewCreated(view, savedInstanceState)
         viewModel.getClassificationItems()
 
-        binding.classificationRecycler.adapter = ClassificationAdapter(ClassificationAdapter.OnClickListener{
-            viewModel.displayEditClassification(it)
-        },ClassificationAdapter.OnDeleteListener{
-            viewModel.deleteClassification(it)
-        },requireContext())
+        binding.classificationRecycler.adapter =
+            ClassificationAdapter(ClassificationAdapter.OnClickListener {
+                viewModel.displayEditClassification(it)
+            }, ClassificationAdapter.OnDeleteListener {
+                viewModel.deleteClassification(it)
+            }, requireContext())
 
         viewModel.classification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                    when(it){
-                        is Resource.Success ->{
-                            hideProgressBar()
-                            bindRecyclerView(binding.classificationRecycler,it.value.results)
-                        }
-                        is Resource.Failure ->{
-                            hideProgressBar()
-                            handleApiError(it)
-                        }
-                        is Resource.Loading ->{
-                            showProgressBar()
-                        }
-                    }
-                })
-
-        viewModel.navigateToEditClassification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                    if (null != it) {
-                        this.findNavController()
-                    .navigate(
-                        AddItemsFragmentDirections.actionAddItemsFragmentToEditClassificationDialog(
-                            it
-                        )
-                    )
-                viewModel.displayClassificationEditComplete()
-            }
-        })
-
-        viewModel.saveClassification.observe(viewLifecycleOwner) { it->
-            binding.classificationProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(),"${it.value}", Toast.LENGTH_LONG).show()
+                    bindRecyclerView(binding.classificationRecycler, it.value.results)
                 }
                 is Resource.Failure -> {
                     hideProgressBar()
                     handleApiError(it)
                 }
-                is Resource.Loading ->{
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
+
+        viewModel.navigateToEditClassification.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                if (null != it) {
+                    this.findNavController()
+                        .navigate(
+                            AddItemsFragmentDirections.actionAddItemsFragmentToEditClassificationDialog(
+                                it
+                            )
+                        )
+                    viewModel.displayClassificationEditComplete()
+                }
+            })
+
+        viewModel.saveClassification.observe(viewLifecycleOwner) { it ->
+            binding.classificationProgress.visible(it is Resource.Loading)
+            when (it) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                }
+                is Resource.Failure -> {
+                    hideProgressBar()
+                    handleApiError(it)
+                }
+                is Resource.Loading -> {
                     showProgressBar()
                     binding.classificationProgress.visible(true)
                 }
@@ -90,11 +92,12 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
         }
 
         binding.addClassification.setOnClickListener {
-            val classificationDialogFragment = AddClassificationDialog(object : AddClassificationListener {
-                override fun onAddClassificationButtonClicked(classificationName: String) {
-                    viewModel.saveClassificationItem(classificationName)
-                }
-            })
+            val classificationDialogFragment =
+                AddClassificationDialog(object : AddClassificationListener {
+                    override fun onAddClassificationButtonClicked(classificationName: String) {
+                        viewModel.saveClassificationItem(classificationName)
+                    }
+                })
             classificationDialogFragment.show(requireActivity().supportFragmentManager, "signature")
         }
     }
@@ -107,18 +110,16 @@ class ClassificationFragment: BaseFragment<ClassificationViewModel, FragmentClas
         binding.classificationProgress.visibility = View.VISIBLE
     }
 
-    override fun getViewModel()= ClassificationViewModel::class.java
+    override fun getViewModel() = ClassificationViewModel::class.java
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    )= FragmentClassificationBinding.inflate(inflater)
+    ) = FragmentClassificationBinding.inflate(inflater)
 
     override fun getRepository(): ClassificationRepository {
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(ClassificationApi::class.java, token)
-//        val database = CategoryDatabase.invoke(requireContext())
-
         return ClassificationRepository(api)
     }
 

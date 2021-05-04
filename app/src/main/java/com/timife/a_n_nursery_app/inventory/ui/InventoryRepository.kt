@@ -38,12 +38,6 @@ class InventoryRepository(private val api: InventoryApi,private val database: Ca
         api.deleteInventoryItems(id)
     }
 
-
-//
-//    suspend fun delete(item: CategoryItem){
-//        database?.getCategoryDao?.delete(item)
-//    }
-//
     suspend fun insertUpdateAll(item:List<CategoryItem>){
         database.getCategoryDao.insertUpdateAll(item)
     }

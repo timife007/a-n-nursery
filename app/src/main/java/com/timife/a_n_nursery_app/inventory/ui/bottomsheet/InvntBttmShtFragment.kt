@@ -1,12 +1,12 @@
 package com.timife.a_n_nursery_app.inventory.ui.bottomsheet
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.downloader.Error
 import com.downloader.OnDownloadListener
@@ -18,7 +18,6 @@ import com.timife.a_n_nursery_app.inventory.BarcodeExtras
 
 class InvntBttmShtFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentInventBttmShtBinding
-
 
 
     override fun onCreateView(
@@ -35,7 +34,8 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
         binding.viewModel =
             ViewModelProvider(this, viewModelFactory).get(InvntBttmShtViewModel::class.java)
 
-        val viewModel = ViewModelProvider(this,viewModelFactory).get(InvntBttmShtViewModel::class.java)
+        val viewModel =
+            ViewModelProvider(this, viewModelFactory).get(InvntBttmShtViewModel::class.java)
 
         binding.editInventory.setOnClickListener {
             viewModel.displayProductEdit(product)
@@ -48,31 +48,42 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
         })
 
 
-       viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
-           Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
-             val barcodeUrl: String = it.barcode_url.toString()
-           val fileName = """${it.name}.pdf"""
-             binding.downloadBarcode.setOnClickListener {
-                 Toast.makeText(requireContext(), fileName,Toast.LENGTH_SHORT).show()
-                 binding.barcodeProgress.visibility = View.VISIBLE
-                 downloadPdfFromInternet(barcodeUrl,BarcodeExtras.getRootDirPath(requireContext()),fileName)
-             }
-         })
+        viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+            val barcodeUrl: String = it.barcode_url.toString()
+            val fileName = """${it.name}.pdf"""
+            binding.downloadBarcode.setOnClickListener {
+                binding.barcodeProgress.visibility = View.VISIBLE
+                downloadPdfFromInternet(
+                    barcodeUrl,
+                    BarcodeExtras.getRootDirPath(requireContext()),
+                    fileName
+                )
+            }
+        })
         return binding.root
     }
 
-    private fun downloadPdfFromInternet(url:String,dirPath:String,fileName:String?){
+    private fun downloadPdfFromInternet(url: String, dirPath: String, fileName: String?) {
         PRDownloader.download(
-            url,dirPath,fileName
-        ).build().start(object : OnDownloadListener{
+            url, dirPath, fileName
+        ).build().start(object : OnDownloadListener {
             override fun onDownloadComplete() {
                 binding.barcodeProgress.visibility = View.GONE
-                Toast.makeText(requireContext(),"BarCode successfully downloaded!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "BarCode successfully downloaded!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             override fun onError(error: Error?) {
                 binding.barcodeProgress.visibility = View.GONE
-                Toast.makeText(requireContext(),"Error in downloading file : $error",Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Error in downloading file : $error",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
         })

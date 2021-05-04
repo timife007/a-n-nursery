@@ -9,11 +9,13 @@ import com.timife.a_n_nursery_app.inventory.categories.network.Category
 import com.timife.a_n_nursery_app.inventory.categories.network.CategoryItems
 import kotlinx.coroutines.launch
 
-class CategoryViewModel (private val categoryRepository: CategoryRepository): BaseViewModel(categoryRepository) {
+class CategoryViewModel(private val categoryRepository: CategoryRepository) :
+    BaseViewModel(categoryRepository) {
 
     companion object {
 
     }
+
     // TODO: Implement the ViewModel
     private val _category: MutableLiveData<Resource<CategoryItems>> = MutableLiveData()
     val category: LiveData<Resource<CategoryItems>>
@@ -30,7 +32,7 @@ class CategoryViewModel (private val categoryRepository: CategoryRepository): Ba
         get() = _navigateToEditCategory
 
 
-    fun deleteCategoryItem(categoryId:Int) = viewModelScope.launch {
+    fun deleteCategoryItem(categoryId: Int) = viewModelScope.launch {
         categoryRepository.deleteCategory(categoryId)
     }
 
@@ -43,7 +45,7 @@ class CategoryViewModel (private val categoryRepository: CategoryRepository): Ba
         _saveCategory.value = categoryRepository.saveCategory(categoryName)
     }
 
-    fun displayEditCategory(category:Category)  {
+    fun displayEditCategory(category: Category) {
         _navigateToEditCategory.value = category
     }
 

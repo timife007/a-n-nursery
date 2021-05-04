@@ -8,10 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.DialogAddCategoryBinding
-import com.timife.a_n_nursery_app.databinding.DialogAddClassificationBinding
-import com.timife.a_n_nursery_app.inventory.classifications.ui.addClassifications.AddClassificationListener
 
-class AddCategoryDialog (var addCategoryListener: AddCategoryListener): DialogFragment() {
+class AddCategoryDialog(var addCategoryListener: AddCategoryListener) : DialogFragment() {
     private lateinit var binding: DialogAddCategoryBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,8 +23,9 @@ class AddCategoryDialog (var addCategoryListener: AddCategoryListener): DialogFr
         binding.createCategory.setOnClickListener {
             val name = binding.categoryName.text.toString()
 
-            if (name.isEmpty()){
-                Toast.makeText(requireContext(),"Please fill Information", Toast.LENGTH_SHORT).show()
+            if (name.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill Information", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
             addCategoryListener.onAddCategoryButtonClicked(

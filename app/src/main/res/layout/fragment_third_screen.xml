@@ -25,12 +25,13 @@
         android:id="@+id/order_note"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
         android:text="@string/now_you_can_order_for_fresh_seedlings_you_can_get_it_as_fast_as_possible"
         android:textColor="#757575"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/order" />
 
@@ -39,15 +40,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="14dp"
+        android:layout_marginBottom="156dp"
         android:contentDescription="@string/check_inventory"
         android:src="@drawable/third_screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintTop_toBottomOf="@+id/order_note" />
 
     <TextView
         android:id="@+id/skip"

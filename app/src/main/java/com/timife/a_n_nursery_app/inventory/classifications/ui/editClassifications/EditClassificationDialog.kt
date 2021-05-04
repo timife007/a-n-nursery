@@ -13,19 +13,17 @@ import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.UserPreferences
 import com.timife.a_n_nursery_app.databinding.DialogEditClassificationBinding
 import com.timife.a_n_nursery_app.handleApiError
-import com.timife.a_n_nursery_app.inventory.categories.network.CategoryApi
-import com.timife.a_n_nursery_app.inventory.categories.ui.CategoryRepository
 import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationApi
 import com.timife.a_n_nursery_app.inventory.classifications.ui.ClassificationRepository
 import com.timife.a_n_nursery_app.login.network.RetrofitClient
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class EditClassificationDialog: DialogFragment(){
+class EditClassificationDialog : DialogFragment() {
     private lateinit var userPreferences: UserPreferences
-    private val retrofitClient =  RetrofitClient()
+    private val retrofitClient = RetrofitClient()
     private lateinit var viewModel: EditClassificationViewModel
-    private lateinit var binding : DialogEditClassificationBinding
+    private lateinit var binding: DialogEditClassificationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,15 +34,21 @@ class EditClassificationDialog: DialogFragment(){
         val application = requireNotNull(activity).application
         binding = DialogEditClassificationBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        val classification = EditClassificationDialogArgs.fromBundle(requireArguments()).selectedEditClassification
-        val classificationId = EditClassificationDialogArgs.fromBundle(requireArguments()).selectedEditClassification.id
+        val classification =
+            EditClassificationDialogArgs.fromBundle(requireArguments()).selectedEditClassification
+        val classificationId =
+            EditClassificationDialogArgs.fromBundle(requireArguments()).selectedEditClassification.id
 
         //Dependency Injection needed
         userPreferences = UserPreferences(requireContext())
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(ClassificationApi::class.java, token)
         val classificationRepository = ClassificationRepository(api)
-        val viewModelFactory = EditClassificationViewModelFactory(classification, application,classificationRepository)
+        val viewModelFactory = EditClassificationViewModelFactory(
+            classification,
+            application,
+            classificationRepository
+        )
         binding.viewModel =
             ViewModelProvider(this, viewModelFactory).get(EditClassificationViewModel::class.java)
         viewModel =
@@ -56,17 +60,21 @@ class EditClassificationDialog: DialogFragment(){
 
 
             //Update check
-            viewModel.updateClassification.observe(viewLifecycleOwner){
-                when(it){
+            viewModel.updateClassification.observe(viewLifecycleOwner) {
+                when (it) {
                     is Resource.Success -> {
-                        Toast.makeText(requireContext(),"Classification Updated Successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Classification Updated Successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         dismiss()
                     }
-                    is Resource.Failure ->{
+                    is Resource.Failure -> {
                         handleApiError(it)
                     }
-                    is Resource.Loading ->{
-                        Toast.makeText(requireContext(),"Updating...", Toast.LENGTH_LONG).show()
+                    is Resource.Loading -> {
+                        Toast.makeText(requireContext(), "Updating...", Toast.LENGTH_LONG).show()
                     }
                 }
             }

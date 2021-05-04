@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
+    private lateinit var binding : FragmentCartBinding
 
-    companion object {
-        fun newInstance() = CartFragment()
-    }
 
     private lateinit var viewModel: CartViewModel
 
@@ -20,7 +20,13 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        val database = CartDatabase.invoke(requireContext())
+        val cartRepository = CartRepository(database)
+        val factory = CartViewModelFactory(cartRepository)
+        val viewModel = ViewModelProvider(this,factory).get(CartViewModel::class.java)
+
+        binding = FragmentCartBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

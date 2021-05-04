@@ -1,17 +1,13 @@
 package com.timife.a_n_nursery_app
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.os.Environment
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.BarChart
 import com.google.android.material.snackbar.Snackbar
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.login.ui.auth.LoginFragment
-import java.io.File
 
 fun <A : Activity> Activity.startNewActivity(activity: Class<A>) {
     Intent(this, activity).also {
@@ -20,8 +16,8 @@ fun <A : Activity> Activity.startNewActivity(activity: Class<A>) {
     }
 }
 
-class Constants{
-    companion object{
+class Constants {
+    companion object {
         const val QUERY_PAGE_SIZE = 15
     }
 }

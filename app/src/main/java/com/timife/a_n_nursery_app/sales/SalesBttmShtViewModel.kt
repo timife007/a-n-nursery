@@ -6,8 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.timife.a_n_nursery_app.inventory.response.Inventory
+import com.timife.a_n_nursery_app.sales.cart.CartItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class SalesBttmShtViewModel(product: Inventory, application: Application) : AndroidViewModel(application) {
+class SalesBttmShtViewModel(product: Inventory, application: Application,private val repository: SalesRepository) : AndroidViewModel(application) {
 
     private val _scannedProduct = MutableLiveData<Inventory>()
     val scannedProduct: LiveData<Inventory>
@@ -16,7 +20,8 @@ class SalesBttmShtViewModel(product: Inventory, application: Application) : Andr
     init {
         _scannedProduct.value = product
     }
-    // TODO: Implement the ViewModel
 
-
+    fun upsert(item:CartItem) = CoroutineScope(Dispatchers.Main).launch {
+        repository.upsert(item)
+    }
 }

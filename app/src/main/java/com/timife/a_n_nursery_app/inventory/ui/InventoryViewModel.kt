@@ -25,13 +25,10 @@ import kotlinx.coroutines.launch
 class InventoryViewModel(
     private val inventoryRepository: InventoryRepository
 ) : BaseViewModel(inventoryRepository) {
-//    init {
-//        getCategoryItems()
-//    }
 
     companion object {
         private const val DEFAULT_QUERY = ""
-        private const val  DEFAULT_FILTER = ""
+        private const val DEFAULT_FILTER = ""
     }
 
     private val currentFilter = MutableLiveData(
@@ -40,16 +37,16 @@ class InventoryViewModel(
     private val currentQuery = MutableLiveData(
         DEFAULT_QUERY
     )
-    val   result = currentQuery.switchMap { queryString ->
+    val result = currentQuery.switchMap { queryString ->
         inventoryRepository.getSearchResults(queryString).cachedIn(viewModelScope)
     }
 
     val filter = currentFilter.switchMap { categoryString ->
-       inventoryRepository.getFilterResults(categoryString).cachedIn(viewModelScope)
-}
+        inventoryRepository.getFilterResults(categoryString).cachedIn(viewModelScope)
+    }
 
 
-    fun getSearchInventory (searchQuery: String){
+    fun getSearchInventory(searchQuery: String) {
         currentQuery.value = searchQuery
     }
 
@@ -58,19 +55,19 @@ class InventoryViewModel(
     }
 
     private val _category: MutableLiveData<Resource<CategoryItems>> = MutableLiveData()
-    val category:LiveData<Resource<CategoryItems>>
-    get() = _category
+    val category: LiveData<Resource<CategoryItems>>
+        get() = _category
 
     private val _location: MutableLiveData<Resource<LocationItems>> = MutableLiveData()
-    val location : LiveData<Resource<LocationItems>>
-    get() = _location
+    val location: LiveData<Resource<LocationItems>>
+        get() = _location
 
     private val _classification: MutableLiveData<Resource<ClassificationItems>> = MutableLiveData()
-    val classification : LiveData<Resource<ClassificationItems>>
+    val classification: LiveData<Resource<ClassificationItems>>
         get() = _classification
 
     private val _lots: MutableLiveData<Resource<LotItems>> = MutableLiveData()
-    val lots : LiveData<Resource<LotItems>>
+    val lots: LiveData<Resource<LotItems>>
         get() = _lots
 
 
@@ -88,7 +85,7 @@ class InventoryViewModel(
         _location.value = inventoryRepository.getLocations()
     }
 
-     fun getCategoryItems() = viewModelScope.launch {
+    fun getCategoryItems() = viewModelScope.launch {
         _category.value = inventoryRepository.getCategory()
     }
 
@@ -100,26 +97,26 @@ class InventoryViewModel(
         _lots.value = inventoryRepository.getlots()
     }
 
-    fun upsert(item: List<CategoryItem>){
+    fun upsert(item: List<CategoryItem>) {
         CoroutineScope(Dispatchers.Main).launch {  //Using .main because room already provides main safety
             inventoryRepository.insertUpdateAll(item)
         }
     }
 
 
-    fun upsertLot(item: List<LotItem>){
+    fun upsertLot(item: List<LotItem>) {
         CoroutineScope(Dispatchers.Main).launch {  //Using .main because room already provides main safety
             inventoryRepository.insertUpdateAllLots(item)
         }
     }
 
-    fun upsertLocation(item: List<LocationItem>){
+    fun upsertLocation(item: List<LocationItem>) {
         CoroutineScope(Dispatchers.Main).launch {  //Using .main because room already provides main safety
             inventoryRepository.insertUpdateAllLocations(item)
         }
     }
 
-    fun upsertClassification(item: List<ClassificationItem>){
+    fun upsertClassification(item: List<ClassificationItem>) {
         CoroutineScope(Dispatchers.Main).launch {  //Using .main because room already provides main safety
             inventoryRepository.insertUpdateAllClassifications(item)
         }
@@ -160,11 +157,11 @@ class InventoryViewModel(
         )
     }
 
-    fun deleteInventoryItem(productId:Int)= viewModelScope.launch {
+    fun deleteInventoryItem(productId: Int) = viewModelScope.launch {
         inventoryRepository.deleteInventoryProduct(productId)
     }
 
-    fun displayProductDetails(product: Inventory){
+    fun displayProductDetails(product: Inventory) {
         _navigateToSelectedProduct.value = product
     }
 

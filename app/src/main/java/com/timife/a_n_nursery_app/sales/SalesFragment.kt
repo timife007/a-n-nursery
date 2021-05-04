@@ -1,8 +1,6 @@
 package com.timife.a_n_nursery_app.sales
 
-import android.content.Context
 import android.content.pm.PackageManager
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,23 +8,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import com.budiyev.android.codescanner.*
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentSalesBinding
-import com.timife.a_n_nursery_app.enable
-import com.timife.a_n_nursery_app.inventory.classifications.network.ClassificationApi
-import com.timife.a_n_nursery_app.inventory.classifications.ui.ClassificationRepository
 import com.timife.a_n_nursery_app.inventory.response.Inventory
+import com.timife.a_n_nursery_app.sales.cart.CartDatabase
 import com.timife.a_n_nursery_app.sales.network.SalesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -37,17 +28,6 @@ private const val CAMERA_REQUEST_CODE = 101
 class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRepository>() {
     private lateinit var codeScanner: CodeScanner
 
-//    private lateinit var viewModel: SalesViewModel
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        setUpPermissions()
-//        setHasOptionsMenu(true)
-//
-////        return inflater.inflate(R.layout.fragment_sales, container, false)
-//    }
 
     private fun setUpPermissions() {
         val permission = ContextCompat.checkSelfPermission(
@@ -79,8 +59,6 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                         requireContext(), "You need the camera permission to be able to scan",
                         Toast.LENGTH_SHORT
                     ).show()
-                } else {
-                    //
                 }
             }
         }
@@ -89,8 +67,6 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpPermissions()
-//        binding
-
         val scannerView = view.findViewById<CodeScannerView>(R.id.scanner_view)
         val activity = requireActivity()
         codeScanner = CodeScanner(activity, scannerView)
@@ -110,10 +86,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                         viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
                             when (it) {
                                 is Resource.Success -> {
-//                                        binding.fetchButton.enable(true)
                                     binding.salesProgress.visibility = View.GONE
-                                    Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT)
-                                        .show()
                                     val inventory = Inventory(
                                         it.value.results[0].barcode_digit,
                                         it.value.results[0].barcode_url,
@@ -133,11 +106,16 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                                         it.value.results[0].size,
                                         it.value.results[0].updated
                                     )
-                                    this@SalesFragment.findNavController().navigate(
-                                        SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(
-                                            inventory
+                                    if (
+                                        NavHostFragment.findNavController(this@SalesFragment).currentDestination?.id == R.id.salesFragment
+                                    ) {
+                                        this@SalesFragment.findNavController().navigate(
+                                            SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(
+                                                inventory
+                                            )
                                         )
-                                    )
+
+                                    }
                                 }
 
                                 is Resource.Failure -> {
@@ -181,10 +159,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
         codeScanner.releaseResources()
         super.onPause()
     }
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
-//    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -201,9 +176,9 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
     override fun getRepository(): SalesRepository {
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(SalesApi::class.java, token)
-//        val database = CategoryDatabase.invoke(requireContext())
+        val database = CartDatabase.invoke(requireContext())
 
-        return SalesRepository(api)
+        return SalesRepository(api,database)
     }
 
 }

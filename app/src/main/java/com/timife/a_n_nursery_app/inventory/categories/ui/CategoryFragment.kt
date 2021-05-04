@@ -22,8 +22,8 @@ import com.timife.a_n_nursery_app.visible
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding, CategoryRepository>(){
-//    private lateinit var data : List<Category>
+class CategoryFragment :
+    BaseFragment<CategoryViewModel, FragmentCategoryBinding, CategoryRepository>() {
 
     companion object {
         fun newInstance() = CategoryFragment()
@@ -40,12 +40,10 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCategoryItems()
 
-        val adapter = CategoryAdapter(CategoryAdapter.OnClickListener{
+        val adapter = CategoryAdapter(CategoryAdapter.OnClickListener {
             viewModel.displayEditCategory(it)
-            Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
-        }, CategoryAdapter.OnDeleteListener{
+        }, CategoryAdapter.OnDeleteListener {
             viewModel.deleteCategoryItem(it)
-            Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
         }, requireContext())
 
         binding.categoryRecycler.adapter = adapter
@@ -54,9 +52,8 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
         binding.swipeRefreshCategory.setOnRefreshListener {
             swipeCount += 1
 
-            if (swipeCount > 0){
+            if (swipeCount > 0) {
                 adapter.submitList(data)
-//                adapter.notifyDataSetChanged()
             }
             binding.swipeRefreshCategory.isRefreshing = false
         }
@@ -64,17 +61,17 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
 
 
         viewModel.category.observe(viewLifecycleOwner, Observer {
-            when(it){
-                is Resource.Success ->{
+            when (it) {
+                is Resource.Success -> {
                     hideProgressBar()
-                    bindRecyclerView(binding.categoryRecycler,it.value.results)
+                    bindRecyclerView(binding.categoryRecycler, it.value.results)
 
                 }
-                is Resource.Failure ->{
+                is Resource.Failure -> {
                     hideProgressBar()
                     handleApiError(it)
                 }
-                is Resource.Loading ->{
+                is Resource.Loading -> {
                     showProgressBar()
                 }
             }
@@ -97,13 +94,12 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(),"${it.value}", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
                     hideProgressBar()
                     handleApiError(it)
                 }
-                is Resource.Loading ->{
+                is Resource.Loading -> {
                     showProgressBar()
                     binding.categoryProgress.visible(true)
                 }
@@ -124,21 +120,19 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
     }
 
     private fun showProgressBar() {
-        binding.categoryProgress?.visibility = View.VISIBLE
+        binding.categoryProgress.visibility = View.VISIBLE
     }
 
-    override fun getViewModel()= CategoryViewModel::class.java
+    override fun getViewModel() = CategoryViewModel::class.java
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    )= FragmentCategoryBinding.inflate(inflater)
+    ) = FragmentCategoryBinding.inflate(inflater)
 
     override fun getRepository(): CategoryRepository {
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(CategoryApi::class.java, token)
-//        val database = CategoryDatabase.invoke(requireContext())
-
         return CategoryRepository(api)
     }
 

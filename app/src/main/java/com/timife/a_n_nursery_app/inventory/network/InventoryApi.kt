@@ -20,14 +20,14 @@ interface InventoryApi {
 
     @GET("/lots/")
     suspend fun getLots(
-    ):LotItems
+    ): LotItems
 
     @GET("/classifications/")
     suspend fun getClassification(
-    ):ClassificationItems
+    ): ClassificationItems
 
     //Search api interface
-    @GET("/product/list/") 
+    @GET("/product/list/")
     suspend fun getSearchInventory(
         @Query("name")
         searchQuery: String?,
@@ -47,7 +47,7 @@ interface InventoryApi {
     @DELETE("/products/{id}/")
     suspend fun deleteInventoryItems(
         @Path("id")
-        deleteId:Int?
+        deleteId: Int?
     )
 
 
@@ -82,5 +82,5 @@ interface InventoryApi {
         @Field("location.name") location: String,
         @Field("quantity") quantity: Int,
         @Field("category.name") category: String
-    ):Inventory
+    ): Inventory
 }
