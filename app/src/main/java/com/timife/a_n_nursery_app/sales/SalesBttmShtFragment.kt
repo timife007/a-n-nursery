@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.timife.a_n_nursery_app.R
@@ -40,19 +42,42 @@ class SalesBttmShtFragment : BottomSheetDialogFragment() {
         val viewModelFactory = SalesViewModelFactory(product, application,repository)
         binding.viewModel =
             ViewModelProvider(this, viewModelFactory).get(SalesBttmShtViewModel::class.java)
+        val viewModel = ViewModelProvider(this,viewModelFactory).get(SalesBttmShtViewModel::class.java)
         binding.itemPrice.text = productPrice
 
         val productName = SalesBttmShtFragmentArgs.fromBundle(requireArguments()).scannedProduct.name
         val productSize =
             SalesBttmShtFragmentArgs.fromBundle(requireArguments()).scannedProduct.size
-        val productQuantity =
-            SalesBttmShtFragmentArgs.fromBundle(requireArguments()).scannedProduct.quantity
+        val productQuantity = 0
+        val productId = SalesBttmShtFragmentArgs.fromBundle(requireArguments()).scannedProduct.id
+
+        val scannedItem = CartItem(
+            productId,productName,productSize,productQuantity,productPrice
+        )
+
+        fun addItem(cartItem: CartItem){
+            val carter : MutableList<CartItem> = mutableListOf()
+            val targetItem = carter.singleOrNull{
+                it.id == cartItem.id
+            }
+            if (targetItem == null){
+                cartItem.quantity++
+                viewModel.upsert(cartItem)
+            }else{
+                targetItem.quantity++
+            }
+        }
 
         binding.addCartBtn.setOnClickListener {
-            val cartItem = CartItem(
-                productName,productSize,productQuantity,productPrice
-            )
-            binding.viewModel.upsert(cartItem)
+//            if( )
+//            viewModel.upsert(cartItem)
+            addItem(scannedItem)
+
+
+//            viewModel.getAllCartItems().observe(viewLifecycleOwner, Observer {
+//                Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
+//            })
+
             dismiss()
         }
 

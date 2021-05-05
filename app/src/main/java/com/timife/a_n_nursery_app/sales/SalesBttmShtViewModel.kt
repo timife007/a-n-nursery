@@ -24,4 +24,10 @@ class SalesBttmShtViewModel(product: Inventory, application: Application,private
     fun upsert(item:CartItem) = CoroutineScope(Dispatchers.Main).launch {
         repository.upsert(item)
     }
+
+
+    fun getAllCartItems()=
+        repository.getAllCartItems()
+
+
 }

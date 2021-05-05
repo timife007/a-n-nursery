@@ -153,7 +153,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
         })
 
         binding.cartFab.setOnClickListener {
-            this
+            this.findNavController().navigate(R.id.action_salesFragment_to_cartFragment)
         }
     }
 

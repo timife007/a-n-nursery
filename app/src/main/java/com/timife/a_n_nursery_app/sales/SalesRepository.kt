@@ -14,4 +14,7 @@ class SalesRepository(private val api: SalesApi,private val database: CartDataba
 
     suspend fun upsert(item:CartItem) = database.cartDao.upsertCartItem(item)
 
+    fun getAllCartItems() = database.cartDao.getAllCartItems()
+
+
 }

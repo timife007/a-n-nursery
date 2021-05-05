@@ -21,6 +21,7 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentCartBinding.inflate(inflater)
         val database = CartDatabase.invoke(requireContext())
         val cartRepository = CartRepository(database)
         val factory = CartViewModelFactory(cartRepository)
@@ -33,14 +34,6 @@ class CartFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
 
-        binding = FragmentCartBinding.inflate(inflater)
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [CartItem::class],
-    version = 1
+    version = 2
 )
 abstract class CartDatabase: RoomDatabase() {
     abstract val cartDao:CartDao
