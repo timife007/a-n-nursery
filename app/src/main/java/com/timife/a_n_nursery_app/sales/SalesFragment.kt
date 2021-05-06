@@ -97,7 +97,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
             codeScanner.startPreview()
         }
 
-        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
+        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer{
             when (it) {
                 is Resource.Success -> {
                     binding.salesProgress.visibility = View.GONE
