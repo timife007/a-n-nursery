@@ -56,16 +56,7 @@ class SalesBttmShtFragment : BottomSheetDialogFragment() {
         )
 
         fun addItem(cartItem: CartItem){
-            val carter : MutableList<CartItem> = mutableListOf()
-            val targetItem = carter.singleOrNull{
-                it.id == cartItem.id
-            }
-            if (targetItem == null){
-                cartItem.quantity++
-                viewModel.upsert(cartItem)
-            }else{
-                targetItem.quantity++
-            }
+            viewModel.upsert(cartItem)
         }
 
         binding.addCartBtn.setOnClickListener {

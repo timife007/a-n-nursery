@@ -16,6 +16,7 @@ import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.databinding.FragmentSalesBinding
+import com.timife.a_n_nursery_app.databinding.SalesBttmShtFragmentBinding
 import com.timife.a_n_nursery_app.inventory.response.Inventory
 import com.timife.a_n_nursery_app.sales.cart.CartDatabase
 import com.timife.a_n_nursery_app.sales.network.SalesApi
@@ -27,7 +28,6 @@ private const val CAMERA_REQUEST_CODE = 101
 
 class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRepository>() {
     private lateinit var codeScanner: CodeScanner
-
 
     private fun setUpPermissions() {
         val permission = ContextCompat.checkSelfPermission(
@@ -83,55 +83,6 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                     scanText.text = it.text
                     if (scanText.text != null) {
                         viewModel.searchByBarcode(scanText.text.toString())
-                        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
-                            when (it) {
-                                is Resource.Success -> {
-                                    binding.salesProgress.visibility = View.GONE
-                                    val inventory = Inventory(
-                                        it.value.results[0].barcode_digit,
-                                        it.value.results[0].barcode_url,
-                                        it.value.results[0].botanical_name,
-                                        it.value.results[0].category,
-                                        it.value.results[0].classification,
-                                        it.value.results[0].color,
-                                        it.value.results[0].cost,
-                                        it.value.results[0].created,
-                                        it.value.results[0].id,
-                                        it.value.results[0].image,
-                                        it.value.results[0].location,
-                                        it.value.results[0].lot,
-                                        it.value.results[0].name,
-                                        it.value.results[0].price,
-                                        it.value.results[0].quantity,
-                                        it.value.results[0].size,
-                                        it.value.results[0].updated
-                                    )
-                                    if (
-                                        NavHostFragment.findNavController(this@SalesFragment).currentDestination?.id == R.id.salesFragment
-                                    ) {
-                                        this@SalesFragment.findNavController().navigate(
-                                            SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(
-                                                inventory
-                                            )
-                                        )
-
-                                    }
-                                }
-
-                                is Resource.Failure -> {
-                                    binding.salesProgress.visibility = View.GONE
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Unable to fetch scanned item",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-
-                                is Resource.Loading ->
-                                    binding.salesProgress.visibility = View.VISIBLE
-                            }
-                        })
-                     
                     }
 
                 }
@@ -141,9 +92,66 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                 Log.e("Main", "Camera initialization error:${it.message}")
             }
         }
+
         scannerView.setOnClickListener {
             codeScanner.startPreview()
         }
+
+        viewModel.barcodeItem.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    binding.salesProgress.visibility = View.GONE
+                    Toast.makeText(
+                        requireActivity(),
+                        it.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    if(it.value.results.isNotEmpty()) {
+                        val inventory = Inventory(
+                            it.value.results[0].barcode_digit,
+                            it.value.results[0].barcode_url,
+                            it.value.results[0].botanical_name,
+                            it.value.results[0].category,
+                            it.value.results[0].classification,
+                            it.value.results[0].color,
+                            it.value.results[0].cost,
+                            it.value.results[0].created,
+                            it.value.results[0].id,
+                            it.value.results[0].image,
+                            it.value.results[0].location,
+                            it.value.results[0].lot,
+                            it.value.results[0].name,
+                            it.value.results[0].price,
+                            it.value.results[0].quantity,
+                            it.value.results[0].size,
+                            it.value.results[0].updated
+                        )
+                        if (
+                            NavHostFragment.findNavController(this@SalesFragment).currentDestination?.id == R.id.salesFragment
+                        ) {
+                            this@SalesFragment.findNavController().navigate(
+                                SalesFragmentDirections.actionSalesFragmentToSalesBttmShtFragment(
+                                    inventory
+                                )
+                            )
+
+                        }
+                    }
+                }
+
+                is Resource.Failure -> {
+                    binding.salesProgress.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        "Unable to fetch scanned item",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is Resource.Loading ->
+                    binding.salesProgress.visibility = View.VISIBLE
+            }
+        })
 
         viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
             val scannedProduct = it
@@ -188,4 +196,10 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
         return SalesRepository(api,database)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.sales_cart){
+            this.findNavController().navigate(R.id.action_salesFragment_to_cartFragment)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
