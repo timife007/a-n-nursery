@@ -110,8 +110,7 @@ dependencies {
 
     implementation 'com.mindorks.android:prdownloader:0.6.0'
 
-
-
-
+    // MAKE LIVE-DATA FIRE EVENTS ONLY ONCE
+    implementation 'com.github.hadilq.liveevent:liveevent:1.2.0'
 
 }

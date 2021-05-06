@@ -101,11 +101,6 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
             when (it) {
                 is Resource.Success -> {
                     binding.salesProgress.visibility = View.GONE
-                    Toast.makeText(
-                        requireActivity(),
-                        it.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
                     if(it.value.results.isNotEmpty()) {
                         val inventory = Inventory(
                             it.value.results[0].barcode_digit,
