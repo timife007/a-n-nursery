@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_salesFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_terminalFragment"
+            app:destination="@id/terminalFragment" />
     </fragment>
     <fragment
         android:id="@+id/vendorFragment"
@@ -220,5 +223,10 @@
         android:name="com.timife.a_n_nursery_app.sales.cart.CartFragment"
         android:label="Cart"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/terminalFragment"
+        android:name="com.timife.a_n_nursery_app.sales.TerminalFragment"
+        android:label="Terminal"
+        tools:layout="@layout/fragment_terminal" />
 
 </navigation>
