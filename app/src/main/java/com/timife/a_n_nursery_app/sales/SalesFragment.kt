@@ -176,6 +176,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
         inflater.inflate(R.menu.sales_menu, menu)
     }
 
+
     override fun getViewModel() = SalesViewModel::class.java
 
     override fun getFragmentBinding(
@@ -192,8 +193,8 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.sales_cart){
-            this.findNavController().navigate(R.id.action_salesFragment_to_cartFragment)
+        if(item.itemId == R.id.terminal){
+            this.findNavController().navigate(R.id.action_salesFragment_to_terminalFragment)
         }
         return super.onOptionsItemSelected(item)
     }
