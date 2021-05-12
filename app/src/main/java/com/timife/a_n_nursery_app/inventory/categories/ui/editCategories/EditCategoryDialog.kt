@@ -32,7 +32,7 @@ class EditCategoryDialog: DialogFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.window?.setBackgroundDrawableResource(R.drawable.round_corner_dialog)
+        dialog?.window?.setBackgroundDragit wableResource(R.drawable.round_corner_dialog)
         val application = requireNotNull(activity).application
         binding = DialogEditCategoryBinding.inflate(inflater)
         binding.lifecycleOwner = this
@@ -56,7 +56,7 @@ class EditCategoryDialog: DialogFragment(){
                 viewModel.updateCategory(categoryId,categoryName)
 
                 //Update check
-                viewModel.updateCategory.observe(viewLifecycleOwner){
+                viewModel.updateCategory.observe(viewLifecycleOwner) {
                     when(it){
                         is Resource.Success -> {
                             Toast.makeText(requireContext(),"$it Updated Successfully",Toast.LENGTH_SHORT).show()
