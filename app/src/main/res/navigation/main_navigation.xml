@@ -227,6 +227,19 @@
         android:id="@+id/terminalFragment"
         android:name="com.timife.a_n_nursery_app.sales.TerminalFragment"
         android:label="Terminal"
-        tools:layout="@layout/fragment_terminal" />
+        tools:layout="@layout/fragment_terminal" >
+        <action
+            android:id="@+id/action_terminalFragment_to_pairTerminalDialog"
+            app:destination="@id/pairTerminalDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/pairTerminalDialog"
+        tools:layout="@layout/dialog_pair_terminal"
+        android:name="com.timife.a_n_nursery_app.sales.PairTerminalDialog"
+        android:label="PairTerminalDialog" >
+        <argument
+            android:name="deviceCode"
+            app:argType="com.timife.a_n_nursery_app.sales.network.DeviceCode"/>
+    </dialog>
 
 </navigation>

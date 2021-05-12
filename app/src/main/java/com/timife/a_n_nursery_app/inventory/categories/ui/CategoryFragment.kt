@@ -89,7 +89,7 @@ class CategoryFragment :
             }
         })
 
-        viewModel.saveCategory.observe(viewLifecycleOwner) {
+        viewModel.saveCategory.observe(viewLifecycleOwner, Observer {
             binding.categoryProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -104,7 +104,7 @@ class CategoryFragment :
                     binding.categoryProgress.visible(true)
                 }
             }
-        }
+        })
         binding.addCategory.setOnClickListener {
             val categoryDialogFragment = AddCategoryDialog(object : AddCategoryListener {
                 override fun onAddCategoryButtonClicked(categoryName: String) {

@@ -8,31 +8,48 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.UserPreferences
 import com.timife.a_n_nursery_app.databinding.DialogPairTerminalBinding
+import com.timife.a_n_nursery_app.databinding.SalesBttmShtFragmentBinding
+import com.timife.a_n_nursery_app.login.network.RetrofitClient
 import com.timife.a_n_nursery_app.sales.cart.CartDatabase
 import com.timife.a_n_nursery_app.sales.network.SalesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class PairTerminalDialog : BaseDialogFragment<PairTerminalDialogViewModel,DialogPairTerminalBinding,SalesRepository>() {
+class PairTerminalDialog : DialogFragment() {
 
-    companion object {
-        fun newInstance() = PairTerminalDialog()
-    }
+    private lateinit var binding: DialogPairTerminalBinding
+    private lateinit var repository: SalesRepository
+    protected val retrofitClient = RetrofitClient()
 
-    override fun getViewModel()= PairTerminalDialogViewModel::class.java
 
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    )= DialogPairTerminalBinding.inflate(inflater)
-
-    override fun getRepository(): SalesRepository {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val userPreferences = UserPreferences(requireContext())
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(SalesApi::class.java, token)
         val database = CartDatabase.invoke(requireContext())
+        repository = SalesRepository(api, database)
+        val application = requireNotNull(activity).application
+        binding = DialogPairTerminalBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        val code = PairTerminalDialogArgs.fromBundle(requireArguments()).deviceCode
+        val viewModelFactory = TerminalViewModelFactory(code, application,repository)
 
-        return SalesRepository(api,database)
+        val viewModel = ViewModelProvider(this,viewModelFactory).get(PairTerminalDialogViewModel::class.java)
+        binding.viewModel = viewModel
+
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
+
 
 }

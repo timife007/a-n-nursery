@@ -17,8 +17,10 @@ import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
 import com.timife.a_n_nursery_app.inventory.ui.InventoryViewModel
 import com.timife.a_n_nursery_app.login.ui.auth.LoginRepository
 import com.timife.a_n_nursery_app.login.ui.auth.LoginViewModel
+import com.timife.a_n_nursery_app.sales.PairTerminalDialogViewModel
 import com.timife.a_n_nursery_app.sales.SalesRepository
 import com.timife.a_n_nursery_app.sales.SalesViewModel
+import com.timife.a_n_nursery_app.sales.network.DeviceCode
 import com.timife.a_n_nursery_app.settings.SettingsRepository
 import com.timife.a_n_nursery_app.settings.SettingsViewModel
 import com.timife.a_n_nursery_app.settings.access_control.AccessControlRepository

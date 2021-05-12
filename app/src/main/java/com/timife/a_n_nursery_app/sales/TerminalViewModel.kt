@@ -14,6 +14,10 @@ class TerminalViewModel(private val salesRepository: SalesRepository) : BaseView
     val deviceCode: LiveData<Resource<TerminalCode>>
         get() = _deviceCode
 
+    init {
+        getDeviceCode()
+    }
+
      fun getDeviceCode()= viewModelScope.launch {
          _deviceCode.value = salesRepository.getTerminalCode()
      }
