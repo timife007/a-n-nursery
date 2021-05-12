@@ -7,26 +7,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.base.BaseFragment
+import com.timife.a_n_nursery_app.databinding.FragmentTerminalBinding
+import com.timife.a_n_nursery_app.sales.cart.CartDatabase
+import com.timife.a_n_nursery_app.sales.network.SalesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
-class TerminalFragment : Fragment() {
+class TerminalFragment : BaseFragment<TerminalViewModel,FragmentTerminalBinding,SalesRepository>() {
 
     companion object {
         fun newInstance() = TerminalFragment()
     }
 
-    private lateinit var viewModel: TerminalViewModel
+    override fun getViewModel()=TerminalViewModel::class.java
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_terminal, container, false)
-    }
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    )= FragmentTerminalBinding.inflate(inflater)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TerminalViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun getRepository(): SalesRepository {
+        val token = runBlocking { userPreferences.authToken.first() }
+        val api = retrofitClient.buildApi(SalesApi::class.java, token)
+        val database = CartDatabase.invoke(requireContext())
+
+        return SalesRepository(api,database)
     }
 
 }

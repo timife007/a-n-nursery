@@ -8,35 +8,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.timife.a_n_nursery_app.R
+import com.timife.a_n_nursery_app.databinding.DialogPairTerminalBinding
+import com.timife.a_n_nursery_app.sales.cart.CartDatabase
+import com.timife.a_n_nursery_app.sales.network.SalesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
-class PairTerminalDialog : DialogFragment() {
+class PairTerminalDialog : BaseDialogFragment<PairTerminalDialogViewModel,DialogPairTerminalBinding,SalesRepository>() {
 
     companion object {
         fun newInstance() = PairTerminalDialog()
     }
 
-    private lateinit var viewModel: PairTerminalDialogViewModel
+    override fun getViewModel()= PairTerminalDialogViewModel::class.java
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        dialog?.window?.setBackgroundDrawableResource(R.drawable.round_corner_dialog)
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    )= DialogPairTerminalBinding.inflate(inflater)
 
-        return inflater.inflate(R.layout.dialog_pair_terminal, container, false)
-    }
+    override fun getRepository(): SalesRepository {
+        val token = runBlocking { userPreferences.authToken.first() }
+        val api = retrofitClient.buildApi(SalesApi::class.java, token)
+        val database = CartDatabase.invoke(requireContext())
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PairTerminalDialogViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
-        val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
-        dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+        return SalesRepository(api,database)
     }
 
 }
