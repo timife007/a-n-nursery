@@ -1,5 +1,7 @@
 package com.timife.a_n_nursery_app.dashboard
 
+import android.R.attr.left
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,27 +9,31 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.dashboard.network.DashboardApi
+import com.timife.a_n_nursery_app.dashboard.response.TransactionPrice
 import com.timife.a_n_nursery_app.databinding.FragmentDashboardBinding
-import com.timife.a_n_nursery_app.databinding.FragmentInventoryBinding
 import com.timife.a_n_nursery_app.handleApiError
-import com.timife.a_n_nursery_app.inventory.categories.database.CategoryDatabase
-import com.timife.a_n_nursery_app.inventory.categories.database.CategoryItem
-import com.timife.a_n_nursery_app.inventory.network.InventoryApi
-import com.timife.a_n_nursery_app.inventory.ui.InventoryRepository
-import com.timife.a_n_nursery_app.inventory.ui.InventoryViewModel
 import com.timife.a_n_nursery_app.specs
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import java.text.DecimalFormat
 
-class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBinding, DashBoardRepository>() {
+
+class DashboardFragment :
+    BaseFragment<DashboardViewModel, FragmentDashboardBinding, DashBoardRepository>() {
 //    private lateinit var binding: FragmentDashboardBinding
 //    private lateinit var viewModel: DashboardViewModel
 
@@ -63,7 +69,7 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
                 is Resource.Success -> {
                     binding.inventoryProdNum.text = it.value.low_inventory.toString()
                     binding.productNumber.text = it.value.products_sold.toString()
-                    binding.transactionNumber.text =  it.value.transactions.toString()
+                    binding.transactionNumber.text = it.value.transactions.toString()
                     binding.netPrice.text = it.value.net_sales
                     Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
@@ -78,59 +84,107 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
         }
         //Sales Chart Test
         viewModel.salesBar.observe(viewLifecycleOwner) {
-            binding.salesBarChart.data = it
-            val time = arrayOf("1pm", "2pm", "3pm", "4pm")
-            val xAxis = binding.salesBarChart.xAxis
-            xAxis.valueFormatter = IndexAxisValueFormatter(time)
+            binding.salesBarChart.setDrawBarShadow(false)
+            binding.salesBarChart.description.isEnabled = false
+            binding.salesBarChart.setPinchZoom(false)
+            binding.salesBarChart.setDrawGridBackground(true)
+            // empty labels so that the names are spread evenly
+            // empty labels so that the names are spread evenly
+            val labels =
+                arrayOf("", "Mon", "Tue", "Wed", "Thur", "Fri", "")
+            val xAxis: XAxis = binding.salesBarChart.xAxis
             xAxis.setCenterAxisLabels(true)
             xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.granularity = 1f
-            xAxis.isGranularityEnabled = true
-            binding.salesBarChart.isDragEnabled = true
-            binding.salesBarChart.setVisibleXRangeMaximum(3f)
+            xAxis.setDrawGridLines(true)
+            xAxis.granularity = 1f // only intervals of 1 day
 
+            xAxis.textColor = Color.BLACK
+            xAxis.textSize = 12f
+            xAxis.axisLineColor = Color.WHITE
+            xAxis.axisMinimum = 1f
+            xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+
+            val leftAxis: YAxis = binding.salesBarChart.axisLeft
+            leftAxis.textColor = Color.BLACK
+            leftAxis.textSize = 12f
+            leftAxis.axisLineColor = Color.WHITE
+            leftAxis.setDrawGridLines(true)
+            leftAxis.granularity = 2f
+            leftAxis.setLabelCount(8, true)
+            leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+            leftAxis.labelCount = 6
+            leftAxis.axisMinimum = 20f
+            leftAxis.valueFormatter = MyValueFormatter()
+            binding.salesBarChart.axisRight.isEnabled = false
+            binding.salesBarChart.legend.isEnabled = false
+
+            val groupSpace = 0.4f
             val barSpace = 0f
-            val groupSpace = 0.1f
-            it.barWidth = 0.02f
+            val barWidth = 0.3f
 
-            binding.salesBarChart.xAxis.axisMinimum = 0f
-            binding.salesBarChart.xAxis.axisMaximum =
-                0f + binding.salesBarChart.barData.getGroupWidth(groupSpace, barSpace) * 5
+            it.barWidth = barWidth
 
-            binding.salesBarChart.axisLeft.axisMinimum = 0f
-            binding.salesBarChart.groupBars(0f, groupSpace, barSpace)
-            specs(binding.salesBarChart)
+            xAxis.axisMaximum = labels.size - 1.1f
+            binding.salesBarChart.data = it
+            binding.salesBarChart.setScaleEnabled(false)
+            binding.salesBarChart.setVisibleXRangeMaximum(6f)
+            binding.salesBarChart.setExtraOffsets(5F, 5F, 5F, 5F);
+            binding.salesBarChart.groupBars(1f, groupSpace, barSpace)
             binding.salesBarChart.invalidate()
         }
 
         //TransactionsChart Test
         viewModel.transactionsBar.observe(viewLifecycleOwner) {
-            binding.transactionsBarChart.data = it
-            val time = arrayOf("1pm", "2pm", "3pm", "4pm")
-            val xAxis = binding.transactionsBarChart.xAxis
-            xAxis.valueFormatter = IndexAxisValueFormatter(time)
+            binding.transactionsBarChart.setDrawBarShadow(false)
+            binding.transactionsBarChart.description.isEnabled = false
+            binding.transactionsBarChart.setPinchZoom(false)
+            binding.transactionsBarChart.setDrawGridBackground(true)
+
+            val labels =
+                arrayOf("", "Mon", "Tue", "Wed", "Thur", "Fri", "")
+            val xAxis: XAxis = binding.transactionsBarChart.xAxis
             xAxis.setCenterAxisLabels(true)
             xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.granularity = 1f
-            xAxis.isGranularityEnabled = true
-            binding.transactionsBarChart.isDragEnabled = true
-            binding.transactionsBarChart.setVisibleXRangeMaximum(3f)
+            xAxis.setDrawGridLines(true)
+            xAxis.granularity = 1f // only intervals of 1 day
 
+            xAxis.textColor = Color.BLACK
+            xAxis.textSize = 12f
+            xAxis.axisLineColor = Color.WHITE
+            xAxis.axisMinimum = 1f
+            xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+
+            val leftAxis: YAxis = binding.transactionsBarChart.axisLeft
+            leftAxis.textColor = Color.BLACK
+            leftAxis.textSize = 12f
+            leftAxis.axisLineColor = Color.WHITE
+            leftAxis.setDrawGridLines(true)
+            leftAxis.granularity = 2f
+            leftAxis.setLabelCount(8, true)
+            leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+            leftAxis.labelCount = 6
+            leftAxis.axisMinimum = 20f
+            binding.transactionsBarChart.axisRight.isEnabled = false
+            binding.transactionsBarChart.legend.isEnabled = false
+
+            val groupSpace = 0.4f
             val barSpace = 0f
-            val groupSpace = 0.1f
-            it.barWidth = 0.02f
+            val barWidth = 0.3f
 
-            binding.transactionsBarChart.xAxis.axisMinimum = 0f
-            binding.transactionsBarChart.xAxis.axisMaximum =
-                0f + binding.transactionsBarChart.barData.getGroupWidth(groupSpace, barSpace) * 5
-            binding.transactionsBarChart.axisLeft.axisMinimum = 0f
-            binding.transactionsBarChart.groupBars(0f, groupSpace, barSpace)
-            specs(binding.transactionsBarChart)
+            it.barWidth = barWidth
+
+            xAxis.axisMaximum = labels.size - 1.1f
+            binding.transactionsBarChart.data = it
+            binding.transactionsBarChart.setScaleEnabled(false)
+            binding.transactionsBarChart.setVisibleXRangeMaximum(6f)
+            binding.transactionsBarChart.groupBars(1f, groupSpace, barSpace)
+            binding.transactionsBarChart.setExtraOffsets(5F, 5F, 5F, 5F);
             binding.transactionsBarChart.invalidate()
         }
 
         //PieChartTest
         viewModel.pieChart.observe(viewLifecycleOwner) {
+            binding.pieChart.description.isEnabled = false
             binding.pieChart.data = it
             binding.pieChart.transparentCircleRadius = 0F
             binding.pieChart.setDrawEntryLabels(false)
@@ -152,12 +206,12 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
         viewModel = ViewModelProvider(requireActivity()).get(DashboardViewModel::class.java)
     }
 
-    override fun getViewModel()= DashboardViewModel::class.java
+    override fun getViewModel() = DashboardViewModel::class.java
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    )   =     FragmentDashboardBinding.inflate(inflater, container, false)
+    ) = FragmentDashboardBinding.inflate(inflater, container, false)
 
 
     override fun getRepository(): DashBoardRepository {
@@ -167,4 +221,24 @@ class DashboardFragment : BaseFragment<DashboardViewModel, FragmentDashboardBind
 
         return DashBoardRepository(api)
     }
+
+    class MyValueFormatter : ValueFormatter() {
+        private val format = DecimalFormat("###,##0.0")
+
+        // override this for e.g. LineChart or ScatterChart
+        override fun getPointLabel(entry: Entry?): String {
+            return format.format(entry?.y)
+        }
+
+        // override this for BarChart
+        override fun getBarLabel(barEntry: BarEntry?): String {
+            return format.format(barEntry?.y)
+        }
+
+        // override this for custom formatting of XAxis or YAxis labels
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return "$" + value.toInt().toString()
+        }
+    }
+
 }

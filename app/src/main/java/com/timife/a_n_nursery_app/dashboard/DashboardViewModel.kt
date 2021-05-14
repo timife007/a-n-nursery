@@ -1,16 +1,22 @@
 package com.timife.a_n_nursery_app.dashboard
 
+import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseViewModel
 import com.timife.a_n_nursery_app.dashboard.response.DashboardItems
+import com.timife.a_n_nursery_app.dashboard.response.TransactionCategory
+import com.timife.a_n_nursery_app.dashboard.response.TransactionPrice
+import com.timife.a_n_nursery_app.dashboard.response.TransactionProduct
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) : BaseViewModel(dashBoardRepository) {
+class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
+    BaseViewModel(dashBoardRepository) {
     private val _salesBar: MutableLiveData<BarData> = MutableLiveData()
     val salesBar: LiveData<BarData>
         get() = _salesBar
@@ -19,102 +25,174 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
     val transactionsBar: LiveData<BarData>
         get() = _transactionsBar
 
-    private val _dashboard : MutableLiveData<Resource<DashboardItems>> = MutableLiveData()
-    val dashboard : LiveData<Resource<DashboardItems>>
-    get()= _dashboard
+    private val _dashboard: MutableLiveData<Resource<DashboardItems>> = MutableLiveData()
+    val dashboard: LiveData<Resource<DashboardItems>>
+        get() = _dashboard
 
     private val _pieChart: MutableLiveData<PieData> = MutableLiveData()
     val pieChart: LiveData<PieData>
         get() = _pieChart
 
     init {
-        salesBarData()
-        transactionsBarData()
-        pieDataEntry()
+        processSalesChart()
+        processProductChart()
+        processCategoryPieChart()
     }
 
-    private fun transactionsBarData() {
-        fun barEntries3(): ArrayList<BarEntry> {
-            val barEntries: ArrayList<BarEntry> = ArrayList()
-            barEntries.add(BarEntry(1f, 6F))
-            barEntries.add(BarEntry(2f, 2.5F))
-            barEntries.add(BarEntry(3f, 5.5F))
-            barEntries.add(BarEntry(4f, 2.5F))
-            return barEntries
-        }
+    private fun productsBarData(categoriesData: TransactionProduct) {
+        val barOne: ArrayList<BarEntry> = ArrayList()
+        val barTwo: ArrayList<BarEntry> = ArrayList()
 
-        fun barEntries4(): ArrayList<BarEntry> {
-            val barEntries: ArrayList<BarEntry> = ArrayList()
-            barEntries.add(BarEntry(1f, 3F))
-            barEntries.add(BarEntry(2f, 3.5F))
-            barEntries.add(BarEntry(3f, 1.5F))
-            barEntries.add(BarEntry(4f, 5.8F))
-            return barEntries
-        }
+        barOne.add(BarEntry(1.toFloat(), categoriesData.monday.lastweek.toFloat()))
+        barTwo.add(BarEntry(1.toFloat(), categoriesData.monday.two_weeks.toFloat()))
 
-        val barDataSet1 = BarDataSet(barEntries3(), "DataSet 1")
-        barDataSet1.color = ColorTemplate.rgb("#50CF46")
-        val barDataSet2 = BarDataSet(barEntries4(), "DataSet 2")
-        barDataSet2.color = ColorTemplate.rgb("#b19cd9")
-        val data = BarData(barDataSet1, barDataSet2)
-//        _transactionsBar.value = data
+        barOne.add(BarEntry(2.toFloat(), categoriesData.tuesday.lastweek.toFloat()))
+        barTwo.add(BarEntry(2.toFloat(), categoriesData.tuesday.two_weeks.toFloat()))
 
-    }
+        barOne.add(BarEntry(3.toFloat(), categoriesData.wednesday.lastweek.toFloat()))
+        barTwo.add(BarEntry(3.toFloat(), categoriesData.wednesday.two_weeks.toFloat()))
 
+        barOne.add(BarEntry(4.toFloat(), categoriesData.thursday.lastweek.toFloat()))
+        barTwo.add(BarEntry(4.toFloat(), categoriesData.thursday.two_weeks.toFloat()))
 
-    private fun salesBarData() {
-        fun barEntries1(): ArrayList<BarEntry> {
-            val barEntries: ArrayList<BarEntry> = ArrayList()
-            barEntries.add(BarEntry(1f, 200F))
-            barEntries.add(BarEntry(2f, 560F))
-            barEntries.add(BarEntry(3f, 400F))
-            barEntries.add(BarEntry(4f, 180F))
-            return barEntries
-        }
+        barOne.add(BarEntry(5.toFloat(), categoriesData.friday.lastweek.toFloat()))
+        barTwo.add(BarEntry(5.toFloat(), categoriesData.friday.two_weeks.toFloat()))
 
-        fun barEntries2(): ArrayList<BarEntry> {
-            val barEntries: ArrayList<BarEntry> = ArrayList()
-            barEntries.add(BarEntry(1f, 180F))
-            barEntries.add(BarEntry(2f, 190F))
-            barEntries.add(BarEntry(3f, 140F))
-            barEntries.add(BarEntry(4f, 200F))
-            return barEntries
-        }
+        val set1 = BarDataSet(barOne, "barOne")
+        set1.color = Color.parseColor("#50cf46")
+        val set2 = BarDataSet(barTwo, "barTwo")
+        set2.color = Color.parseColor("#eaccf6")
 
-        val barDataSet1 = BarDataSet(barEntries1(), "DataSet 1")
-        barDataSet1.color = ColorTemplate.rgb("#0B4317")
-        val barDataSet2 = BarDataSet(barEntries2(), "DataSet 2")
-        barDataSet2.color = ColorTemplate.rgb("#CD801F")
-        val data = BarData(barDataSet1, barDataSet2)
-//        _salesBar.value = data
-//        _salesBar.postValue(data)
+        set1.isHighlightEnabled = false
+        set2.isHighlightEnabled = false
+
+        set1.setDrawValues(false)
+        set2.setDrawValues(false)
+
+        val dataSets = ArrayList<IBarDataSet>()
+
+        dataSets.add(set1)
+        dataSets.add(set2)
+
+        val data = BarData(dataSets)
+
+        _transactionsBar.value = data
 
     }
 
-    private fun pieDataEntry(): ArrayList<PieEntry> {
+    private fun salesBarData(salesData: TransactionPrice) {
+        val barOne: ArrayList<BarEntry> = ArrayList()
+        val barTwo: ArrayList<BarEntry> = ArrayList()
+
+        barOne.add(BarEntry(1.toFloat(), salesData.monday.lastweek.toFloat()))
+        barTwo.add(BarEntry(1.toFloat(), salesData.monday.two_weeks.toFloat()))
+
+        barOne.add(BarEntry(2.toFloat(), salesData.tuesday.lastweek.toFloat()))
+        barTwo.add(BarEntry(2.toFloat(), salesData.tuesday.two_weeks.toFloat()))
+
+        barOne.add(BarEntry(3.toFloat(), salesData.wednesday.lastweek.toFloat()))
+        barTwo.add(BarEntry(3.toFloat(), salesData.wednesday.two_weeks.toFloat()))
+
+        barOne.add(BarEntry(4.toFloat(), salesData.thursday.lastweek.toFloat()))
+        barTwo.add(BarEntry(4.toFloat(), salesData.thursday.two_weeks.toFloat()))
+
+        barOne.add(BarEntry(5.toFloat(), salesData.friday.lastweek.toFloat()))
+        barTwo.add(BarEntry(5.toFloat(), salesData.friday.two_weeks.toFloat()))
+
+        val set1 = BarDataSet(barOne, "barOne")
+        set1.color = Color.parseColor("#0b4317")
+        val set2 = BarDataSet(barTwo, "barTwo")
+        set2.color = Color.parseColor("#eaccf6")
+
+        set1.isHighlightEnabled = false
+        set2.isHighlightEnabled = false
+
+        set1.setDrawValues(false)
+        set2.setDrawValues(false)
+
+        val dataSets = ArrayList<IBarDataSet>()
+
+        dataSets.add(set1)
+        dataSets.add(set2)
+
+        val data = BarData(dataSets)
+
+        _salesBar.value = data
+
+    }
+
+    private fun categoryBarData(pieData: TransactionCategory) {
+
         val colorClassArray = listOf(
-            ColorTemplate.rgb("#4E2433"),
             ColorTemplate.rgb("#274E24"),
             ColorTemplate.rgb("#50CF46"),
-            ColorTemplate.rgb("#3245F4"),
-            ColorTemplate.rgb("#CD801F")
+            ColorTemplate.rgb("#4E2433")
+//            ColorTemplate.rgb("#3245F4"),
+//            ColorTemplate.rgb("#CD801F")
         )
 
         val dataVals: ArrayList<PieEntry> = ArrayList()
-        dataVals.add(PieEntry(10F, "Ecru Lab"))
-        dataVals.add(PieEntry(7F, "Yu"))
-        dataVals.add(PieEntry(3F, "Cutty"))
-        dataVals.add(PieEntry(15F, "Hyun"))
-        dataVals.add(PieEntry(10F, "Kinp"))
-        val pieDataSet = PieDataSet(dataVals, "Series PieChart")
-        pieDataSet.colors = colorClassArray
-        val pieData = PieData(pieDataSet)
-//        _pieChart.value = pieData
-        return dataVals
 
+        if(pieData.Plants != 0){
+            dataVals.add(PieEntry(pieData.Plants.toFloat(), "Plants"))
+        }
+        if(pieData.Soil != 0){
+            dataVals.add(PieEntry(pieData.Soil.toFloat(), "Soil"))
+        }
+        if(pieData.Trees != 0){
+            dataVals.add(PieEntry(pieData.Trees.toFloat(), "Trees"))
+        }
+
+        val pieDataSet = PieDataSet(dataVals, "")
+        pieDataSet.colors = colorClassArray
+        val data = PieData(pieDataSet)
+        _pieChart.value = data
     }
 
-     fun getDashboard() = viewModelScope.launch {
+    fun getDashboard() = viewModelScope.launch {
         _dashboard.value = dashBoardRepository.getDashboard()
     }
+
+    private fun processSalesChart() = viewModelScope.launch {
+        when (val entries = dashBoardRepository.getPriceChart()) {
+            is Resource.Success -> {
+                salesBarData(entries.value)
+            }
+            is Resource.Failure -> {
+
+            }
+            is Resource.Loading -> {
+
+            }
+        }
+    }
+
+    private fun processProductChart() = viewModelScope.launch {
+        when (val entries = dashBoardRepository.getProductChart()) {
+            is Resource.Success -> {
+                productsBarData(entries.value)
+            }
+            is Resource.Failure -> {
+
+            }
+            is Resource.Loading -> {
+
+            }
+        }
+    }
+
+    private fun processCategoryPieChart() = viewModelScope.launch {
+        when (val entries = dashBoardRepository.getCategoriesChart()) {
+            is Resource.Success -> {
+                categoryBarData(entries.value)
+            }
+            is Resource.Failure -> {
+
+            }
+            is Resource.Loading -> {
+
+            }
+        }
+    }
+
 }
