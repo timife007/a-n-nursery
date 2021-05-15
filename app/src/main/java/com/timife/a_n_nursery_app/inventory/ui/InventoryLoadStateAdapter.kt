@@ -25,8 +25,8 @@ class InventoryLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter
 //                    errorText.isVisible  = true
 //                }
                 footerProgressBar.isVisible = loadState is LoadState.Loading
-                retryButton.isVisible = loadState !is LoadState.Loading
-                errorText.isVisible = loadState !is LoadState.Loading
+//                retryButton.isVisible = loadState !is LoadState.Loading
+//                errorText.isVisible = loadState !is LoadState.Loading
 
 
 //                if (loadState.endOfPaginationReached ){

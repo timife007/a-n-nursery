@@ -47,14 +47,11 @@ class InventoryFragment :
 
 //        var data = PagingData
         binding.swipeRefreshInventory.setOnRefreshListener {
-            swipeCount += 1
-            if (swipeCount > 0) {
-                viewModel.result.observe(viewLifecycleOwner) {
-                    adapter.submitData(viewLifecycleOwner.lifecycle, it)
-                }
-                adapter.notifyDataSetChanged()
-                binding.swipeRefreshInventory.isRefreshing = false
-            }
+            viewModel.getLocationItems()
+            viewModel.getCategoryItems()
+            viewModel.getLotItems()
+            viewModel.getClassificationItems()
+            swipeCount = 1;
         }
 
         binding.apply {
@@ -94,6 +91,7 @@ class InventoryFragment :
                     }
                 }
                 is Resource.Failure -> {
+                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -118,6 +116,7 @@ class InventoryFragment :
                     }
                 }
                 is Resource.Failure -> {
+                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -142,6 +141,7 @@ class InventoryFragment :
                     }
                 }
                 is Resource.Failure -> {
+                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -166,6 +166,7 @@ class InventoryFragment :
                     }
                 }
                 is Resource.Failure -> {
+                    hideProgressBar()
                     handleApiError(it)
                 }
                 is Resource.Loading -> {
@@ -178,8 +179,9 @@ class InventoryFragment :
             binding.apply {
                 inventoryProgress.isVisible = loadState.refresh is LoadState.Loading
                 recyclerView.isVisible = loadState.refresh is LoadState.NotLoading
-                recyclerRetry.isVisible = loadState.refresh is LoadState.Error
-                inventoryNoResultText.isVisible = loadState.refresh is LoadState.Error
+                recyclerRetry.isVisible = loadState.refresh is LoadState.Error && adapter.itemCount == 0
+                inventoryNoResultText.isVisible = loadState.refresh is LoadState.Error && adapter.itemCount == 0
+
 //                if(loadState.append.endOfPaginationReached){
 //                    inventoryNoResultText.isVisible =false
 //                    queryNoResultText.isVisible = false
@@ -268,6 +270,7 @@ class InventoryFragment :
 
     private fun hideProgressBar() {
         binding.inventoryProgress.visibility = View.INVISIBLE
+        binding.swipeRefreshInventory.isRefreshing = false
     }
 
     private fun showProgressBar() {
