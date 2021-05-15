@@ -64,7 +64,7 @@ class InventoryFragment :
                 header = InventoryLoadStateAdapter { adapter.retry() },
                 footer = InventoryLoadStateAdapter { adapter.retry() }
             )
-            recycler_retry.setOnClickListener {
+            recyclerRetry.setOnClickListener {
                 adapter.retry()
             }
         }

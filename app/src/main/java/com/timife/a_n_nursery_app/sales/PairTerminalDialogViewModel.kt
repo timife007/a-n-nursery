@@ -18,8 +18,6 @@ class PairTerminalDialogViewModel(code:DeviceCode, application: Application,
         get() = _deviceCode
 
 
-
-
     init {
         _deviceCode.value = code
     }

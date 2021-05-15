@@ -28,8 +28,6 @@ class SalesBttmShtViewModel(
 
     fun upsert(item: CartItem) = CoroutineScope(Dispatchers.IO).launch {
         val cartItem = repository.checkIfItemExists(item.id!!)
-//        Log.d("CART_CHECK",cartItem.toString())
-//        Log.d("CART_CHECK",item.id.toString())
         if (cartItem != null) {
             item.quantity = cartItem.quantity + 1
             repository.update(item)

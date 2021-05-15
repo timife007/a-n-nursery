@@ -148,6 +148,7 @@
     <string name="barcode">Barcode</string>
     <string name="dollar">$</string>
     <string name="terminal">terminal</string>
+    <string name="activity">Activity</string>
 
 
 </resources>

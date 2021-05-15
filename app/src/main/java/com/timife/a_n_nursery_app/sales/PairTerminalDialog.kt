@@ -28,6 +28,7 @@ class PairTerminalDialog : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.round_corner_dialog)
         val userPreferences = UserPreferences(requireContext())
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(SalesApi::class.java, token)
@@ -37,6 +38,9 @@ class PairTerminalDialog : DialogFragment() {
         binding = DialogPairTerminalBinding.inflate(inflater)
         binding.lifecycleOwner = this
         val code = PairTerminalDialogArgs.fromBundle(requireArguments()).deviceCode
+        val deviceCode = PairTerminalDialogArgs.fromBundle(requireArguments()).deviceCode.code
+
+        binding.code.text = deviceCode
         val viewModelFactory = TerminalViewModelFactory(code, application,repository)
 
         val viewModel = ViewModelProvider(this,viewModelFactory).get(PairTerminalDialogViewModel::class.java)
@@ -47,9 +51,15 @@ class PairTerminalDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
     }
+
+    override fun onStart() {
+        super.onStart()
+        val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
+        dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
 
 
 }

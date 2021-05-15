@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primary_color"
             android:contentDescription="@string/cart"
+            android:layout_margin="20dp"
             android:src="@drawable/ic_cart_fab"
             app:fabCustomSize="50dp"
             app:layout_constraintBottom_toBottomOf="parent"

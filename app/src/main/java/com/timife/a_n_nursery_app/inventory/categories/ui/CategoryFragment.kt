@@ -53,9 +53,10 @@ class CategoryFragment :
             swipeCount += 1
 
             if (swipeCount > 0) {
-                adapter.submitList(data)
+                bindRecyclerView(binding.categoryRecycler,data)
+//                adapter.submitList(data)
             }
-            binding.swipeRefreshCategory.isRefreshing = false
+            binding.swipeRefreshCategory.isRefreshing = true
         }
 
 

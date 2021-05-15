@@ -63,19 +63,19 @@
             android:textColor="@color/white"
             android:textSize="23sp" />
 
+        <ProgressBar
+            android:id="@+id/terminal_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
     </androidx.cardview.widget.CardView>
-    <ProgressBar
-        android:id="@+id/terminal_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:indeterminateDrawable="@drawable/progress"
-        android:layout_centerInParent="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </RelativeLayout>

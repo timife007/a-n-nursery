@@ -147,13 +147,16 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                     binding.salesProgress.visibility = View.VISIBLE
             }
         })
+//        binding.fetchButton.setOnClickListener {
+//
+//        }
 
-        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
-            val scannedProduct = it
-            binding.fetchButton.setOnClickListener {
-                viewModel.displayScannedItem(scannedProduct)
-            }
-        })
+//        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
+//            val scannedProduct = it
+//            binding.fetchButton.setOnClickListener {
+//                viewModel.displayScannedItem(scannedProduct)
+//            }
+//        })
 
         binding.cartFab.setOnClickListener {
             this.findNavController().navigate(R.id.action_salesFragment_to_cartFragment)

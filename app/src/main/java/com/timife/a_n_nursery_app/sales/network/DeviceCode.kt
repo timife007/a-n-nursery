@@ -1,5 +1,9 @@
 package com.timife.a_n_nursery_app.sales.network
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class DeviceCode(
     val code: String,
     val created_at: String,
@@ -10,4 +14,4 @@ data class DeviceCode(
     val product_type: String,
     val status: String,
     val status_changed_at: String
-)
+):Parcelable
