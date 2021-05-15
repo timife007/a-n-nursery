@@ -23,5 +23,9 @@ class SalesRepository(private val api: SalesApi, private val database: CartDatab
 
     fun getAllCartItems() = database.cartDao.getAllCartItems()
 
+    suspend fun getTerminalCode() = safeApiCall {
+        api.getTerminalCode()
+    }
+
 
 }

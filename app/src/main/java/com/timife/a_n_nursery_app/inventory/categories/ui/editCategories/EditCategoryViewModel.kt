@@ -16,8 +16,8 @@ class EditCategoryViewModel (category: Category,application: Application, privat
     val selectedEditCategory: LiveData<Category>
         get() = _selectedEditCategory
 
-    private val _updateCategory = MutableLiveData<com.timife.a_n_nursery_app.Resource<Category>>()
-    val updateCategory : LiveData<com.timife.a_n_nursery_app.Resource<Category>>
+    private val _updateCategory = MutableLiveData<Resource<Category>>()
+    val updateCategory : LiveData<Resource<Category>>
     get() = _updateCategory
 
     init {

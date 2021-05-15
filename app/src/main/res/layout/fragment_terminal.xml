@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".sales.TerminalFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:id="@+id/pair_title"
+        android:text="Pair With Terminal Device"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pair_title"
+        android:id="@+id/pair_text"
+        android:layout_marginStart="40dp"
+        android:textColor="@color/black"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:text="Please ensure that the terminal device is available and ready to get paired. Select the Sign in with device code option"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:id="@+id/connect_image"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/pair_text"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/connect"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/connect"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/connect_image"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="110dp"
+        android:background="@drawable/custom_ripple"
+        app:cardBackgroundColor="@color/primary_color"
+        app:cardCornerRadius="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Connect"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+        <ProgressBar
+            android:id="@+id/terminal_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

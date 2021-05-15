@@ -9,7 +9,11 @@
         android:id="@+id/dashboardFragment"
         android:name="com.timife.a_n_nursery_app.dashboard.DashboardFragment"
         android:label="DashBoard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_activitiesFragment"
+            app:destination="@id/activitiesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inventoryFragment"
         android:name="com.timife.a_n_nursery_app.inventory.ui.InventoryFragment"
@@ -33,6 +37,9 @@
         <action
             android:id="@+id/action_salesFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_terminalFragment"
+            app:destination="@id/terminalFragment" />
     </fragment>
     <fragment
         android:id="@+id/vendorFragment"
@@ -220,5 +227,28 @@
         android:name="com.timife.a_n_nursery_app.sales.cart.CartFragment"
         android:label="Cart"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/terminalFragment"
+        android:name="com.timife.a_n_nursery_app.sales.TerminalFragment"
+        android:label="Terminal"
+        tools:layout="@layout/fragment_terminal" >
+        <action
+            android:id="@+id/action_terminalFragment_to_pairTerminalDialog"
+            app:destination="@id/pairTerminalDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/pairTerminalDialog"
+        tools:layout="@layout/dialog_pair_terminal"
+        android:name="com.timife.a_n_nursery_app.sales.PairTerminalDialog"
+        android:label="PairTerminalDialog" >
+        <argument
+            android:name="deviceCode"
+            app:argType="com.timife.a_n_nursery_app.sales.network.DeviceCode"/>
+    </dialog>
+    <fragment
+        android:id="@+id/activitiesFragment"
+        android:name="com.timife.a_n_nursery_app.activities.ActivitiesFragment"
+        android:label="Activities"
+        tools:layout="@layout/fragment_activities" />
 
 </navigation>

@@ -60,14 +60,9 @@ class SalesBttmShtFragment : BottomSheetDialogFragment() {
         }
 
         binding.addCartBtn.setOnClickListener {
-//            if( )
-//            viewModel.upsert(cartItem)
+
             addItem(scannedItem)
 
-
-//            viewModel.getAllCartItems().observe(viewLifecycleOwner, Observer {
-//                Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
-//            })
 
             dismiss()
         }
