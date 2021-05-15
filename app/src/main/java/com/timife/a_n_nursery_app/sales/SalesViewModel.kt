@@ -27,6 +27,9 @@ class SalesViewModel(private val salesRepository: SalesRepository) :
         _barcodeItem.value = salesRepository.searchByBarcode(barcode_digit)
     }
 
+    fun getTerminalCode() =viewModelScope.launch {
+
+    }
     fun displayScannedItem(inventory: Inventory) {
         _navigateToScannedItem.value = inventory
     }

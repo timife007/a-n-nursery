@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/terminal"
-        android:icon="@drawable/ic_terminal"
-        android:title="@string/terminal"
+        android:id="@+id/activities"
+        android:icon="@drawable/ic_activities"
+        android:title="@string/activity"
         app:showAsAction="ifRoom" />
 
 </menu>

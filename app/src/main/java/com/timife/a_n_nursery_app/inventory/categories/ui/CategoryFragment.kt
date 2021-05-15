@@ -53,9 +53,10 @@ class CategoryFragment :
             swipeCount += 1
 
             if (swipeCount > 0) {
-                adapter.submitList(data)
+                bindRecyclerView(binding.categoryRecycler,data)
+//                adapter.submitList(data)
             }
-            binding.swipeRefreshCategory.isRefreshing = false
+            binding.swipeRefreshCategory.isRefreshing = true
         }
 
 
@@ -89,7 +90,7 @@ class CategoryFragment :
             }
         })
 
-        viewModel.saveCategory.observe(viewLifecycleOwner) {
+        viewModel.saveCategory.observe(viewLifecycleOwner, Observer {
             binding.categoryProgress.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -104,7 +105,7 @@ class CategoryFragment :
                     binding.categoryProgress.visible(true)
                 }
             }
-        }
+        })
         binding.addCategory.setOnClickListener {
             val categoryDialogFragment = AddCategoryDialog(object : AddCategoryListener {
                 override fun onAddCategoryButtonClicked(categoryName: String) {

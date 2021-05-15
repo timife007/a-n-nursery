@@ -3,20 +3,20 @@ package com.timife.a_n_nursery_app.dashboard
 import android.R.attr.left
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.timife.a_n_nursery_app.R
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
@@ -192,6 +192,19 @@ class DashboardFragment :
             binding.pieChart.invalidate()
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.activities_menu, menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.activities){
+            this.findNavController().navigate(R.id.action_dashboardFragment_to_activitiesFragment)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun hideProgressBar() {
         binding.dashboardProgress.visibility = View.INVISIBLE

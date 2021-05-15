@@ -15,15 +15,12 @@ import kotlinx.android.synthetic.main.inventory_card_item.view.*
 
 class InventAdapter(
     private val context: Context,
-    private val onClickListener: OnClickListener, val onDeleteListener: OnDeleteListener
+    private val onClickListener: OnClickListener, private val onDeleteListener: OnDeleteListener
 ) : PagingDataAdapter<Inventory, InventAdapter.InventViewHolder>(INVENTORY_COMPARATOR) {
     inner class InventViewHolder(private var binding: InventoryCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(inventoryProducts: Inventory) {
-            val dropdown = binding.dropdown
-            dropdown.setOnClickListener {
 
-            }
             binding.inventoryResult = inventoryProducts
             binding.executePendingBindings()
         }
@@ -82,10 +79,6 @@ class InventAdapter(
         fun onClick(product: Inventory) {
             clickListener(product)
         }
-
-//        fun onClickEdit(product: Inventory) {
-//            clickListener(product)
-//        }
     }
 
 

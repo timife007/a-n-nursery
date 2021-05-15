@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activityResult"
+            type="com.timife.a_n_nursery_app.activities.response.Activity" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_card"
+            android:layout_marginBottom="5dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="7dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold"
+                    android:id="@+id/first_name"
+                    android:text="@{activityResult.user.first_name}"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/last_name"
+                    android:text="@{activityResult.user.last_name}"
+                    android:layout_toRightOf="@id/first_name"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/verb"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="@{activityResult.verb}"
+                    android:layout_toRightOf="@id/last_name"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/created"
+                    android:text="Activity created on"
+                    android:layout_below="@id/first_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/created"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/verb"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/date" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </FrameLayout>
+</layout>

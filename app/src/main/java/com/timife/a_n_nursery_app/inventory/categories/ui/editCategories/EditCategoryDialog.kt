@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -56,7 +57,7 @@ class EditCategoryDialog: DialogFragment(){
                 viewModel.updateCategory(categoryId,categoryName)
 
                 //Update check
-                viewModel.updateCategory.observe(viewLifecycleOwner){
+                viewModel.updateCategory.observe(viewLifecycleOwner, Observer {
                     when(it){
                         is Resource.Success -> {
                             Toast.makeText(requireContext(),"$it Updated Successfully",Toast.LENGTH_SHORT).show()
@@ -69,7 +70,7 @@ class EditCategoryDialog: DialogFragment(){
                             Toast.makeText(requireContext(),"Updating...",Toast.LENGTH_LONG).show()
                         }
                     }
-                }
+                })
             }
 
         }

@@ -147,13 +147,16 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
                     binding.salesProgress.visibility = View.VISIBLE
             }
         })
+//        binding.fetchButton.setOnClickListener {
+//
+//        }
 
-        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
-            val scannedProduct = it
-            binding.fetchButton.setOnClickListener {
-                viewModel.displayScannedItem(scannedProduct)
-            }
-        })
+//        viewModel.navigateToScannedItem.observe(viewLifecycleOwner, Observer {
+//            val scannedProduct = it
+//            binding.fetchButton.setOnClickListener {
+//                viewModel.displayScannedItem(scannedProduct)
+//            }
+//        })
 
         binding.cartFab.setOnClickListener {
             this.findNavController().navigate(R.id.action_salesFragment_to_cartFragment)
@@ -176,6 +179,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
         inflater.inflate(R.menu.sales_menu, menu)
     }
 
+
     override fun getViewModel() = SalesViewModel::class.java
 
     override fun getFragmentBinding(
@@ -192,8 +196,8 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.sales_cart){
-            this.findNavController().navigate(R.id.action_salesFragment_to_cartFragment)
+        if(item.itemId == R.id.terminal){
+            this.findNavController().navigate(R.id.action_salesFragment_to_terminalFragment)
         }
         return super.onOptionsItemSelected(item)
     }

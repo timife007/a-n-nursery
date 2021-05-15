@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -47,6 +48,14 @@ class InventoryFragment :
 
 //        var data = PagingData
         binding.swipeRefreshInventory.setOnRefreshListener {
+            swipeCount += 1
+            if (swipeCount > 0) {
+                viewModel.result.observe(viewLifecycleOwner, Observer {
+                    adapter.submitData(viewLifecycleOwner.lifecycle, it)
+                })
+                adapter.notifyDataSetChanged()
+                binding.swipeRefreshInventory.isRefreshing = false
+            }
             viewModel.getLocationItems()
             viewModel.getCategoryItems()
             viewModel.getLotItems()
@@ -60,22 +69,22 @@ class InventoryFragment :
                 header = InventoryLoadStateAdapter { adapter.retry() },
                 footer = InventoryLoadStateAdapter { adapter.retry() }
             )
-            recycler_retry.setOnClickListener {
+            recyclerRetry.setOnClickListener {
                 adapter.retry()
             }
         }
 
-        viewModel.result.observe(viewLifecycleOwner) {
+        viewModel.result.observe(viewLifecycleOwner, Observer{
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
             adapter.notifyDataSetChanged()
-        }
+        })
 
-        viewModel.filter.observe(viewLifecycleOwner) {
+        viewModel.filter.observe(viewLifecycleOwner, Observer{
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
             adapter.notifyDataSetChanged()
-        }
+        })
 
-        viewModel.category.observe(viewLifecycleOwner) {
+        viewModel.category.observe(viewLifecycleOwner,Observer{
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -98,9 +107,9 @@ class InventoryFragment :
                     showProgressBar()
                 }
             }
-        }
+        })
 
-        viewModel.location.observe(viewLifecycleOwner) {
+        viewModel.location.observe(viewLifecycleOwner, Observer{
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -123,9 +132,9 @@ class InventoryFragment :
                     showProgressBar()
                 }
             }
-        }
+        })
 
-        viewModel.lots.observe(viewLifecycleOwner) {
+        viewModel.lots.observe(viewLifecycleOwner, Observer{
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -148,9 +157,9 @@ class InventoryFragment :
                     showProgressBar()
                 }
             }
-        }
+        })
 
-        viewModel.classification.observe(viewLifecycleOwner) {
+        viewModel.classification.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -173,7 +182,7 @@ class InventoryFragment :
                     showProgressBar()
                 }
             }
-        }
+        })
 
         adapter.addLoadStateListener { loadState ->
             binding.apply {
@@ -207,7 +216,7 @@ class InventoryFragment :
             }
         }
 
-        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner) {
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner,Observer {
             this.findNavController()
                 .navigate(
                     InventoryFragmentDirections.actionInventoryFragmentToInvntBttmShtFragment(
@@ -215,9 +224,9 @@ class InventoryFragment :
                     )
                 )
             viewModel.displayProductDetailsComplete()
-        }
+        })
 
-        viewModel.saveInventory.observe(viewLifecycleOwner) {
+        viewModel.saveInventory.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -230,7 +239,7 @@ class InventoryFragment :
                     showProgressBar()
                 }
             }
-        }
+        })
 
         binding.invAdd.setOnClickListener {
             val dialogFragment = AddInvItemDialog(object : AddDialogListener {
