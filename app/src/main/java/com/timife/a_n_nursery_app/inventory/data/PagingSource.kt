@@ -11,12 +11,12 @@ private const val INVENTORY_STARTING_PAGE_INDEX = 1
 class InventoryPagingSource(
     private val inventoryApi: InventoryApi,
     private val query: String
-) : PagingSource<Int,Inventory>() {
+) : PagingSource<Int, Inventory>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Inventory> {
         val pageNumber = params.key ?: INVENTORY_STARTING_PAGE_INDEX
 
         return try {
-            val response = inventoryApi.getSearchInventory(query,pageNumber)
+            val response = inventoryApi.getSearchInventory(query, pageNumber)
             val products = response.results
 
             LoadResult.Page(
@@ -27,10 +27,10 @@ class InventoryPagingSource(
         } catch (exception: IOException) {
             LoadResult.Error(exception)
         } catch (exception: HttpException) {
-            if(
+            if (
                 exception.code() == 404
-                    ){
-                return LoadResult.Page(emptyList(), pageNumber-1 ,null)
+            ) {
+                return LoadResult.Page(emptyList(), pageNumber - 1, null)
 
             }
             LoadResult.Error(exception)
@@ -46,7 +46,7 @@ class FilterPagingSource(
         val pageNumber = params.key ?: INVENTORY_STARTING_PAGE_INDEX
 
         return try {
-            val response = inventoryApi.getFilterByCategoryInventory(category,pageNumber)
+            val response = inventoryApi.getFilterByCategoryInventory(category, pageNumber)
             val products = response.results
 
             LoadResult.Page(

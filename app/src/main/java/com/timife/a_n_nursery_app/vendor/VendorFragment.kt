@@ -27,10 +27,10 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
 
         val adapter = VendorAdapter(VendorAdapter.OnClickListener {
             viewModel.displayVendorDetails(it)
-        }, VendorAdapter.OnDeleteListener{
+        }, VendorAdapter.OnDeleteListener {
             viewModel.deleteVendorItem(it)
-            Toast.makeText(requireContext(),"$it",Toast.LENGTH_SHORT).show()
-        },requireContext())
+            Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+        }, requireContext())
 
         binding.recyclerView.adapter = adapter
         binding.apply {
@@ -76,7 +76,6 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
                         it
                     )
                 )
-            viewModel.displayVendorDetailsComplete()
         }
 
         viewModel.saveVendor.observe(viewLifecycleOwner) {
@@ -84,13 +83,13 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(),"${it.value}",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "${it.value}", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
                     hideProgressBar()
                     handleApiError(it)
                 }
-                is Resource.Loading ->{
+                is Resource.Loading -> {
                     showProgressBar()
                     binding.venProgress.visible(true)
                 }
@@ -115,11 +114,13 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
         }
         setHasOptionsMenu(true)
     }
-    private fun hideProgressBar(){
+
+    private fun hideProgressBar() {
         binding.venProgress.visibility = View.INVISIBLE
         isLoading = false
     }
-    private fun showProgressBar(){
+
+    private fun showProgressBar() {
         binding.venProgress.visibility = View.VISIBLE
         isLoading = true
     }
@@ -152,8 +153,8 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
     override fun getViewModel() = VendorViewModel::class.java
 
     override fun getFragmentBinding(
-            inflater: LayoutInflater,
-            container: ViewGroup?
+        inflater: LayoutInflater,
+        container: ViewGroup?
     ) = FragmentVendorBinding.inflate(inflater, container, false)
 
     override fun getRepository(): VendorRepository {

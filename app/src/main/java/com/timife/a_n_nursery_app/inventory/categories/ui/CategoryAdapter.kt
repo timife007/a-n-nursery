@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.category_item.view.*
 
 class CategoryAdapter(
     private val onClickListener: OnClickListener,
-    val onDeleteListener: OnDeleteListener,
+    private val onDeleteListener: OnDeleteListener,
     val context: Context
 ) :
     androidx.recyclerview.widget.ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(
@@ -35,7 +35,6 @@ class CategoryAdapter(
         override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
             return newItem == oldItem
         }
-
     }
 
     override fun onCreateViewHolder(
@@ -58,14 +57,12 @@ class CategoryAdapter(
                 .setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
                 }.setPositiveButton("Yes") { dialog, which ->
-                onDeleteListener.delete(result)
-                notifyDataSetChanged()
-                dialog.dismiss()
-            }.show()
-
+                    onDeleteListener.delete(result)
+                    notifyDataSetChanged()
+                    dialog.dismiss()
+                }.show()
         }
     }
-
 
     class OnClickListener(val clickListener: (category: Category) -> Unit) {
         fun onClick(category: Category) {

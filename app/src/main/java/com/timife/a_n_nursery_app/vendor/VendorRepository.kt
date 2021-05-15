@@ -9,7 +9,7 @@ import com.timife.a_n_nursery_app.vendor.network.VendorPagingSource
 import com.timife.a_n_nursery_app.vendor.network.VendorsApi
 import com.timife.a_n_nursery_app.vendor.response.VendorItem
 
-class VendorRepository(private val api: VendorsApi): BaseRepository(){
+class VendorRepository(private val api: VendorsApi) : BaseRepository() {
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 14
@@ -33,24 +33,25 @@ class VendorRepository(private val api: VendorsApi): BaseRepository(){
         email: String,
         company: String,
         type: String,
-        phoneNumber:String
+        phoneNumber: String
     ): Resource<VendorItem> {
         return safeApiCall {
             api.postVendors(firstName, lastName, email, company, type, phoneNumber)
         }
     }
+
     suspend fun deleteVendor(vendorId: Int) = safeApiCall {
         api.deleteVendor(vendorId)
     }
 
     suspend fun updateVendor(
-        vendorId:Int,
+        vendorId: Int,
         firstName: String,
         lastName: String,
         email: String,
         company: String,
         type: String,
-        phoneNumber:String
+        phoneNumber: String
     ) = safeApiCall {
         api.updateVendor(vendorId, firstName, lastName, email, company, type, phoneNumber)
     }

@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.timife.a_n_nursery_app.R
-import com.timife.a_n_nursery_app.databinding.DialogAddLocationBinding
 import com.timife.a_n_nursery_app.databinding.DialogAddLotBinding
-import com.timife.a_n_nursery_app.inventory.locations.ui.addLocations.AddLocationListener
 
-class AddLotDialog (var addLotListener: AddLotListener): DialogFragment() {
+class AddLotDialog(var addLotListener: AddLotListener) : DialogFragment() {
     private lateinit var binding: DialogAddLotBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,8 +23,9 @@ class AddLotDialog (var addLotListener: AddLotListener): DialogFragment() {
         binding.createLot.setOnClickListener {
             val name = binding.lotName.text.toString()
 
-            if (name.isEmpty()){
-                Toast.makeText(requireContext(),"Please fill Information", Toast.LENGTH_SHORT).show()
+            if (name.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill Information", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
             addLotListener.onAddLotButtonClicked(

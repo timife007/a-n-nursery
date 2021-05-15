@@ -6,17 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.timife.a_n_nursery_app.databinding.LocationItemBinding
 import com.timife.a_n_nursery_app.databinding.LotItemBinding
-import com.timife.a_n_nursery_app.inventory.locations.network.Location
-import com.timife.a_n_nursery_app.inventory.locations.ui.LocationAdapter
-import com.timife.a_n_nursery_app.inventory.lots.database.LotItem
 import com.timife.a_n_nursery_app.inventory.lots.network.Lot
-import kotlinx.android.synthetic.main.location_item.view.*
 import kotlinx.android.synthetic.main.lot_item.view.*
 
 
-class LotAdapter(private val onClickListener: OnClickListener, val onDeleteListener:OnDeleteListener, val context: Context) :
+class LotAdapter(
+    private val onClickListener: OnClickListener,
+    private val onDeleteListener: OnDeleteListener,
+    val context: Context
+) :
     androidx.recyclerview.widget.ListAdapter<Lot, LotAdapter.LotViewHolder>(DiffCallback) {
     class LotViewHolder(private var binding: LotItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -52,11 +51,11 @@ class LotAdapter(private val onClickListener: OnClickListener, val onDeleteListe
         }
 
         holder.itemView.delete_lot.setOnClickListener {
-            MaterialAlertDialogBuilder(context).setTitle("Delete Item").setMessage("Do you want to completely delete this lot?").setNegativeButton("No"){
-                    dialog, which ->
-                dialog.dismiss()
-            }.setPositiveButton("Yes"){
-                    dialog, which ->
+            MaterialAlertDialogBuilder(context).setTitle("Delete Item")
+                .setMessage("Do you want to completely delete this lot?")
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }.setPositiveButton("Yes") { dialog, which ->
                 onDeleteListener.delete(result)
                 notifyDataSetChanged()
                 dialog.dismiss()
@@ -71,8 +70,8 @@ class LotAdapter(private val onClickListener: OnClickListener, val onDeleteListe
         }
     }
 
-    class OnDeleteListener(val deleteListener:(Int) ->Unit){
-        fun delete(lot: Lot){
+    class OnDeleteListener(val deleteListener: (Int) -> Unit) {
+        fun delete(lot: Lot) {
             deleteListener(lot.id!!)
         }
     }

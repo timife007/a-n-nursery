@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.timife.a_n_nursery_app.inventory.response.Inventory
 import com.timife.a_n_nursery_app.vendor.response.VendorItem
 
 class VendorBttmShtViewModel(vendor: VendorItem, application: Application) :
@@ -16,11 +15,12 @@ class VendorBttmShtViewModel(vendor: VendorItem, application: Application) :
     init {
         _selectedVendor.value = vendor
     }
+
     private val _navigateToEditVendor = MutableLiveData<VendorItem>()
     val navigateToEditVendor: LiveData<VendorItem>
         get() = _navigateToEditVendor
 
-    fun displayVendorEdit(vendor: VendorItem){
+    fun displayVendorEdit(vendor: VendorItem) {
         _navigateToEditVendor.value = vendor
     }
 }

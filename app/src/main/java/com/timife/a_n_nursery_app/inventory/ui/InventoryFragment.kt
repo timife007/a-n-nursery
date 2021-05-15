@@ -56,11 +56,11 @@ class InventoryFragment :
                 adapter.notifyDataSetChanged()
                 binding.swipeRefreshInventory.isRefreshing = false
             }
-            viewModel.getLocationItems()
-            viewModel.getCategoryItems()
-            viewModel.getLotItems()
-            viewModel.getClassificationItems()
-            swipeCount = 1;
+            viewModel.result.observe(viewLifecycleOwner, Observer{
+                adapter.submitData(viewLifecycleOwner.lifecycle, it)
+                adapter.notifyDataSetChanged()
+            })
+//            swipeCount = 1;
         }
 
         binding.apply {
