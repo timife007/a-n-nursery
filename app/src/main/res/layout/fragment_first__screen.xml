@@ -17,7 +17,7 @@
             android:id="@+id/check_inventory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="132dp"
             android:text="@string/check_inventory"
             android:textColor="@color/primary_color"

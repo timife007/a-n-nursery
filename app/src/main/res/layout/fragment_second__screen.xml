@@ -34,7 +34,7 @@
             android:id="@+id/access_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
             android:text="@string/access_your_daily_data"
             android:textColor="#595A5C"
