@@ -34,13 +34,14 @@ fun View.enable(enabled: Boolean) {
 fun specs(barChart: BarChart) {
     barChart.description.isEnabled = false
     barChart.axisLeft.setDrawGridLines(true)
-    barChart.axisLeft.setDrawLabels(false)
+    barChart.axisLeft.setDrawLabels(true)
     barChart.xAxis.setDrawGridLines(true)
     barChart.xAxis.setDrawLabels(false)
     barChart.setDrawGridBackground(false)
     barChart.axisRight.setDrawGridLines(false)
     barChart.axisRight.setDrawLabels(false)
     barChart.setDrawBorders(false)
+
 }
 
 fun View.snackbar(message: String, action: (() -> Unit)? = null) {

@@ -196,7 +196,7 @@
         android:gravity="center"
         android:visibility="gone"
         tools:visibility="visible"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:id="@+id/recycler_retry"/>
     <TextView
         android:layout_width="match_parent"
