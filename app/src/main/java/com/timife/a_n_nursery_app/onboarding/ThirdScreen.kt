@@ -39,8 +39,6 @@ class ThirdScreen : Fragment() {
             }
 
         }
-
-
         binding.skip3.setOnClickListener {
             val activity =  LoginActivity::class.java
             requireActivity().startNewActivity(activity)
