@@ -1,5 +1,6 @@
 package com.timife.a_n_nursery_app.onboarding
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.databinding.FragmentSecondScreenBinding
+import com.timife.a_n_nursery_app.login.ui.auth.LoginActivity
+import com.timife.a_n_nursery_app.startNewActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -29,6 +32,20 @@ class SecondScreen : Fragment() {
             view?.currentItem = 2
 //            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
+
+        binding.skip2.setOnClickListener {
+            val activity =  LoginActivity::class.java
+            requireActivity().startNewActivity(activity)
+            onBoardingFinished()
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        }
         return binding.root
+    }
+
+    private fun onBoardingFinished(){
+        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean("Finished",true)
+        editor.apply()
     }
 }

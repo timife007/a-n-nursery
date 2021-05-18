@@ -37,6 +37,15 @@ class ThirdScreen : Fragment() {
                 onBoardingFinished()
                 requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             }
+
+        }
+
+
+        binding.skip3.setOnClickListener {
+            val activity =  LoginActivity::class.java
+            requireActivity().startNewActivity(activity)
+            onBoardingFinished()
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
         // Inflate the layout for this fragment
         return binding.root

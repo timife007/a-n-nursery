@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/order_note" />
 
     <TextView
-        android:id="@+id/skip"
+        android:id="@+id/skip_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="28dp"
-        android:src="@drawable/ic_arrow"
+        android:src="@drawable/ic_arrow_forward"
         app:fabSize="auto"
         app:fabCustomSize="60dp"
         app:maxImageSize="30dp"
