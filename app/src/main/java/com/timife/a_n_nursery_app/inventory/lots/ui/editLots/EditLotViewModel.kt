@@ -11,7 +11,6 @@ import com.timife.a_n_nursery_app.inventory.lots.network.Lot
 import com.timife.a_n_nursery_app.inventory.lots.ui.LotRepository
 import kotlinx.coroutines.launch
 
-//,private val editLotRepository: EditLotRepository
 class EditLotViewModel (lot: Lot, application: Application,private val lotRepository:LotRepository) :
     AndroidViewModel(application) {
     private val _selectedEditLot = MutableLiveData<Lot>()

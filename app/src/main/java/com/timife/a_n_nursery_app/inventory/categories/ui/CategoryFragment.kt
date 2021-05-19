@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.a_n_nursery_app.Resource
@@ -52,14 +50,14 @@ class CategoryFragment :
         binding.swipeRefreshCategory.setOnRefreshListener {
             swipeCount += 1
 
+
             if (swipeCount > 0) {
-                bindRecyclerView(binding.categoryRecycler,data)
-//                adapter.submitList(data)
+                bindRecyclerView(binding.categoryRecycler, data)
             }
-            binding.swipeRefreshCategory.isRefreshing = true
+            viewModel.getCategoryItems()
+
+            binding.swipeRefreshCategory.isRefreshing = false
         }
-
-
 
         viewModel.category.observe(viewLifecycleOwner, Observer {
             when (it) {

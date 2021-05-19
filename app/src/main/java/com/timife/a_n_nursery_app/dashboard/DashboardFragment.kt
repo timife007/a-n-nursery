@@ -1,6 +1,5 @@
 package com.timife.a_n_nursery_app.dashboard
 
-import android.R.attr.left
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
@@ -10,23 +9,19 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.timife.a_n_nursery_app.R
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.timife.a_n_nursery_app.R
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseFragment
 import com.timife.a_n_nursery_app.dashboard.network.DashboardApi
-import com.timife.a_n_nursery_app.dashboard.response.TransactionPrice
 import com.timife.a_n_nursery_app.databinding.FragmentDashboardBinding
 import com.timife.a_n_nursery_app.handleApiError
-import com.timife.a_n_nursery_app.specs
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import java.text.DecimalFormat
@@ -34,13 +29,11 @@ import java.text.DecimalFormat
 
 class DashboardFragment :
     BaseFragment<DashboardViewModel, FragmentDashboardBinding, DashBoardRepository>() {
-//    private lateinit var binding: FragmentDashboardBinding
-//    private lateinit var viewModel: DashboardViewModel
+    var swipeCount = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "DashBoard"
-//        showProgressBar()
         viewModel.getDashboard()
 
         val spinnerItems = arrayOf("Today", "Yesterday", "Last Week")
@@ -63,6 +56,24 @@ class DashboardFragment :
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+        fun refresh(){
+            viewModel.processSalesChart()
+            viewModel.processProductChart()
+            viewModel.processCategoryPieChart()
+        }
+
+        binding.swipeRefreshDashboard!!.setOnRefreshListener {
+            swipeCount += 1
+
+
+            if (swipeCount > 0) {
+                refresh()
+            }
+            refresh()
+
+            binding.swipeRefreshDashboard!!.isRefreshing = false
+        }
+
 
         viewModel.dashboard.observe(viewLifecycleOwner) {
             when (it) {
@@ -192,6 +203,7 @@ class DashboardFragment :
             binding.pieChart.invalidate()
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.activities_menu, menu)
@@ -199,7 +211,7 @@ class DashboardFragment :
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.activities){
+        if (item.itemId == R.id.activities) {
             this.findNavController().navigate(R.id.action_dashboardFragment_to_activitiesFragment)
         }
         return super.onOptionsItemSelected(item)
@@ -230,8 +242,6 @@ class DashboardFragment :
     override fun getRepository(): DashBoardRepository {
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(DashboardApi::class.java, token)
-//        val database = CategoryDatabase.invoke(requireContext())
-
         return DashBoardRepository(api)
     }
 

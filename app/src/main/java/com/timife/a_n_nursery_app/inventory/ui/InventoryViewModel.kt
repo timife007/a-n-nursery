@@ -122,11 +122,6 @@ class InventoryViewModel(
         }
     }
 
-//    fun delete(item: ShopItem){
-//        CoroutineScope(Dispatchers.Main).launch {
-//            shopItemRepository.delete(item)
-//        }
-//    }
 
     fun saveInventoryItems(
         productName: String,

@@ -18,6 +18,11 @@
         tools:layout_editor_absoluteX="51dp"
         tools:layout_editor_absoluteY="2dp"
         android:contentDescription="@string/lot_fab" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:id="@+id/swipe_refresh_lot"
+        android:layout_height="match_parent">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -30,6 +35,7 @@
         tools:listitem="@layout/lot_item"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/lotProgress"

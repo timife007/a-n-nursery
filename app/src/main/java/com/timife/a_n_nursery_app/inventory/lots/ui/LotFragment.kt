@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -23,6 +22,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
 class LotFragment : BaseFragment<LotViewModel, FragmentLotBinding, LotRepository>() {
+    var swipeCount = 0
 
     companion object {
         fun newInstance() = LotFragment()
@@ -42,6 +42,19 @@ class LotFragment : BaseFragment<LotViewModel, FragmentLotBinding, LotRepository
         }, LotAdapter.OnDeleteListener {
             viewModel.deleteLotItem(it)
         }, requireContext())
+
+        val data = ArrayList<Lot>()
+        binding.swipeRefreshLot.setOnRefreshListener {
+            swipeCount += 1
+
+
+            if (swipeCount > 0) {
+                bindRecyclerView(binding.lotRecycler, data)
+            }
+            viewModel.getLotItems()
+
+            binding.swipeRefreshLot.isRefreshing = false
+        }
 
         viewModel.lot.observe(viewLifecycleOwner, Observer {
             when (it) {

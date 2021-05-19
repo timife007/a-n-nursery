@@ -12,9 +12,12 @@ import com.timife.a_n_nursery_app.vendor.response.VendorItem
 import kotlinx.android.synthetic.main.vendor_item.view.*
 
 class VendorAdapter(
-        private val onClickListener: OnClickListener,val onDeleteListener:OnDeleteListener,val context:Context
+    private val onClickListener: OnClickListener,
+    private val onDeleteListener: OnDeleteListener,
+    val context: Context
 ) : PagingDataAdapter<VendorItem, VendorAdapter.VendorViewHolder>(VENDOR_COMPARATOR) {
-    inner class VendorViewHolder(private var binding: VendorItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class VendorViewHolder(private var binding: VendorItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(vendorItem: VendorItem) {
             binding.vendorItem = vendorItem
             binding.executePendingBindings()
@@ -36,7 +39,7 @@ class VendorAdapter(
     }
 
     override fun onBindViewHolder(holder: VendorViewHolder, position: Int) {
-        val vendor =getItem(position)
+        val vendor = getItem(position)
         if (vendor != null) {
             holder.bind(vendor)
         }
@@ -51,11 +54,11 @@ class VendorAdapter(
             MaterialAlertDialogBuilder(context).setTitle("")
                 .setItems(inventoryItemOptions) { dialog,
                                                   which ->
-                    MaterialAlertDialogBuilder(context).setTitle("Delete Item").setMessage("Do you want to completely delete this vendor?").setNegativeButton("No"){
-                            dialog, _ ->
-                        dialog.dismiss()
-                    }.setPositiveButton("Yes"){
-                            dialog, _ ->
+                    MaterialAlertDialogBuilder(context).setTitle("Delete Item")
+                        .setMessage("Do you want to completely delete this vendor?")
+                        .setNegativeButton("No") { dialog, _ ->
+                            dialog.dismiss()
+                        }.setPositiveButton("Yes") { dialog, _ ->
                         onDeleteListener.delete(vendor!!)
                         notifyDataSetChanged()
                         dialog.dismiss()
@@ -70,8 +73,8 @@ class VendorAdapter(
         }
     }
 
-    class OnDeleteListener(val deleteListener:(Int) -> Unit){
-        fun delete(vendor:VendorItem){
+    class OnDeleteListener(val deleteListener: (Int) -> Unit) {
+        fun delete(vendor: VendorItem) {
             deleteListener(vendor.id!!)
         }
     }

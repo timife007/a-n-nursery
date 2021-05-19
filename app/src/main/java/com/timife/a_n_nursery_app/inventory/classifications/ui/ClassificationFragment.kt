@@ -22,6 +22,7 @@ import kotlinx.coroutines.runBlocking
 
 class ClassificationFragment :
     BaseFragment<ClassificationViewModel, FragmentClassificationBinding, ClassificationRepository>() {
+    var swipeCount = 0
 
     companion object {
         fun newInstance() = ClassificationFragment()
@@ -33,6 +34,7 @@ class ClassificationFragment :
         adapter.submitList(data)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getClassificationItems()
@@ -43,6 +45,19 @@ class ClassificationFragment :
             }, ClassificationAdapter.OnDeleteListener {
                 viewModel.deleteClassification(it)
             }, requireContext())
+
+        val data = ArrayList<Classification>()
+        binding.swipeRefreshClassification.setOnRefreshListener {
+            swipeCount += 1
+
+
+            if (swipeCount > 0) {
+                bindRecyclerView(binding.classificationRecycler, data)
+            }
+            viewModel.getClassificationItems()
+
+            binding.swipeRefreshClassification.isRefreshing = false
+        }
 
         viewModel.classification.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when (it) {

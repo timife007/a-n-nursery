@@ -153,7 +153,7 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
         _dashboard.value = dashBoardRepository.getDashboard()
     }
 
-    private fun processSalesChart() = viewModelScope.launch {
+     fun processSalesChart() = viewModelScope.launch {
         when (val entries = dashBoardRepository.getPriceChart()) {
             is Resource.Success -> {
                 salesBarData(entries.value)
@@ -167,7 +167,7 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
         }
     }
 
-    private fun processProductChart() = viewModelScope.launch {
+    fun processProductChart() = viewModelScope.launch {
         when (val entries = dashBoardRepository.getProductChart()) {
             is Resource.Success -> {
                 productsBarData(entries.value)
@@ -181,7 +181,7 @@ class DashboardViewModel(private val dashBoardRepository: DashBoardRepository) :
         }
     }
 
-    private fun processCategoryPieChart() = viewModelScope.launch {
+    fun processCategoryPieChart() = viewModelScope.launch {
         when (val entries = dashBoardRepository.getCategoriesChart()) {
             is Resource.Success -> {
                 categoryBarData(entries.value)

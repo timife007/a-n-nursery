@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.timife.a_n_nursery_app.vendor.response.VendorItem
 
-class VendorBttmShtViewModelFactory (
+class VendorBttmShtViewModelFactory(
     private val vendor: VendorItem,
     private val application: Application
 ) : ViewModelProvider.Factory {

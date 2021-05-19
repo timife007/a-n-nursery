@@ -24,6 +24,7 @@ import kotlinx.coroutines.runBlocking
 
 class LocationFragment :
     BaseFragment<LocationViewModel, FragmentLocationBinding, LocationRepository>() {
+    var swipeCount = 0
 
     companion object {
         fun newInstance() = LocationFragment()
@@ -38,11 +39,28 @@ class LocationFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLocationItems()
 
+
+
+
         binding.locationRecycler.adapter = LocationAdapter(LocationAdapter.OnClickListener {
             viewModel.displayEditLocation(it)
         }, LocationAdapter.OnDeleteListener {
             viewModel.deleteLocationItem(it)
         }, requireContext())
+
+
+        val data = ArrayList<Location>()
+        binding.swipeRefreshLocation.setOnRefreshListener {
+            swipeCount += 1
+
+
+            if (swipeCount > 0) {
+                bindRecyclerView(binding.locationRecycler,data)
+            }
+            viewModel.getLocationItems()
+
+            binding.swipeRefreshLocation.isRefreshing = false
+        }
 
         viewModel.location.observe(viewLifecycleOwner, Observer {
             when (it) {
