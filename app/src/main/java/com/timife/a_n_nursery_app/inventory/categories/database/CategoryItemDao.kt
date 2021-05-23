@@ -11,10 +11,13 @@ interface CategoryItemDao {
     suspend fun upsertAll(item: CategoryItem)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUpdateAll(item:List<CategoryItem>)
+    suspend fun insertUpdateAll(vararg item: CategoryItem)
 
     @Delete
     suspend fun delete(item: CategoryItem)
+
+    @Query("DELETE FROM category_items")
+    suspend fun deleteAll()
 
     @Query("SELECT * from category_items")
     fun getAllCategoryItems(): LiveData<List<CategoryItem>>

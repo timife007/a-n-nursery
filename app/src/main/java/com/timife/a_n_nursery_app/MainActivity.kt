@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         )
         val inventoryApi = retrofitClient.buildApi(InventoryApi::class.java, token)
         val database = CategoryDatabase.invoke(this)
+        database.getCategoryDao.getAllCategoryItems();
         ViewModelProvider(this, ViewModelFactory(InventoryRepository(inventoryApi, database))).get(
             InventoryViewModel::class.java
         )

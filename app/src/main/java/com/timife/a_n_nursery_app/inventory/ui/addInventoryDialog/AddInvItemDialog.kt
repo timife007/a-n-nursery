@@ -156,7 +156,7 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
             val price = binding.price.text.toString()
             val classification = classificationId
             val size = binding.sizeText.text.toString()
-            val quantity = binding.quantity.text.toString().toInt()
+            val quantity = binding.quantity.text.toString()?.toInt()
             val color = binding.color.text.toString()
             val category =categoryId
             val location  = locationId

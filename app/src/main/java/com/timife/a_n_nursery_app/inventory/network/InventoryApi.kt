@@ -38,7 +38,7 @@ interface InventoryApi {
     //Filter by category api interface
     @GET("/product/list/")
     suspend fun getFilterByCategoryInventory(
-        @Query("category")
+        @Query("category__name")
         filterQuery: String?,
         @Query("page")
         pageNumber: Int?

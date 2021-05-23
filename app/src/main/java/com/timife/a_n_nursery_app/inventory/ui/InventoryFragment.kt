@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.google.android.material.chip.Chip
@@ -23,9 +23,9 @@ import com.timife.a_n_nursery_app.inventory.lots.database.LotItem
 import com.timife.a_n_nursery_app.inventory.network.InventoryApi
 import com.timife.a_n_nursery_app.inventory.ui.addInventoryDialog.AddDialogListener
 import com.timife.a_n_nursery_app.inventory.ui.addInventoryDialog.AddInvItemDialog
-import kotlinx.android.synthetic.main.fragment_inventory.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import java.util.*
 
 
 class InventoryFragment :
@@ -37,7 +37,6 @@ class InventoryFragment :
         viewModel.getCategoryItems()
         viewModel.getLotItems()
         viewModel.getClassificationItems()
-
         binding = FragmentInventoryBinding.bind(view)
 
         val adapter = InventAdapter(requireContext(), InventAdapter.OnClickListener {
@@ -56,7 +55,7 @@ class InventoryFragment :
                 adapter.notifyDataSetChanged()
                 binding.swipeRefreshInventory.isRefreshing = false
             }
-            viewModel.result.observe(viewLifecycleOwner, Observer{
+            viewModel.result.observe(viewLifecycleOwner, Observer {
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
                 adapter.notifyDataSetChanged()
             })
@@ -74,49 +73,58 @@ class InventoryFragment :
             }
         }
 
-        viewModel.result.observe(viewLifecycleOwner, Observer{
+        viewModel.result.observe(viewLifecycleOwner, Observer {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
             adapter.notifyDataSetChanged()
         })
 
-        viewModel.filter.observe(viewLifecycleOwner, Observer{
+        viewModel.filter.observe(viewLifecycleOwner, Observer {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
             adapter.notifyDataSetChanged()
         })
 
-        viewModel.category.observe(viewLifecycleOwner,Observer{
-            when (it) {
-                is Resource.Success -> {
-                    hideProgressBar()
-                    try {
-                        val categoryList = it.value.results
-                        categoryList.forEach {
-                            val category = CategoryItem(it.id!!, it.name!!)
-                            viewModel.upsert(listOf(category))
-                        }
-
-                    } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
+        viewModel.category.observe(viewLifecycleOwner, Observer {
+            if (it is List<CategoryItem> && it.isNotEmpty()) {
+                val chipGroup = binding.invChipGroup
+                chipGroup.removeAllViews()
+                val chip = Chip(requireActivity(), null, R.style.CustomChipChoice)
+                chip.text = "ALL"
+                chip.isCheckable = true
+                chip.isClickable = true
+                chip.isFocusable = true
+                chip.chipStrokeWidth = 1F
+                chip.isCloseIconVisible = false
+                chip.isChecked = true
+                chipGroup.addView(chip)
+                it.forEach { categoryItem ->
+                    val chipItems = Chip(requireActivity(), null, R.style.CustomChipChoice)
+                    chipItems.text = categoryItem.name
+                    chipItems.isCheckable = true
+                    chipItems.isClickable = true
+                    chipItems.isFocusable = true
+                    chipItems.chipStrokeWidth = 1F
+                    chipItems.isCloseIconVisible = false
+                    chipGroup.addView(chipItems)
+                }
+                chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                    val clickedChip = group?.findViewById<Chip>(checkedId)
+                    if (clickedChip?.text != "ALL") {
+                        viewModel.getFilterItems(clickedChip?.text.toString())
+                    } else {
+                        viewModel.getFilterItems("")
                     }
-                }
-                is Resource.Failure -> {
-                    hideProgressBar()
-                    handleApiError(it)
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
                 }
             }
         })
 
-        viewModel.location.observe(viewLifecycleOwner, Observer{
+        viewModel.location.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
                     try {
                         val locationList = it.value.results
-                        locationList.forEach {
-                            val location = LocationItem(it.id!!, it.name!!)
+                        locationList.forEach { locationData ->
+                            val location = LocationItem(locationData.id!!, locationData.name!!)
                             viewModel.upsertLocation(listOf(location))
                         }
 
@@ -134,14 +142,14 @@ class InventoryFragment :
             }
         })
 
-        viewModel.lots.observe(viewLifecycleOwner, Observer{
+        viewModel.lots.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
                     try {
                         val lotsList = it.value.results
-                        lotsList.forEach {
-                            val lot = LotItem(it.id!!, it.name)
+                        lotsList.forEach { lotData ->
+                            val lot = LotItem(lotData.id!!, lotData.name)
                             viewModel.upsertLot(listOf(lot))
                         }
 
@@ -188,8 +196,10 @@ class InventoryFragment :
             binding.apply {
                 inventoryProgress.isVisible = loadState.refresh is LoadState.Loading
                 recyclerView.isVisible = loadState.refresh is LoadState.NotLoading
-                recyclerRetry.isVisible = loadState.refresh is LoadState.Error && adapter.itemCount == 0
-                inventoryNoResultText.isVisible = loadState.refresh is LoadState.Error && adapter.itemCount == 0
+                recyclerRetry.isVisible =
+                    loadState.refresh is LoadState.Error && adapter.itemCount == 0
+                inventoryNoResultText.isVisible =
+                    loadState.refresh is LoadState.Error && adapter.itemCount == 0
 
 //                if(loadState.append.endOfPaginationReached){
 //                    inventoryNoResultText.isVisible =false
@@ -206,17 +216,7 @@ class InventoryFragment :
             }
         }
 
-        val chipGroup = binding.invChipGroup
-        chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            val chip = group?.findViewById<Chip>(checkedId)
-            if (chip?.text != "All") {
-                viewModel.getFilterItems(chip?.text.toString())
-            } else {
-                viewModel.getFilterItems("")
-            }
-        }
-
-        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner,Observer {
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             this.findNavController()
                 .navigate(
                     InventoryFragmentDirections.actionInventoryFragmentToInvntBttmShtFragment(
@@ -328,7 +328,7 @@ class InventoryFragment :
         val token = runBlocking { userPreferences.authToken.first() }
         val api = retrofitClient.buildApi(InventoryApi::class.java, token)
         val database = CategoryDatabase.invoke(requireContext())
-
+        database.getCategoryDao.getAllCategoryItems();
         return InventoryRepository(api, database)
     }
 }

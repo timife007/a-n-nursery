@@ -94,44 +94,44 @@
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/access_control" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:id="@+id/advanced">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="85dp"-->
+<!--        android:id="@+id/advanced">-->
 
-        <ImageView
-            android:id="@+id/advanced_icon"
-            android:layout_width="30dp"
-            android:layout_marginStart="28dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/advanced"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/advanced" />
+<!--        <ImageView-->
+<!--            android:id="@+id/advanced_icon"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_marginStart="28dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/advanced"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:contentDescription="@string/advanced" />-->
 
-        <TextView
-            android:id="@+id/advanced_text"
-            android:textAppearance="@style/settingsText"
-            android:layout_marginStart="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/advanced"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/advanced_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/advanced_text"-->
+<!--            android:textAppearance="@style/settingsText"-->
+<!--            android:layout_marginStart="40dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/advanced"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/advanced_icon"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <ImageView
-            android:id="@+id/advanced_arrow"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="28dp"
-            android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/advanced" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <ImageView-->
+<!--            android:id="@+id/advanced_arrow"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:layout_marginEnd="28dp"-->
+<!--            android:src="@drawable/ic_arrow"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:contentDescription="@string/advanced" />-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="85dp"

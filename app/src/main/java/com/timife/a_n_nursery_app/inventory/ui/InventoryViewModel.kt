@@ -54,9 +54,8 @@ class InventoryViewModel(
         currentFilter.value = filterQuery
     }
 
-    private val _category: MutableLiveData<Resource<CategoryItems>> = MutableLiveData()
-    val category: LiveData<Resource<CategoryItems>>
-        get() = _category
+    val category: LiveData<List<CategoryItem>>
+        get() = inventoryRepository.getDbCategories()
 
     private val _location: MutableLiveData<Resource<LocationItems>> = MutableLiveData()
     val location: LiveData<Resource<LocationItems>>
@@ -86,7 +85,7 @@ class InventoryViewModel(
     }
 
     fun getCategoryItems() = viewModelScope.launch {
-        _category.value = inventoryRepository.getCategory()
+        inventoryRepository.getCategory()
     }
 
     fun getClassificationItems() = viewModelScope.launch {
@@ -102,7 +101,6 @@ class InventoryViewModel(
             inventoryRepository.insertUpdateAll(item)
         }
     }
-
 
     fun upsertLot(item: List<LotItem>) {
         CoroutineScope(Dispatchers.Main).launch {  //Using .main because room already provides main safety
