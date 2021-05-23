@@ -36,26 +36,27 @@ class DashboardFragment :
         activity?.title = "DashBoard"
         viewModel.getDashboard()
 
-        val spinnerItems = arrayOf("Today", "Yesterday", "Last Week")
-        binding.spinner.adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            spinnerItems
-        )
+//        val spinnerItems = arrayOf("Today", "Yesterday", "Last Week")
+//        binding.spinner.adapter = ArrayAdapter(
+//            requireContext(),
+//            android.R.layout.simple_dropdown_item_1line,
+//            spinnerItems
+//        )
+//
+//        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                spinnerItems.get(position)
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//            }
+//        }
 
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                spinnerItems.get(position)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-        }
         fun refresh(){
             viewModel.processSalesChart()
             viewModel.processProductChart()
