@@ -197,7 +197,7 @@ class SalesFragment : BaseFragment<SalesViewModel, FragmentSalesBinding, SalesRe
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.terminal){
-            this.findNavController().navigate(R.id.action_salesFragment_to_terminalFragment)
+         //   this.findNavController().navigate(R.id.action_salesFragment_to_terminalFragment)
         }
         return super.onOptionsItemSelected(item)
     }
