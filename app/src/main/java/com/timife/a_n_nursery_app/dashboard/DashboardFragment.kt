@@ -83,7 +83,7 @@ class DashboardFragment :
                     binding.productNumber.text = it.value.products_sold.toString()
                     binding.transactionNumber.text = it.value.transactions.toString()
                     binding.netPrice.text = it.value.net_sales
-                    Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
+          //          Toast.makeText(requireContext(), "$it.value", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
                     hideProgressBar()

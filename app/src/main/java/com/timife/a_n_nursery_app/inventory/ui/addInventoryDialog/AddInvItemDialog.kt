@@ -24,9 +24,9 @@ import kotlinx.android.synthetic.main.dialog_updatedit_inventory_items.*
 class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragment() {
     private lateinit var binding: DialogAddInventoryItemBinding
 
-    private var categoryId : Int = 0
-    private var classificationId:Int  = 0
-    private var locationId:Int = 0
+    private var categoryId: Int = 0
+    private var classificationId: Int = 0
+    private var locationId: Int = 0
     private var lotId: Int = 0
 
     override fun onCreateView(
@@ -41,14 +41,18 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
         val addInvRepository = AddInvRepository(categoryDatabase)
         val factory = AddInvItemViewModelFactory(addInvRepository)
 
-         val viewModel= ViewModelProvider(this, factory).get(AddInvItemViewModel::class.java)
+        val viewModel = ViewModelProvider(this, factory).get(AddInvItemViewModel::class.java)
 
 
 //        initData()
-        val categoryAdapter = ArrayAdapter<Any>(requireContext(),android.R.layout.simple_dropdown_item_1line)
-        val lotAdapter = ArrayAdapter<Any>(requireContext(),android.R.layout.simple_dropdown_item_1line)
-        val locationAdapter = ArrayAdapter<Any>(requireContext(),android.R.layout.simple_dropdown_item_1line)
-        val classificationAdapter = ArrayAdapter<Any>(requireContext(),android.R.layout.simple_dropdown_item_1line)
+        val categoryAdapter =
+            ArrayAdapter<Any>(requireContext(), android.R.layout.simple_dropdown_item_1line)
+        val lotAdapter =
+            ArrayAdapter<Any>(requireContext(), android.R.layout.simple_dropdown_item_1line)
+        val locationAdapter =
+            ArrayAdapter<Any>(requireContext(), android.R.layout.simple_dropdown_item_1line)
+        val classificationAdapter =
+            ArrayAdapter<Any>(requireContext(), android.R.layout.simple_dropdown_item_1line)
 
 
 
@@ -58,20 +62,21 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                 categoryAdapter.add(it.name)
             }
             val categoryList = it
-            binding.invCategoriesContainer.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    categoryId = categoryList[position].id
-                }
+            binding.invCategoriesContainer.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        categoryId = categoryList[position].id
+                    }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
                 }
-            }
         })
 
         binding.invCategoriesContainer.adapter = categoryAdapter
@@ -83,20 +88,21 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
             }
 
             val lotsList = it
-            binding.lotContainer.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    lotId= lotsList[position].id
-                }
+            binding.lotContainer.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        lotId = lotsList[position].id
+                    }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
                 }
-            }
         }
         binding.lotContainer.adapter = lotAdapter
 
@@ -106,20 +112,21 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                 locationAdapter.add(it.name)
             }
             val locationList = it
-            binding.location1Container.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    locationId= locationList[position].id
-                }
+            binding.location1Container.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        locationId = locationList[position].id
+                    }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
                 }
-            }
         }
 
         binding.location1Container.adapter = locationAdapter
@@ -129,20 +136,21 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
                 classificationAdapter.add(it.name)
             }
             val classificationList = it
-            binding.classificationContainer.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    classificationId= classificationList[position].id
-                }
+            binding.classificationContainer.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        classificationId = classificationList[position].id
+                    }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
                 }
-            }
         }
 
         binding.classificationContainer.adapter = classificationAdapter
@@ -156,16 +164,40 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
             val price = binding.price.text.toString()
             val classification = classificationId
             val size = binding.sizeText.text.toString()
-            val quantity = binding.quantity.text.toString()?.toInt()
+            var quantityData = binding.quantity.text.toString()
             val color = binding.color.text.toString()
-            val category =categoryId
-            val location  = locationId
+            val category = categoryId
+            val location = locationId
+            var quantity: Int;
 
-            if (productName.isEmpty() || botanicalName.isEmpty() ||  cost.isEmpty() || price.isEmpty()||  size.isEmpty()|| color.isEmpty()) {
+            if (productName.isEmpty() || botanicalName.isEmpty() || cost.isEmpty() ||
+                price.isEmpty() || size.isEmpty() || color.isEmpty()
+            ) {
                 Toast.makeText(context, "Please fill information", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            addDialogListener.onAddButtonClicked(productName,botanicalName,size,classification,color,price,cost,lot,location,quantity,category)
+
+            if (quantityData.isEmpty()) {
+                Toast.makeText(context, "Please fill in quantity", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            } else {
+                quantity = quantityData.toInt()
+            }
+
+            addDialogListener.onAddButtonClicked(
+                productName,
+                botanicalName,
+                size,
+                classification,
+                color,
+                price,
+                cost,
+                lot,
+                location,
+                quantity,
+                category
+            )
             dismiss()
         }
         binding.cancel.setOnClickListener {
@@ -173,10 +205,11 @@ class AddInvItemDialog(var addDialogListener: AddDialogListener) : DialogFragmen
         }
         return binding.root
     }
+
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
-        dialog?.window?.setLayout(width,ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 }

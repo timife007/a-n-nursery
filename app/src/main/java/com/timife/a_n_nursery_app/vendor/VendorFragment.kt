@@ -29,7 +29,7 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
             viewModel.displayVendorDetails(it)
         }, VendorAdapter.OnDeleteListener {
             viewModel.deleteVendorItem(it)
-            Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+      //      Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
         }, requireContext())
 
         binding.recyclerView.adapter = adapter
@@ -83,7 +83,7 @@ class VendorFragment : BaseFragment<VendorViewModel, FragmentVendorBinding, Vend
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(), "${it.value}", Toast.LENGTH_LONG).show()
+               //     Toast.makeText(requireContext(), "${it.value}", Toast.LENGTH_LONG).show()
                 }
                 is Resource.Failure -> {
                     hideProgressBar()

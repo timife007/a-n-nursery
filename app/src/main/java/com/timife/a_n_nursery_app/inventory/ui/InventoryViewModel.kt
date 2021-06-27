@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.hadilq.liveevent.LiveEvent
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseViewModel
 import com.timife.a_n_nursery_app.inventory.categories.database.CategoryItem
@@ -70,8 +71,8 @@ class InventoryViewModel(
         get() = _lots
 
 
-    private val _navigateToSelectedProduct = MutableLiveData<Inventory>()
-    val navigateToSelectedProduct: LiveData<Inventory>
+    private val _navigateToSelectedProduct = LiveEvent<Inventory>()
+    val navigateToSelectedProduct: LiveEvent<Inventory>
         get() = _navigateToSelectedProduct
 
 

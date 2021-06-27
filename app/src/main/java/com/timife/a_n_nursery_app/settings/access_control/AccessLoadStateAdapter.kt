@@ -20,14 +20,14 @@ class AccessLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<Ac
         fun bind(loadState: LoadState){
             binding.apply {
                 footerProgressBar.isVisible = loadState is LoadState.Loading
-                retryButton.isVisible = loadState is LoadState.Error
-                errorText.isVisible = loadState is LoadState.Error
-
-
-                if (loadState.endOfPaginationReached ){
-                    retryButton.isVisible = false
-                    errorText.isVisible = false
-                }
+//                retryButton.isVisible = loadState is LoadState.Error
+//                errorText.isVisible = loadState is LoadState.Error
+//
+//
+//                if (loadState.endOfPaginationReached ){
+//                    retryButton.isVisible = false
+//                    errorText.isVisible = false
+//                }
             }
         }
 

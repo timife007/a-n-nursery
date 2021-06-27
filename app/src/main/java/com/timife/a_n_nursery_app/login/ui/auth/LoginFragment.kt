@@ -31,9 +31,9 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding, LoginRe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.forgotPassword.setOnClickListener {
-            this.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
-        }
+//        binding.forgotPassword.setOnClickListener {
+//            this.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+//        }
         binding.loginprogress.visible(false)
         binding.fab.enable(false)
 

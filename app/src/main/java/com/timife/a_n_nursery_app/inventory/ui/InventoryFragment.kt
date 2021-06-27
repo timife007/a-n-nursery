@@ -129,7 +129,7 @@ class InventoryFragment :
                         }
 
                     } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
+               //         Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Failure -> {
@@ -154,7 +154,7 @@ class InventoryFragment :
                         }
 
                     } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
+                  //      Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Failure -> {
@@ -179,7 +179,7 @@ class InventoryFragment :
                         }
 
                     } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
+                 //       Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Failure -> {

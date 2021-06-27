@@ -49,7 +49,7 @@ class InvntBttmShtFragment : BottomSheetDialogFragment() {
 
 
         viewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+         //   Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             val barcodeUrl: String = it.barcode_url.toString()
             val fileName = """${it.name}.pdf"""
             binding.downloadBarcode.setOnClickListener {

@@ -32,6 +32,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def appName = "a_n_nursery_app"
+            def date = new Date()
+            def formattedDate = date.format('MMM-dd-yyyy')
+            outputFileName = appName + formattedDate + "-${variant.versionName}-${variant.versionCode}.apk"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

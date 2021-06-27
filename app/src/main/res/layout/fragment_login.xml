@@ -129,18 +129,18 @@
             app:layout_constraintTop_toBottomOf="@+id/editPassword"
             android:contentDescription="@string/fab" />
 
-        <TextView
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
-            android:textColor="@color/primary_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in"
-            app:layout_constraintVertical_bias="0.445" />
+<!--        <TextView-->
+<!--            android:id="@+id/forgot_password"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/forgot_password"-->
+<!--            android:textColor="@color/primary_color"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.501"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/sign_in"-->
+<!--            app:layout_constraintVertical_bias="0.445" />-->
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

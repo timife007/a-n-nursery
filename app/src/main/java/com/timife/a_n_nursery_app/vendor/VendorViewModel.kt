@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.hadilq.liveevent.LiveEvent
 import com.timife.a_n_nursery_app.Resource
 import com.timife.a_n_nursery_app.base.BaseViewModel
 import com.timife.a_n_nursery_app.vendor.response.VendorItem
@@ -28,8 +29,8 @@ class VendorViewModel(
     val saveVendor: LiveData<Resource<VendorItem>>
         get() = _saveVendor
 
-    private val _navigateToSelectedVendor = MutableLiveData<VendorItem>()
-    val navigateToSelectedVendor: LiveData<VendorItem>
+    private val _navigateToSelectedVendor = LiveEvent<VendorItem>()
+    val navigateToSelectedVendor: LiveEvent<VendorItem>
         get() = _navigateToSelectedVendor
 
     fun getVendorSearchItems(firstName: String) {

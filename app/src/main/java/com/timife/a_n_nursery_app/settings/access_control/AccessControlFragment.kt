@@ -45,7 +45,7 @@ class AccessControlFragment : BaseFragment<AccessControlViewModel, FragmentAcces
                 header = AccessLoadStateAdapter { adapter.retry() },
                 footer = AccessLoadStateAdapter { adapter.retry() }
             )
-            recycler_retry.setOnClickListener {
+            recyclerRetry.setOnClickListener {
                 adapter.retry()
             }
         }
@@ -57,19 +57,12 @@ class AccessControlFragment : BaseFragment<AccessControlViewModel, FragmentAcces
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 accessProgress.isVisible = loadState.source.refresh is LoadState.Loading
-                accessRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
-                recyclerRetry.isVisible = loadState.source.refresh is LoadState.Error
-                queryNoResultText.isVisible = loadState.source.refresh is LoadState.Error
+                accessRecyclerView.isVisible = loadState.refresh is LoadState.NotLoading
+                recyclerRetry.visibility = View.GONE
+                //   loadState.refresh is LoadState.Error && adapter.itemCount == 0
+                queryNoResultText.visibility = View.GONE
+                //   loadState.refresh is LoadState.Error && adapter.itemCount == 0
 
-                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached &&
-                    adapter.itemCount < 1
-                ) {
-                    accessRecyclerView.isVisible = false
-                    queryNoResultText.isVisible = true
-
-                } else {
-                    queryNoResultText.isVisible = false
-                }
             }
         }
 
